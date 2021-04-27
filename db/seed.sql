@@ -2,7 +2,7 @@ create table users (
 user_id serial primary key,
 email varchar(255),
 hash text,
-username varchar(55)
+name varchar(55)
 )
 
 create table user_filter(
