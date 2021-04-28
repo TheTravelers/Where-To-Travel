@@ -1,19 +1,18 @@
 import axios from 'axios'
 import React, { Component } from 'react'
-<<<<<<< HEAD
+import {getSavedDestinations} from '../../redux/destinationReducer'
+import {connect} from 'react-redux'
 import './UserList.scss'
-=======
-import './UserList.scss'
->>>>>>> main
+
 
 class UserList extends Component{
-    constructor(props){
-        super(props)
-    }
 
-    componentDidMount(){
-        axios.get(`/userDestList/${this.props.user.id}`)
+
+    componentWillMount(){
+        console.log(this.props.user.user.user, 'this.props.user')
+        axios.get(`/userDestList/${this.props.user.user.user.user_id}`)
         .then(res => {
+            console.log(res.data, 'res data')
             this.props.getSavedDestinations(res.data)
 
         })
@@ -22,11 +21,22 @@ class UserList extends Component{
 
 
     render(){
+        console.log(this.props.dest, 'this.props.dest')
+        if (this.props.dest.userSavedDestinations.length < 1) {
+            return (
+              <section>
+          
+                <header>
+                  <h2>You have no saved destinations</h2>
+                </header>
+              </section>
+            );
+          }
         return(
             <div>
-                <h1>{this.props.user.id}'s Saved Destinations</h1>
+                <h1>{this.props.user.user.user.name}'s Saved Destinations</h1>
                 <div>
-                    {this.props.savedDestinations.map((element, index) => {
+                    {this.props.dest.userSavedDestinations.map((element, index) => {
                         return (
                             <div key={index}>
                                 <h2>{element.city_name}</h2>
@@ -48,7 +58,9 @@ class UserList extends Component{
 }
 
 const mapStateToProps = reduxState => {
-    return reduxState.userReducer,
-    reduxState.destinationReducer
+    return {
+    user: reduxState.userReducer,
+    dest: reduxState.destinationReducer
+    }
   }
   export default connect(mapStateToProps, {getSavedDestinations})(UserList);
