@@ -35,7 +35,7 @@ class Auth extends Component {
     register = () => {
         axios.post('/auth/register', this.state)
         .then(res => {
-            thiis.props.history.push('/Filter')
+            this.props.history.push('/Filter')
         }).catch(err => console.log(err)) 
     }
 
