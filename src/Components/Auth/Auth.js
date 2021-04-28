@@ -98,7 +98,7 @@ class Auth extends Component {
                         <input value={this.state.password} onChange={e => this.handlePasswordChange(e.target.value)}/>
                     </div>
                     <div>
-                        <button></button>
+                        <button onClick={this.register}>Register</button>
                     </div>
                 </div>
 
