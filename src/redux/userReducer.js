@@ -35,7 +35,8 @@ export default function reducer(state= initialState, action){
         case REGISTER_USER:
         return{
             ...state,
-            user: action.payload
+            user: action.payload,
+            isLoggedIn: true
         }
         case LOGIN_USER:
             return {
