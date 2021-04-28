@@ -1,6 +1,9 @@
 import React, {Component} from 'react'
 import axios from 'axios'
+import {connect} from 'react-redux'
+import {loginUser, registerUser} from '../../redux/userReducer'
 import './Auth.scss'
+
 
 class Auth extends Component {
     constructor(props){
@@ -29,12 +32,14 @@ class Auth extends Component {
     login = () => {
         axios.post('/auth/login', this.state)
         .then(res => {
+            this.props.loginUser({user: res.data})
             this.props.history.push('/Filter')
         }).catch(err => console.log(err))
     }
     register = () => {
         axios.post('/auth/register', this.state)
         .then(res => {
+            this.props.registerUser({user: res.data})
             this.props.history.push('/Filter')
         }).catch(err => console.log(err)) 
     }
@@ -102,4 +107,4 @@ class Auth extends Component {
         }
     }
 }
-export default Auth
+export default connect(null, {loginUser, registerUser})(Auth)
