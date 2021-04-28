@@ -1,7 +1,10 @@
 import axios from 'axios'
 import React, { Component } from 'react'
-import {getSavedDestinations} from '../../redux/destinationReducer'
-import './UserList.css'
+<<<<<<< HEAD
+import './UserList.scss'
+=======
+import './UserList.scss'
+>>>>>>> main
 
 class UserList extends Component{
     constructor(props){
