@@ -31,14 +31,14 @@ class Auth extends Component {
     login = () => {
         axios.post('/auth/login', this.state)
         .then(res => {
-            this.props.loginUser({user: res.data.email})
+            this.props.loginUser({user: res.data})
             this.props.history.push('/Filter')
         }).catch(err => console.log(err))
     }
     register = () => {
         axios.post('/auth/register', this.state)
         .then(res => {
-            this.props.registerUser({user: res.data.email})
+            this.props.registerUser({user: res.data})
             this.props.history.push('/Filter')
         }).catch(err => console.log(err)) 
     }

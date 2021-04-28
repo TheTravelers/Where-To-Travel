@@ -26,7 +26,9 @@ module.exports = {
         let salt = bcrypt.genSaltSync(10)
         let hash = bcrypt.hashSync(password, salt)
         let [newUser] = await db.auth.create_user(email, hash, name)
+        delete newUser.hash
         req.session.user = newUser
+        res.status(200).send(req.session.user)
     },
     logout: ( req, res ) => {
         req.session.destroy()
