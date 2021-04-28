@@ -8,6 +8,7 @@ const userCtrl = require('./controllers/authController')
 app.use(express.json());
 
 const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env;
+const nodemailerCtrl = require('./controllers/nodeMailerCtrl')
 
 app.use(session({
     resave: false,
@@ -30,6 +31,7 @@ app.post('/auth/logout', userCtrl.logout)
 
 
 // NODEMAILER ENDPOINT
+app.post('/api/send-email',nodemailerCtrl.sendEmail);
 
 massive({
     connectionString: CONNECTION_STRING,
