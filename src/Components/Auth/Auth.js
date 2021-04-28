@@ -37,8 +37,11 @@ class Auth extends Component {
         }).catch(err => console.log(err))
     }
     register = () => {
-        axios.post('/auth/register', this.state)
+        const { email, name, password } = this.state
+        console.log('err', this.state)
+        axios.post('/auth/register', {email, name, password})
         .then(res => {
+            console.log(res.data)
             this.props.registerUser({user: res.data})
             this.props.history.push('/main')
         }).catch(err => console.log(err)) 
@@ -65,7 +68,7 @@ class Auth extends Component {
                     </div>
                     <div>
                         <h3>Password:</h3>
-                        <input value={this.state.password} onChange={e => this.handlePasswordChange(e.target.value)}/>
+                        <input type="password" value={this.state.password} onChange={e => this.handlePasswordChange(e.target.value)}/>
                     </div>
                     <div>
                         <button onClick={this.login}>login</button>
@@ -95,10 +98,10 @@ class Auth extends Component {
                     </div>
                     <div>
                         <h3>Password:</h3>
-                        <input value={this.state.password} onChange={e => this.handlePasswordChange(e.target.value)}/>
+                        <input type="password" value={this.state.password} onChange={e => this.handlePasswordChange(e.target.value)}/>
                     </div>
                     <div>
-                        <button></button>
+                        <button onClick={this.register}>Register</button>
                     </div>
                 </div>
 
