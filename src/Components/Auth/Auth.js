@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
-import './Auth.css'
+import './Auth.scss'
 
 class Auth extends Component {
     constructor(props){
