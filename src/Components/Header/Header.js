@@ -22,8 +22,8 @@ const Header = (props) => {
                 <h1>Where Should I Go?</h1>
             </section>
             <section>
-                <Link to="/my-list"><button>My List</button></Link>
-                <button>Logout</button>
+                <Link to="/my-list"><button >My List</button></Link>
+                <button onClick={logout}>Logout</button>
             </section>
         </header>
     )
