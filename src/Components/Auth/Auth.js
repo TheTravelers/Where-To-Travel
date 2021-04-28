@@ -110,4 +110,5 @@ class Auth extends Component {
         }
     }
 }
+
 export default connect(null, {loginUser, registerUser})(Auth)
