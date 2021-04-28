@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const massive = require('massive');
 const session = require('express-session')
+const userCtrl = require('./controllers/authController')
 
 app.use(express.json());
 
@@ -19,7 +20,10 @@ app.use(session({
 }))
 
 // AUTH ENDPOINTS
-
+app.post('/auth/register', userCtrl.register)
+app.post('/auth/login', userCtrl.login)
+app.post('/auth/logout', userCtrl.logout)
+// app.get('/auth/me', userCtrl.getUser)
 
 
 // ENDPOINTS
