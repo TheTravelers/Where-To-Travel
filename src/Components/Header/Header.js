@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { logoutUser } from '../../redux/userReducer';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import './Header.css';
+import './Header.scss';
 
 const Header = (props) => {
 
