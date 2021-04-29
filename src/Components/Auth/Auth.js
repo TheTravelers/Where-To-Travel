@@ -12,7 +12,8 @@ class Auth extends Component {
             email: '',
             password: '',
             name: '',
-            mode: 'login'
+            mode: 'login',
+            errorMsg: ''
         }
     }
     handleEmailChange = (val) => {
@@ -34,14 +35,28 @@ class Auth extends Component {
         .then(res => {
             this.props.loginUser({user: res.data})
             this.props.history.push('/main')
-        }).catch(err => console.log(err))
+        })
+        .catch(err => {console.log(err)
+        this.setState({errorMsg: 'Incorrect email or password.'})
+        })
     }
     register = () => {
         axios.post('/auth/register', this.state)
         .then(res => {
             this.props.registerUser({user: res.data})
             this.props.history.push('/main')
-        }).catch(err => console.log(err)) 
+        }).catch(err => {
+            console.log(err)
+            this.setState({errorMsg: 'This email already exists'})
+        }) 
+    }
+    closeErrorMsg = () => {
+        this.setState({
+            email: '',
+            password: '',
+            name: '',
+            errorMsg: false
+        })
     }
 
     render(){
@@ -51,6 +66,7 @@ class Auth extends Component {
             <div>
                 <div>
                     <h1>Where Should I Travel?</h1>
+                    {this.state.errorMsg && <h3>{this.state.errorMsg} <span onClick={this.closeErrorMessage}>X</span></h3>}
                     <div>
                         <button name='register' onClick={this.handleMode} disabled={mode === 'register'}>
                             Register
@@ -78,6 +94,7 @@ class Auth extends Component {
                 <div>
                     <div>
                     <h1>Where Should I Travel?</h1>
+                    {this.state.errorMsg && <h3>{this.state.errorMsg} <span onClick={this.closeErrorMessage}>X</span></h3>}
                     <div>
                         <button name='register' onClick={this.handleMode} disabled={mode === 'register'}>
                             Register
