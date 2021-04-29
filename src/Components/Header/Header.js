@@ -6,12 +6,12 @@ import axios from 'axios';
 import './Header.scss';
 
 const Header = (props) => {
+    console.log(props)
 
     function logout() {
-        axios.delete('/auth/logout')
+        axios.post('/auth/logout')
         .then(() => {
             props.logoutUser()
-            props.history.push('/')
         })
         .catch(err => console.log(err))
     }
@@ -23,7 +23,7 @@ const Header = (props) => {
             </section>
             <section>
                 <Link to="/my-list"><button >My List</button></Link>
-                <button onClick={logout}>Logout</button>
+                <Link to="/"><button onClick={logout}>Logout</button></Link>
             </section>
         </header>
     )

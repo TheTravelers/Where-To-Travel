@@ -4,6 +4,7 @@ const app = express();
 const massive = require('massive');
 const session = require('express-session')
 const userCtrl = require('./controllers/authController')
+const userListCtrl = require('./controllers/userListController')
 
 app.use(express.json());
 
@@ -25,7 +26,8 @@ app.post('/auth/login', userCtrl.login)
 app.post('/auth/logout', userCtrl.logout)
 
 // app.get('/auth/me', userCtrl.getUser)
-
+//USER LIST ENDPOINTS
+app.get('/userDestList/:user_id', userListCtrl.getDestinations)
 
 // ENDPOINTS
 

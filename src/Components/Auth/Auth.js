@@ -37,12 +37,15 @@ class Auth extends Component {
             this.props.history.push('/main')
         })
         .catch(err => {console.log(err)
-        this.setState({errorMsg: 'Incorrect email or password.'})
+        this.setState({errorMsg: 'Incorrect email or password'})
         })
     }
     register = () => {
-        axios.post('/auth/register', this.state)
+        const { email, name, password } = this.state
+        console.log('err', this.state)
+        axios.post('/auth/register', {email, name, password})
         .then(res => {
+            console.log(res.data)
             this.props.registerUser({user: res.data})
             this.props.history.push('/main')
         }).catch(err => {
@@ -66,7 +69,7 @@ class Auth extends Component {
             <div>
                 <div>
                     <h1>Where Should I Travel?</h1>
-                    {this.state.errorMsg && <h3>{this.state.errorMsg} <span onClick={this.closeErrorMessage}>X</span></h3>}
+                    {this.state.errorMsg && <h3>{this.state.errorMsg} <span onClick={this.closeErrorMsg}>X</span></h3>}
                     <div>
                         <button name='register' onClick={this.handleMode} disabled={mode === 'register'}>
                             Register
@@ -77,11 +80,11 @@ class Auth extends Component {
                     </div>
                     <div>
                         <h3>Email:</h3>
-                        <input value={this.state.username} onChange={e => this.handleEmailChange(e.target.value)}/>
+                        <input value={this.state.email} onChange={e => this.handleEmailChange(e.target.value)}/>
                     </div>
                     <div>
                         <h3>Password:</h3>
-                        <input value={this.state.password} onChange={e => this.handlePasswordChange(e.target.value)}/>
+                        <input type="password" value={this.state.password} onChange={e => this.handlePasswordChange(e.target.value)}/>
                     </div>
                     <div>
                         <button onClick={this.login}>login</button>
@@ -94,7 +97,7 @@ class Auth extends Component {
                 <div>
                     <div>
                     <h1>Where Should I Travel?</h1>
-                    {this.state.errorMsg && <h3>{this.state.errorMsg} <span onClick={this.closeErrorMessage}>X</span></h3>}
+                    {this.state.errorMsg && <h3>{this.state.errorMsg} <span onClick={this.closeErrorMsg}>X</span></h3>}
                     <div>
                         <button name='register' onClick={this.handleMode} disabled={mode === 'register'}>
                             Register
@@ -108,14 +111,14 @@ class Auth extends Component {
                         <input value={this.state.name} onChange={e => this.handleNameChange(e.target.value)}/>
                         
                         <h3>Email:</h3>
-                        <input value={this.state.username} onChange={e => this.handleEmailChange(e.target.value)}/>
+                        <input value={this.state.email} onChange={e => this.handleEmailChange(e.target.value)}/>
                     </div>
                     <div>
                         <h3>Password:</h3>
-                        <input value={this.state.password} onChange={e => this.handlePasswordChange(e.target.value)}/>
+                        <input type="password" value={this.state.password} onChange={e => this.handlePasswordChange(e.target.value)}/>
                     </div>
                     <div>
-                        <button></button>
+                        <button onClick={this.register}>Register</button>
                     </div>
                 </div>
 
@@ -124,4 +127,5 @@ class Auth extends Component {
         }
     }
 }
+
 export default connect(null, {loginUser, registerUser})(Auth)
