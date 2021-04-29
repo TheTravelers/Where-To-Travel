@@ -8,7 +8,8 @@ class Filter extends Component{
     render(){
         return(
             <div>
-                <Header/>
+                <Header />
+                
             </div>
         )
     }
