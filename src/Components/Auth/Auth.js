@@ -12,7 +12,8 @@ class Auth extends Component {
             email: '',
             password: '',
             name: '',
-            mode: 'login'
+            mode: 'login',
+            errorMsg: ''
         }
     }
     handleEmailChange = (val) => {
@@ -34,7 +35,10 @@ class Auth extends Component {
         .then(res => {
             this.props.loginUser({user: res.data})
             this.props.history.push('/main')
-        }).catch(err => console.log(err))
+        })
+        .catch(err => {console.log(err)
+        this.setState({errorMsg: 'Incorrect email or password'})
+        })
     }
     register = () => {
         const { email, name, password } = this.state
@@ -44,7 +48,18 @@ class Auth extends Component {
             console.log(res.data)
             this.props.registerUser({user: res.data})
             this.props.history.push('/main')
-        }).catch(err => console.log(err)) 
+        }).catch(err => {
+            console.log(err)
+            this.setState({errorMsg: 'This email already exists'})
+        }) 
+    }
+    closeErrorMsg = () => {
+        this.setState({
+            email: '',
+            password: '',
+            name: '',
+            errorMsg: false
+        })
     }
 
     render(){
@@ -54,6 +69,7 @@ class Auth extends Component {
             <div>
                 <div>
                     <h1>Where Should I Travel?</h1>
+                    {this.state.errorMsg && <h3>{this.state.errorMsg} <span onClick={this.closeErrorMsg}>X</span></h3>}
                     <div>
                         <button name='register' onClick={this.handleMode} disabled={mode === 'register'}>
                             Register
@@ -64,7 +80,7 @@ class Auth extends Component {
                     </div>
                     <div>
                         <h3>Email:</h3>
-                        <input value={this.state.username} onChange={e => this.handleEmailChange(e.target.value)}/>
+                        <input value={this.state.email} onChange={e => this.handleEmailChange(e.target.value)}/>
                     </div>
                     <div>
                         <h3>Password:</h3>
@@ -81,6 +97,7 @@ class Auth extends Component {
                 <div>
                     <div>
                     <h1>Where Should I Travel?</h1>
+                    {this.state.errorMsg && <h3>{this.state.errorMsg} <span onClick={this.closeErrorMsg}>X</span></h3>}
                     <div>
                         <button name='register' onClick={this.handleMode} disabled={mode === 'register'}>
                             Register
@@ -94,7 +111,7 @@ class Auth extends Component {
                         <input value={this.state.name} onChange={e => this.handleNameChange(e.target.value)}/>
                         
                         <h3>Email:</h3>
-                        <input value={this.state.username} onChange={e => this.handleEmailChange(e.target.value)}/>
+                        <input value={this.state.email} onChange={e => this.handleEmailChange(e.target.value)}/>
                     </div>
                     <div>
                         <h3>Password:</h3>
