@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Header from '../Header/Header'
 import './Filter.scss'
 
 class Filter extends Component{
@@ -7,7 +8,8 @@ class Filter extends Component{
     render(){
         return(
             <div>
-
+                <Header />
+                
             </div>
         )
     }
