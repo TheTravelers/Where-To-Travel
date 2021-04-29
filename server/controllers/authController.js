@@ -34,11 +34,11 @@ module.exports = {
         req.session.destroy()
         return res.sendStatus(200)
     },
-    // getUser: async(req, res) => {
-    //     let user = req.session.user
-    //     const db = req.app.get('db')
-    //     if(user){
-    //         await db.auth.find_user(email)
-    //     }
-    // }
+    getUser: async(req, res) => {
+        let user = req.session.user
+        const db = req.app.get('db')
+        if(user){
+            await db.auth.find_user(email)
+        }
+    }
 }
