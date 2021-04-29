@@ -24,9 +24,7 @@ class UserList extends Component{
         if (this.props.dest.userSavedDestinations.length < 1) {
             return (
               <section>
-                    <div>
-                        <Header />
-                    </div>
+                    <Header />
                 <header>
                   <h2>You have no saved destinations</h2>
                 </header>
@@ -35,9 +33,7 @@ class UserList extends Component{
           }
         return(
             <div>
-                <div>
                     <Header />
-                </div>
                 <h1>{this.props.user.user.user.name}'s Saved Destinations</h1>
                 <div>
                     {this.props.dest.userSavedDestinations.map((element, index) => {
