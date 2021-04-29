@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
 }
@@ -9,4 +10,19 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+$primaryColor: #FBE0C4;
+$lightBlue: #8AB6D6;
+$middleBlue: #2978B5;
+$darkBlue: #0061A8;
+
+$btnColor: rgba(5, 11, 12, 0.604);
+
+@mixin flex($direction, $background) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $background;
+    flex-direction: $direction;
 }

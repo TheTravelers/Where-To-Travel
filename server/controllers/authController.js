@@ -38,7 +38,7 @@ module.exports = {
         let user = req.session.user
         const db = req.app.get('db')
         if(user){
-            await db.auth.find_user(email)
+            await db.auth.find_user(user.email)
         }
     }
 }

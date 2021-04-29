@@ -1,8 +1,8 @@
 import axios from 'axios'
 import React, { Component } from 'react'
+import Header from '../Header/Header'
 import {getSavedDestinations} from '../../redux/destinationReducer'
 import {connect} from 'react-redux'
-import Header from '../Header/Header'
 import './UserList.scss'
 
 
@@ -10,12 +10,14 @@ class UserList extends Component{
 
 
     componentWillMount(){
+        console.log(this.props.user.user.user, 'this.props.user')
         axios.get(`/userDestList/${this.props.user.user.user.user_id}`)
         .then(res => {
-            // console.log(res.data, 'res data')
+            console.log(res.data, 'res data')
             this.props.getSavedDestinations(res.data)
 
         })
+        //
     }
 
 
@@ -24,7 +26,7 @@ class UserList extends Component{
         if (this.props.dest.userSavedDestinations.length < 1) {
             return (
               <section>
-                    <Header />
+                  <Header />
                 <header>
                   <h2>You have no saved destinations</h2>
                 </header>
@@ -33,7 +35,7 @@ class UserList extends Component{
           }
         return(
             <div>
-                    <Header />
+                <Header />
                 <h1>{this.props.user.user.user.name}'s Saved Destinations</h1>
                 <div>
                     {this.props.dest.userSavedDestinations.map((element, index) => {

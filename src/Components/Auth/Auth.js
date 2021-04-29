@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
 import {loginUser, registerUser} from '../../redux/userReducer'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 import './Auth.scss'
 
 
@@ -13,7 +15,7 @@ class Auth extends Component {
             password: '',
             name: '',
             mode: 'login',
-            errorMsg: ''
+            // errorMsg: ''
         }
     }
     handleEmailChange = (val) => {
@@ -37,7 +39,8 @@ class Auth extends Component {
             this.props.history.push('/main')
         })
         .catch(err => {console.log(err)
-        this.setState({errorMsg: 'Incorrect email or password'})
+            this.notifyWarning('Incorrect email or password')
+        // this.setState({errorMsg: 'Incorrect email or password'})
         })
     }
     register = () => {
@@ -50,26 +53,39 @@ class Auth extends Component {
             this.props.history.push('/main')
         }).catch(err => {
             console.log(err)
-            this.setState({errorMsg: 'This email already exists'})
+            // this.setState({errorMsg: 'This email already exists'})
+            this.notifyWarning('This email already exists')
         }) 
     }
-    closeErrorMsg = () => {
-        this.setState({
-            email: '',
-            password: '',
-            name: '',
-            errorMsg: false
-        })
+    // closeErrorMsg = () => {
+    //     this.setState({
+    //         email: '',
+    //         password: '',
+    //         name: '',
+    //         errorMsg: false
+    //     })
+    // }
+
+    notifyWarning = (msg) => {
+        return toast.error(msg, {
+            position: "top-center",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            }) 
     }
 
     render(){
         let {mode} = this.state
         if(mode === "login"){
         return(
-            <div>
-                <div>
+            <div className="auth-container">
+                <div className="login-container">
                     <h1>Where Should I Travel?</h1>
-                    {this.state.errorMsg && <h3>{this.state.errorMsg} <span onClick={this.closeErrorMsg}>X</span></h3>}
+                    {/* {this.state.errorMsg && <h3>{this.state.errorMsg} <span onClick={this.closeErrorMsg}>X</span></h3>} */}
                     <div>
                         <button name='register' onClick={this.handleMode} disabled={mode === 'register'}>
                             Register
@@ -90,14 +106,14 @@ class Auth extends Component {
                         <button onClick={this.login}>login</button>
                     </div>
                 </div>
-
+                <ToastContainer />
             </div>
         )}else{
             return(
                 <div>
                     <div>
                     <h1>Where Should I Travel?</h1>
-                    {this.state.errorMsg && <h3>{this.state.errorMsg} <span onClick={this.closeErrorMsg}>X</span></h3>}
+                    {/* {this.state.errorMsg && <h3>{this.state.errorMsg} <span onClick={this.closeErrorMsg}>X</span></h3>} */}
                     <div>
                         <button name='register' onClick={this.handleMode} disabled={mode === 'register'}>
                             Register
@@ -121,7 +137,7 @@ class Auth extends Component {
                         <button onClick={this.register}>Register</button>
                     </div>
                 </div>
-
+                <ToastContainer />
             </div>
             )
         }
