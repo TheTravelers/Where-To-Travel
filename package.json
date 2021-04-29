@@ -21,6 +21,8 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-toastify": "^7.0.4",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-promise-middleware": "^6.1.2",
     "sass": "^1.32.11",
     "web-vitals": "^1.1.1"
   },
