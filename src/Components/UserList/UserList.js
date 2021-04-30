@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import Header from '../Header/Header'
 import {getSavedDestinations} from '../../redux/destinationReducer'
 import {connect} from 'react-redux'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import './UserList.scss'
 
 
@@ -20,6 +22,14 @@ class UserList extends Component{
         //
     }
 
+    notifyRemoval = () => {
+        toast.warning('Destination removed from your list', {
+            position: 'top-center',
+            autoClose: 4000,
+            closeOnClick: true
+        })
+    }
+    //    need to render this somewhere <ToastContainer />
 
     render(){
         console.log(this.props.dest, 'this.props.dest')

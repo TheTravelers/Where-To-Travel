@@ -2,6 +2,8 @@ import axios from 'axios'
 import React, { Component } from 'react'
 import Header from '../Header/Header'
 import {updateSavedDestinations} from '../../redux/destinationReducer'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import './Results.scss'
  
 class Results extends Component{
@@ -33,7 +35,14 @@ class Results extends Component{
        })
    }
  
- 
+   notifySuccess = () => {
+    toast.success('Destination added to your list', {
+        position: 'top-center',
+        autoClose: 4000,
+        closeOnClick: true
+        })
+    }
+ //    need to render this somewhere <ToastContainer />
   
  
    render(){
