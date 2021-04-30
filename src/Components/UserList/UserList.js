@@ -13,7 +13,7 @@ class UserList extends Component{
     constructor(){
         super()
         this.state ={
-            title: '',
+            emailTo: '',
             message: ''
         }
     }
@@ -72,7 +72,7 @@ class UserList extends Component{
     }
 
     handleTitleChange = (val) => {
-        this.setState({title: val})
+        this.setState({emailTo: val})
     }
 
     handleMessageChange = (val) => {
@@ -141,13 +141,12 @@ class UserList extends Component{
                         <div>
                             
                             <div>
-
-                                <span>Title: </span>
-                                <input value={this.state.title} onChange={e => this.handleTitleChange(e.target.value)} />
+                                <span>Email To: </span>
+                                <input value={this.state.emailTo} onChange={e => this.handleTitleChange(e.target.value)} />
                             </div>
                             <div>
                                 <span>Message: </span>
-                                <input className='text-box' value={this.props.dest.userSavedDestinations} onChange={e => this.handleMessageChange(e.target.value)}/>
+                                <input type='text-area' className='text-box' value={this.props.dest.userSavedDestinations} onChange={e => this.handleMessageChange(e.target.value)}/>
                             </div>
                         </div>
                         <div className='email-button-section'>
