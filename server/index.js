@@ -28,6 +28,7 @@ app.post('/auth/logout', userCtrl.logout)
 app.get('/auth/me', userCtrl.getUser)
 //USER LIST ENDPOINTS
 app.get('/userDestList/:user_id', userListCtrl.getDestinations)
+app.post('/userDestList/:user_id', userListCtrl.addDestination)
 
 // ENDPOINTS
 

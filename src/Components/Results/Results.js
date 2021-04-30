@@ -26,7 +26,7 @@ class Results extends Component{
        }).catch(err => console.log(err))
    }
  
-   addToUserList = (cityName) => {
+   addToUserList = (cityName, distance, population, waterFront, adultFriendly) => {
        axios.post(`/userDestList/${this.props.user.user.user.user_id}`, {cityName, distance, population, waterFront, adultFriendly})
        .then(res => {
            this.props.updateSavedDestinations(res.data)
@@ -47,15 +47,14 @@ class Results extends Component{
                        const {cityName, distance, population, waterFront, adultFriendly} = element
                        return(
                            <div key={index}>
-                               <h2>{element.cityName}</h2>
+                               <h2>{cityName}</h2>
                                <li>
-                                   <ul>{element.distance} miles from your current destination</ul>
-                                   <ul>Area: {element.population > 20000 ? 'Urban' : 'Rural'}</ul>
-                                   <ul>Near Waterfront: {element.waterFront === true ? 'Yes' : 'No'}</ul>
-                                   <ul>Adult Activities Nearby: {element.adultFriendly > 4 ? 'Yes' : 'No'}</ul>
+                                   <ul>{distance} miles from your current destination</ul>
+                                   <ul>Area: {population > 20000 ? 'Urban' : 'Rural'}</ul>
+                                   <ul>Near Waterfront: {waterFront === true ? 'Yes' : 'No'}</ul>
+                                   <ul>Adult Activities Nearby: {adultFriendly > 4 ? 'Yes' : 'No'}</ul>
                                </li>
-                               <button onClick={this.addToUserList()}
-                                    >Add</button>
+                               <button onClick={this.addToUserList(cityName, distance, population, waterFront, adultFriendly)}>Add</button>
                            </div>
                        )
                    })}
