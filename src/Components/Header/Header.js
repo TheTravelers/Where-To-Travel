@@ -17,15 +17,16 @@ const Header = (props) => {
     }
 
     return(
-        <header>
-            <section>
-                <h1>Where Should I Go?</h1>
-            </section>
-            <section>
-                <Link to="/my-list"><button >My List</button></Link>
-                <Link to="/"><button onClick={logout}>Logout</button></Link>
-            </section>
-        </header>
+        <div>
+            <header className='header-container'>
+                <h1 className="header-h1">Where Should I Go?</h1>
+                <nav className="header-nav">
+                    <Link to="/my-list"><button className='header-button' >My List</button></Link>
+                    <Link to="/"><button className='header-button' onClick={logout}>Logout</button></Link>
+                </nav>
+            </header>
+
+        </div>
     )
 }
 export default connect(null, { logoutUser })(Header)
