@@ -67,7 +67,7 @@ class Auth extends Component {
     // }
 
     notifyWarning = (msg) => {
-        return toast.error(msg, {
+        toast.error(msg, {
             position: "top-center",
             autoClose: 4000,
             hideProgressBar: false,
@@ -75,7 +75,12 @@ class Auth extends Component {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            }) 
+        }) 
+        this.setState({
+                email: '',
+                password: '',
+                name: ''  
+        })
     }
 
     render(){
