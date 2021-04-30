@@ -27,7 +27,7 @@ const initialState = {
             }
         case UPDATE_SAVED_DESTINATIONS:
             return{
-                ...state, userSavedDestinations: [...state.arr, action.payload]
+                ...state, userSavedDestinations: [...state.userSavedDestinations, action.payload]
             }
         default: return state;
     }
