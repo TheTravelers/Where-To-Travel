@@ -1,5 +1,86 @@
 @import '../../App.scss';
 
-user-destinations-container {
-    height: 80%;
+div {
+    background-color: $primaryColor;
+}
+
+.user-destinations-container {
+    margin-bottom: 0;
+    background-color: $primaryColor;
 };
+
+.user-list-title{
+    font-size: x-large;
+    content: contain;
+}
+
+.user-list-share-button {
+    position: fixed;
+    font-size: medium;
+    bottom: 0;
+    right: 0;
+    width: 30%;
+    height: 80px;
+    color: white;
+    background-color: $darkBlue;
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+    border-top-right-radius: 50%;
+}
+
+.city-name-row {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    .add-to-share-list {
+        position: relative;
+        float: right;
+        border-radius: 50%;
+        height: 30px;
+        width: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: large;
+        
+    }
+}
+
+
+
+
+
+.user-destination-single {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid $darkBlue;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border-radius: 10%;
+    background-color: white;
+
+
+    li{
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+        justify-content: left;
+
+
+        ul{
+        display: flex;
+        flex-direction: row;
+        align-items: left;
+        justify-content: left;
+
+        .city-answer{
+            padding-left: 10px;
+            font-style:italic;
+        }
+        }
+
+    }
+}

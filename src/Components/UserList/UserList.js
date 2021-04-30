@@ -36,22 +36,47 @@ class UserList extends Component{
         return(
             <div>
                 <Header />
-                <h1>{this.props.user.user.user.name}'s Saved Destinations</h1>
                 <div>
+
+                    <h1 className='user-list-title'>{this.props.user.user.user.name}'s Saved Destinations</h1>
+                    <div className='user-destination-container'>
                     {this.props.dest.userSavedDestinations.map((element, index) => {
                         return (
-                            <div className='user-destinations-container' key={index}>
-                                <h2>{element.city_name}</h2>
+                            <div className='user-destination-single' key={index}>
+                                <h2 className='city-name-row'>
+                                    <span>{element.city_name}, {element.state}</span>
+                                    <button className="add-to-share-list">-</button>
+                                </h2>
+                                <img src={element.city_img}/>
                                 <li>
-                                    <ul>Area: {element.population > 20000 ? 'Urban' : 'Rural'}</ul>
-                                    <ul>Near Waterfront: {element.waterfront === true ? 'Yes' : 'No'}</ul>
-                                    <ul>Adult Activities Nearby{element.adult_friendly === true ? 'Yes' : 'No'}</ul>
-                                    <ul>Family Activities Nearby{element.family_friendly === true ? 'Yes' : 'No'}</ul>
+                                    <ul>Area:
+                                        <span className='city-answer'>
+                                            {element.population > 20000 ? 'Urban' : 'Rural'}
+                                        </span>
+                                    </ul>
+                                    <ul>Near Waterfront: 
+                                        <span className='city-answer'>
+                                            {element.waterfront === true ? 'Yes' : 'No'}
+                                        </span>
+                                    </ul>
+                                    <ul>Adult Activities Nearby: 
+                                        <span className='city-answer'>
+                                            {element.adult_friendly === true ? 'Yes' : 'No'}
+                                        </span>
+                                        </ul>
+                                    <ul>Family Activities Nearby: 
+                                        <span className='city-answer'>
+                                            
+                                            {element.family_friendly === true ? 'Yes' : 'No'}
+                                        </span>
+                                        </ul>
                                 
                                 </li>
                             </div>
                         )
                     })}
+                    </div>
+                    <button className='user-list-share-button'>SHARE LIST</button>
                 </div>
             </div>
         )
