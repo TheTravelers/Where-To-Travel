@@ -6,10 +6,17 @@ import {connect} from 'react-redux'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import './UserList.scss'
+import EmailForm from './EmailForm'
 
 
 class UserList extends Component{
-
+    constructor(){
+        super()
+        this.state ={
+            title: '',
+            message: ''
+        }
+    }
 
     componentWillMount(){
         console.log(this.props.user.user.user, 'this.props.user')
@@ -17,9 +24,29 @@ class UserList extends Component{
         .then(res => {
             console.log(res.data, 'res data')
             this.props.getSavedDestinations(res.data)
+            
 
         })
+
         //
+    }
+
+    // componentDidMount(){
+    //     this.setState({showEmailForm: false})
+    // }
+
+    showEmailForm = () => {
+        // Get the snackbar DIV
+        var x = document.getElementById("email-form-comp");
+        // Add the "show" class to DIV
+        x.className = "show";
+
+        this.setState({message: this.props.dest})
+    }
+
+    hideEmailForm(){
+        var x = document.getElementById("email-form-comp");
+        x.className = x.className.replace("show", "")
     }
 
     notifyRemoval = () => {
@@ -30,6 +57,28 @@ class UserList extends Component{
         })
     }
     //    need to render this somewhere <ToastContainer />
+
+
+    shareList = () => {
+        // add nodemailer functionality here.
+        const {name, email} = this.props.user.user.user
+        let {title} = this.state.title
+        const message = this.props.dest.userSavedDestinations;
+        axios.post('/api/send-email', {name, email, title, message})
+        .then(res => {
+            console.log(res.data, 'shareList Response')
+
+        })
+    }
+
+    handleTitleChange = (val) => {
+        this.setState({title: val})
+    }
+
+    handleMessageChange = (val) => {
+        this.setState({message: val})
+    }
+
 
     render(){
         console.log(this.props.dest, 'this.props.dest')
@@ -86,7 +135,27 @@ class UserList extends Component{
                         )
                     })}
                     </div>
-                    <button className='user-list-share-button'>SHARE LIST</button>
+                    <button className='user-list-share-button' onClick={this.showEmailForm}>SHARE LIST</button>
+                    <div id='email-form-comp' className=''>
+                            EMAIL FORM
+                        <div>
+                            
+                            <div>
+
+                                <span>Title: </span>
+                                <input value={this.state.title} onChange={e => this.handleTitleChange(e.target.value)} />
+                            </div>
+                            <div>
+                                <span>Message: </span>
+                                <input className='text-box' value={this.props.dest.userSavedDestinations} onChange={e => this.handleMessageChange(e.target.value)}/>
+                            </div>
+                        </div>
+                        <div className='email-button-section'>
+                            <button className='email-button' onClick={this.hideEmailForm}>CANCEL</button>
+                            <button className='email-button'>SEND</button>
+                        </div>
+                                {/* < EmailForm /> */}
+                    </div>
                 </div>
             </div>
         )

@@ -48,6 +48,47 @@ div {
     }
 }
 
+#email-form-comp.show {
+    visibility: visible;
+    position: fixed;
+    display:flex;
+    flex-direction: column;
+    bottom: 5%;
+    left: 5%;
+    z-index: 10;
+    width: 90vw;
+    height: 90vh;
+
+    .text-box{
+        position: relative;
+        height: 300px !important;
+        width: 90%;
+        background-color: white;
+    }
+
+    .email-button-section{
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+
+        .email-button{
+            width: 40%;
+            height: 50px;
+            margin-bottom: 0;
+        }
+    }
+    
+}
+
+#email-form-comp {
+    visibility: hidden;
+}
+// .email-form-container {
+//     width: auto;
+// }
+
 
 
 
