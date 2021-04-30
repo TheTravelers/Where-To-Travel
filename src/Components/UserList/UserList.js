@@ -40,7 +40,7 @@ class UserList extends Component{
                 <div>
                     {this.props.dest.userSavedDestinations.map((element, index) => {
                         return (
-                            <div key={index}>
+                            <div className='user-destinations-container' key={index}>
                                 <h2>{element.city_name}</h2>
                                 <li>
                                     <ul>Area: {element.population > 20000 ? 'Urban' : 'Rural'}</ul>
