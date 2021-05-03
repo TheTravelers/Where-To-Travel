@@ -169,9 +169,9 @@ module.exports = {
       return noRepeatsArray
       }
       
-    const x= removeRepeatingCities(noCitiesFilter)
+    const finalCityList = removeRepeatingCities(noCitiesFilter)
 
-    return res.status(200).send(x);
+    return res.status(200).send(finalCityList);
   },
 };
 
