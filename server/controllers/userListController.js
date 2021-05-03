@@ -15,12 +15,12 @@ module.exports = {
     },
     deleteDestination: async ( req, res ) => {
         const db = req.app.get('db')
-        const {dest_id} = req.params;
+        const {saved_dest_id} = req.params;
 
         try{
-            await db.delete_destination(dest_id)
+            userId = await db.delete_destination(saved_dest_id)
 
-            return res.sendStatus(200)
+            return res.status(200).send(userId)
         }
         catch(err){
             console.log(err)

@@ -34,7 +34,7 @@ div {
     padding-left: 10px;
     padding-right: 10px;
 
-    .add-to-share-list {
+    .remove-from-share-list {
         position: relative;
         float: right;
         border-radius: 50%;
@@ -69,6 +69,10 @@ div {
         background-color: white;
     }
 
+    .email-button {
+        border-radius: 30%;
+    }
+
     .email-message-container{
         display: flex;
         flex-direction: column;
@@ -89,9 +93,10 @@ div {
         }
 
         .message{
-
         background-color: $lightBlue;
         }
+
+        
     }
 
     

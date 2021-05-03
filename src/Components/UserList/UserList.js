@@ -87,6 +87,16 @@ class UserList extends Component{
         this.setState({message: newVal})
     }
 
+    removeFromList = (val) => {
+        // console.log(val)
+        let saved_dest_id = val
+        // console.log(saved_dest_id)
+        axios.delete(`/userDestList/${saved_dest_id}`)
+        .then(res => {
+            console.log(res.data)
+        })
+    }
+
 
     render(){
         console.log(this.props.dest, 'this.props.dest')
@@ -112,7 +122,8 @@ class UserList extends Component{
                             <div className='user-destination-single' key={index}>
                                 <h2 className='city-name-row'>
                                     <span>{element.city_name}, {element.state}</span>
-                                    <button className="add-to-share-list">-</button>
+                                    <button className="remove-from-share-list" onClick={() => this.removeFromList(element.saved_dest_id)}>-</button>
+                                    {/* this.removeFromList(element) */}
                                 </h2>
                                 <img src={element.city_img}/>
                                 <li>
@@ -154,7 +165,7 @@ class UserList extends Component{
                             </div>
                             <div className='message'>
                                 <span>Message: </span>
-                                <input type='text-area' className='text-box' value={this.state.message} onChange={e => this.handleMessageChange(e.target.value)}/>
+                                <textarea type='text-area' className='text-box' value={this.state.message} onChange={e => this.handleMessageChange(e.target.value)}/>
                             </div>
                         </div>
                         <div className='email-button-section'>

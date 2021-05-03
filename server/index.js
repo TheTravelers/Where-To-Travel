@@ -30,6 +30,7 @@ app.get('/auth/me', userCtrl.getUser)
 //USER LIST ENDPOINTS
 app.get('/userDestList/:user_id', userListCtrl.getDestinations)
 app.post('/userDestList/:user_id', userListCtrl.addDestination)
+app.delete('/userDestList/:saved_dest_id', userListCtrl.deleteDestination)
 
 // FILTER ENDPOINTS
 
