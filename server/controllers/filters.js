@@ -30,6 +30,7 @@ module.exports = {
       inState, // boolean
       winterSports, // boolean
     } = req.body;
+    console.log(req.body)
 
     // we are using the geo coder to have information from our user using his coordinates
     const [getInfoUser] = await geocoder.reverse({
@@ -144,6 +145,7 @@ module.exports = {
     } else {
       filterCities = cities;
     }
+    console.log(filterCities)
 
     return res.status(200).send(filterCities);
   },

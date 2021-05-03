@@ -33,7 +33,7 @@ app.post('/userDestList/:user_id', userListCtrl.addDestination)
 
 // FILTER ENDPOINTS
 
-app.get('/api/filters', filterCtrl.filter)
+app.post('/api/filters', filterCtrl.filter)
 
 // NODEMAILER ENDPOINT
 app.post('/api/send-email',nodemailerCtrl.sendEmail);
