@@ -73,7 +73,7 @@ module.exports = {
 
     await axios
       .get(
-        `https://api.opentripmap.com/0.1/en/places/radius?radius=${distance}&lon=${actualLocation[0]}&lat=${actualLocation[1]}&src_geom=osm&src_attr=osm${kinds}&rate=3h&format=geojson&limit=50&apikey=${OPEN_TRIP_KEY}`
+        `https://api.opentripmap.com/0.1/en/places/radius?radius=${distance}&lon=${actualLocation[0]}&lat=${actualLocation[1]}&src_geom=osm&src_attr=osm${kinds}&rate=1&format=geojson&limit=100&apikey=${OPEN_TRIP_KEY}`
       )
       .then(async (response) => {
         response.data.features.forEach((e, i) => {
@@ -146,12 +146,31 @@ module.exports = {
       filterCities = cities;
     }
     // console.log(filterCities)
-    const noCitiesFilterCities = filterCities.filter( e => {
+    const noCitiesFilter = filterCities.filter( e => {
       // console.log(e.cityName)
       return e.cityName  
     }) 
 
-    return res.status(200).send(noCitiesFilterCities);
+    removeRepeatingCities = (arr) => {
+
+
+      let noRepeatsArray = []
+      
+      let uniqueObj = {}
+      
+      for(let i in arr){
+        let objCityName = arr[i]['cityName']
+        uniqueObj[objCityName] = arr[i]
+      }
+      for(i in uniqueObj){
+        noRepeatsArray.push(uniqueObj[i])
+      }
+      return noRepeatsArray
+      }
+      
+    const x= removeRepeatingCities(noCitiesFilter)
+
+    return res.status(200).send(x);
   },
 };
 

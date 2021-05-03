@@ -5,7 +5,7 @@ const massive = require('massive');
 const session = require('express-session')
 const userCtrl = require('./controllers/authController')
 const userListCtrl = require('./controllers/userListController')
-const filterCtrl = require('./controllers/filters')
+const filterCtrl = require('./controllers/filtersController')
 
 app.use(express.json());
 
