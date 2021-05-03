@@ -21,10 +21,10 @@ class UserList extends Component{
     }
 
     componentWillMount() {
-        console.log(this.props.user.user.user, 'this.props.user')
+        // console.log(this.props.user.user.user, 'this.props.user')
         axios.get(`/userDestList/${this.props.user.user.user.user_id}`)
         .then(res => {
-            console.log(res.data, 'res data')
+            // console.log(res.data, 'res data')
             this.props.getSavedDestinations(res.data)
             
             
@@ -43,7 +43,7 @@ class UserList extends Component{
         var x = document.getElementById("email-form-comp");
         // Add the "show" class to DIV
         x.className = "show";
-        console.log(this.props.dest.userSavedDestinations, 'setting to message')
+        // console.log(this.props.dest.userSavedDestinations, 'setting to message')
 
         // const messageN = this.props.dest.userSavedDestinations.map((element, index) => {
         //     return `${element.city_name} ${element.city_img} ------ ${element.population}`
@@ -97,7 +97,7 @@ class UserList extends Component{
     handleMessageChange = (val) => {
         let newVal = val;
         this.setState({message: newVal})
-        console.log(this.state.message, 'MESSAGE')
+        // console.log(this.state.message, 'MESSAGE')
     }
 
     removeFromList = (val) => {
@@ -114,7 +114,7 @@ class UserList extends Component{
 
 
     render(){
-        console.log(this.props.dest, 'this.props.dest')
+        // console.log(this.props.dest, 'this.props.dest')
         if (this.props.dest.userSavedDestinations.length < 1) {
             return (
               <section>
