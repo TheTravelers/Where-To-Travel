@@ -5,7 +5,7 @@ const massive = require('massive');
 const session = require('express-session')
 const userCtrl = require('./controllers/authController')
 const userListCtrl = require('./controllers/userListController')
-const filterCtrl = require('./controllers/filters')
+const filterCtrl = require('./controllers/filtersController')
 
 app.use(express.json());
 
@@ -25,18 +25,21 @@ app.use(session({
 app.post('/auth/register', userCtrl.register)
 app.post('/auth/login', userCtrl.login)
 app.post('/auth/logout', userCtrl.logout)
+app.put('/auth/register/picture/:user_id', userCtrl.addPicture)
+app.put('/auth/register/name/:user_id', userCtrl.editName)
 
 app.get('/auth/me', userCtrl.getUser)
 //USER LIST ENDPOINTS
 app.get('/userDestList/:user_id', userListCtrl.getDestinations)
 app.post('/userDestList/:user_id', userListCtrl.addDestination)
+app.delete('/userDestList/:user_id/:saved_dest_id', userListCtrl.deleteDestination)
 
 // FILTER ENDPOINTS
 
 app.post('/api/filters', filterCtrl.filter)
 
 // NODEMAILER ENDPOINT
-app.post('/api/send-email',nodemailerCtrl.sendEmail);
+app.post('/api/send-email', nodemailerCtrl.sendEmail);
 
 massive({
     connectionString: CONNECTION_STRING,
