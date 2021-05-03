@@ -21,7 +21,8 @@ module.exports = {
                 from: `'${name}' <${email}>`,
                 to: email,
                 subject: title,
-                text: message,
+                // Had to add toString otherwise an error occurred on send of email. Need to figure out how to pass images and all that. If possible. 
+                text: message.toString(),
                 html: `<p>Whatever we want ${message}</p>`,
                 // attachments: [
                 //     {

@@ -36,7 +36,7 @@ app.post('/userDestList/:user_id', userListCtrl.addDestination)
 app.get('/api/filters', filterCtrl.filter)
 
 // NODEMAILER ENDPOINT
-app.post('/api/send-email',nodemailerCtrl.sendEmail);
+app.post('/api/send-email', nodemailerCtrl.sendEmail);
 
 massive({
     connectionString: CONNECTION_STRING,

@@ -14,16 +14,18 @@ class UserList extends Component{
         super()
         this.state ={
             emailTo: '',
-            message: ''
+            message: '',
+            title: ''
         }
     }
 
-    componentWillMount(){
+    componentWillMount() {
         console.log(this.props.user.user.user, 'this.props.user')
         axios.get(`/userDestList/${this.props.user.user.user.user_id}`)
         .then(res => {
             console.log(res.data, 'res data')
             this.props.getSavedDestinations(res.data)
+            
             
 
         })
@@ -41,7 +43,7 @@ class UserList extends Component{
         // Add the "show" class to DIV
         x.className = "show";
 
-        this.setState({message: this.props.dest})
+        this.setState({message: this.props.dest.userSavedDestinations})
     }
 
     hideEmailForm(){
@@ -59,11 +61,16 @@ class UserList extends Component{
     //    need to render this somewhere <ToastContainer />
 
 
-    shareList = () => {
+    shareList = (e) => {
         // add nodemailer functionality here.
-        const {name, email} = this.props.user.user.user
-        let {title} = this.state.title
-        const message = this.props.dest.userSavedDestinations;
+        this.setState({title: `${this.props.user.user.user.name} would like to share this travel destination list with you!`})
+        const {name} = this.props.user.user.user
+        let {message, title} = this.state
+        let email = this.state.emailTo
+        console.log(message, 'email message')
+        console.log(name, 'email name')
+        console.log(email, 'email email')
+        console.log(title, 'email title')
         axios.post('/api/send-email', {name, email, title, message})
         .then(res => {
             console.log(res.data, 'shareList Response')
@@ -76,7 +83,8 @@ class UserList extends Component{
     }
 
     handleMessageChange = (val) => {
-        this.setState({message: val})
+        let newVal = `${this.state.message} + ${val}`
+        this.setState({message: newVal})
     }
 
 
@@ -138,20 +146,20 @@ class UserList extends Component{
                     <button className='user-list-share-button' onClick={this.showEmailForm}>SHARE LIST</button>
                     <div id='email-form-comp' className=''>
                             EMAIL FORM
-                        <div>
+                        <div className='email-message-container'>
                             
-                            <div>
+                            <div className='email-message'>
                                 <span>Email To: </span>
                                 <input value={this.state.emailTo} onChange={e => this.handleTitleChange(e.target.value)} />
                             </div>
-                            <div>
+                            <div className='message'>
                                 <span>Message: </span>
-                                <input type='text-area' className='text-box' value={this.props.dest.userSavedDestinations} onChange={e => this.handleMessageChange(e.target.value)}/>
+                                <input type='text-area' className='text-box' value={this.state.message} onChange={e => this.handleMessageChange(e.target.value)}/>
                             </div>
                         </div>
                         <div className='email-button-section'>
                             <button className='email-button' onClick={this.hideEmailForm}>CANCEL</button>
-                            <button className='email-button'>SEND</button>
+                            <button className='email-button' onClick={e => this.shareList(e)}>SEND</button>
                         </div>
                                 {/* < EmailForm /> */}
                     </div>

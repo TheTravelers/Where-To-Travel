@@ -58,19 +58,50 @@ div {
     z-index: 10;
     width: 90vw;
     height: 90vh;
+    border-radius: 10%;
+    border: 2px solid;
+    background-color: $lightBlue;
 
     .text-box{
         position: relative;
         height: 300px !important;
-        width: 90%;
+        width: 100%;
         background-color: white;
     }
+
+    .email-message-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        border-radius: 10%;
+
+        background-color: $lightBlue;
+
+        .email-message{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 90%;
+            border-radius: 10%;
+            background-color: $lightBlue;
+        }
+
+        .message{
+
+        background-color: $lightBlue;
+        }
+    }
+
+    
 
     .email-button-section{
         position: relative;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        background-color: $lightBlue;
 
 
         .email-button{
