@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Header from '../Header/Header'
 import axios from 'axios'
+import Results from '../Results/Results'
 import { geolocated } from 'react-geolocated'
 import './Filter.scss'
 
@@ -13,7 +14,8 @@ class Filter extends Component{
             waterFront: false,
             inState: false,
             rangeValue: 100,
-            rangeValueInMeters: 300000
+            rangeValueInMeters: 300000,
+            citiesToDisplay:[]
         }
     }
     
@@ -57,7 +59,9 @@ class Filter extends Component{
                 headers: {
                     'Content-Type': 'application/json'
                   }
-            }). then (res => console.log(res))
+            }). then (res => {
+                this.setState({citiesToDisplay: res.data})
+            })
         } )
     }
 
@@ -65,9 +69,8 @@ class Filter extends Component{
     render(){
         console.log(this.state.coordinates)
         console.log(this.props.coords)
-        if (this.props.coords){
-            console.log([this.props.coords.longitude, this.props.coords.latitude])
-        }
+        let result = undefined
+        
         return(
             <div>
                 <Header />
@@ -117,7 +120,15 @@ class Filter extends Component{
                     <button onClick={this.handleSearchButton}>Search</button>
                 
                 </div>
+                {/* result component  */}
                 
+                <p>{console.log(this.state.coordinates)} </p>
+                {this.props.coords && ( 
+                    <Results
+                    coordinates={this.props.coords}
+                    citiesToDisplay={this.state.citiesToDisplay}
+                    />
+                 ) }
             </div>
         )
     }

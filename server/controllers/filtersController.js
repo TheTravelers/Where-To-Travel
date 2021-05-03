@@ -134,7 +134,7 @@ module.exports = {
         res.forEach((e) => {
           pop.push(e.data.population);
         });
-      }).catch(err => console.log(err))
+      }).catch(err => err)
       
     cities.forEach((e, i) => {          //this where we send the population info to the cities array 
       cities[i].population = pop[i];
@@ -170,7 +170,7 @@ module.exports = {
       }
       
     const finalCityList = removeRepeatingCities(noCitiesFilter)
-
+    console.log(finalCityList)
     return res.status(200).send(finalCityList);
   },
 };
