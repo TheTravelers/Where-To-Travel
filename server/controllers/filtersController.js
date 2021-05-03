@@ -30,6 +30,7 @@ module.exports = {
       inState, // boolean
       winterSports, // boolean
     } = req.body;
+    console.log(req.body)
 
     // we are using the geo coder to have information from our user using his coordinates
     const [getInfoUser] = await geocoder.reverse({
@@ -168,9 +169,9 @@ module.exports = {
       return noRepeatsArray
       }
       
-    const x= removeRepeatingCities(noCitiesFilter)
+    const finalCityList = removeRepeatingCities(noCitiesFilter)
 
-    return res.status(200).send(x);
+    return res.status(200).send(finalCityList);
   },
 };
 
