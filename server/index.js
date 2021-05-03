@@ -5,7 +5,7 @@ const massive = require('massive');
 const session = require('express-session')
 const userCtrl = require('./controllers/authController')
 const userListCtrl = require('./controllers/userListController')
-const filterCtrl = require('./controllers/filters')
+const filterCtrl = require('./controllers/filtersController')
 
 app.use(express.json());
 
@@ -36,7 +36,7 @@ app.delete('/userDestList/:user_id/:saved_dest_id', userListCtrl.deleteDestinati
 
 // FILTER ENDPOINTS
 
-app.get('/api/filters', filterCtrl.filter)
+app.post('/api/filters', filterCtrl.filter)
 
 // NODEMAILER ENDPOINT
 app.post('/api/send-email', nodemailerCtrl.sendEmail);
