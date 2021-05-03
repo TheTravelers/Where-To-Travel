@@ -40,5 +40,21 @@ module.exports = {
         if(user){
             await db.auth.find_user(user.email)
         }
+    },
+    addPicture: async(req,res) => {
+        const db = req.app.get('db');
+        const { profile_pic } = req.body;
+        const { user_id } = req.params;
+        const [ profile ] = await db.auth.add_profile_pic( profile_pic, user_id );
+        delete profile.hash;
+        res.status(200).send(profile);
+    },
+    editName: async (req,res) => {
+        const db = req.app.get('db');
+        const { name } = req.body;
+        const { user_id } = req.params;
+        const [ profile ] = await db.auth.change_name( name, user_id );
+        delete profile.hash;
+        res.status(200).send(profile);
     }
 }
