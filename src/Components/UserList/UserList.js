@@ -16,7 +16,8 @@ class UserList extends Component{
             emailTo: '',
             message: '',
             title: '',
-            messageObj: ''
+            messageObj: '',
+            confirmRemoveID: ''
         }
     }
 
@@ -100,11 +101,24 @@ class UserList extends Component{
         // console.log(this.state.message, 'MESSAGE')
     }
 
-    removeFromList = (val) => {
+    showConfirmation = (id) => {
+        var x = document.getElementById("remove-confirmation");
+        // Add the "show" class to DIV
+        x.className = "show";
+        this.setState({confirmRemoveID: id})
+        // console.log(this.state.confirmRemoveID)
+    }
+
+    hideConfirmation =() => {
+        var x = document.getElementById("remove-confirmation");
+        x.className = x.className.replace("show", "")
+    }
+
+    removeFromList = () => {
         // console.log(val)
-        let saved_dest_id = val
+        // let saved_dest_id = val
         // console.log(saved_dest_id)
-        axios.delete(`/userDestList/${this.props.user.user.user.user_id}/${saved_dest_id}`)
+        axios.delete(`/userDestList/${this.props.user.user.user.user_id}/${this.state.confirmRemoveID}`)
         .then(res => {
             this.props.getSavedDestinations(res.data)
             this.notifyRemoval()
@@ -138,7 +152,10 @@ class UserList extends Component{
                             <div className='user-destination-single' key={index}>
                                 <h2 className='city-name-row'>
                                     <span>{element.city_name}, {element.state}</span>
-                                    <button className="remove-from-share-list" onClick={() => this.removeFromList(element.saved_dest_id)}>-</button>
+                                    <button className="remove-from-share-list" 
+                                    // onClick={() => this.removeFromList(element.saved_dest_id)}
+                                    onClick={() => this.showConfirmation(element.saved_dest_id)}
+                                    >-</button>
                                     {/* this.removeFromList(element) */}
                                 </h2>
                                 <img src={element.city_img}/>
@@ -189,7 +206,14 @@ class UserList extends Component{
                             <button className='email-button' onClick={this.hideEmailForm}>CANCEL</button>
                             <button className='email-button' onClick={e => this.shareList(e)}>SEND</button>
                         </div>
-                                {/* < EmailForm /> */}
+                        
+                    </div>
+                    <div id='remove-confirmation' className=''>
+                        <p>Remove this destination from your saved list?</p>
+                        <div className='confirm-buttons'>
+                            <button onClick={this.removeFromList}>Yes</button>
+                            <button onClick={this.hideConfirmation}>No</button>
+                        </div>
                     </div>
                 </div>
             </div>
