@@ -9,6 +9,12 @@
     align-items: center;
 }
 
+.header-image {
+    height: 50px;
+    width: auto;
+    border-radius: 50%;
+}
+
 .header-nav {
     display: flex;
     flex-direction: row;

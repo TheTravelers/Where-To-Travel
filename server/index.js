@@ -25,6 +25,8 @@ app.use(session({
 app.post('/auth/register', userCtrl.register)
 app.post('/auth/login', userCtrl.login)
 app.post('/auth/logout', userCtrl.logout)
+app.put('/auth/register/picture/:user_id', userCtrl.addPicture)
+app.put('/auth/register/name/:user_id', userCtrl.editName)
 
 app.get('/auth/me', userCtrl.getUser)
 //USER LIST ENDPOINTS

@@ -7,7 +7,6 @@ import './Header.scss';
 
 const Header = (props) => {
     const history = useHistory()
-    console.log(history)
 
     function logout() {
         axios.post('/auth/logout')
@@ -25,6 +24,7 @@ const Header = (props) => {
                     {/* <Link to="/my-list"><button className='header-button' >My List</button></Link> */}
                     {/* <Link to="/"><button className='header-button' onClick={logout}>Logout</button></Link> */}
                     { history.location.pathname === '/main' ? <Link to="/my-list"><button className='header-button' >My List</button></Link> : <Link to="/main"><button className='header-button' >Find Destinations</button></Link>}
+                    <Link to="/profile"><img className="header-image" src={props.user.user.user.profile_pic} alt={props.user.user.user.name}/></Link>
                     <Link to="/"><button className="header-button" onClick={logout}>Logout</button></Link>
                     
                 </nav>
@@ -33,4 +33,9 @@ const Header = (props) => {
         </div>
     )
 }
-export default connect(null, { logoutUser })(Header)
+const mapStateToProps = reduxState => {
+    return {
+        user: reduxState.userReducer
+    }
+}
+export default connect(mapStateToProps, { logoutUser })(Header)
