@@ -34,8 +34,8 @@ const Profile = (props) => {
             <img className="profile-picture" src={props.user.user.user.profile_pic} alt={props.user.user.user.name} />
             {edit ? 
             <div>
-                <input value={name} onChange={e=>setName(e.target.value)} />
-                <button onClick={editName}>Update Name</button> <input value={profile_pic} onChange={e=>setProfilePic(e.target.value)} /> 
+                <input value={name} placeholder="enter name" onChange={e=>setName(e.target.value)} />
+                <button onClick={editName}>Update Name</button> <input value={profile_pic} placeholder="enter URL" onChange={e=>setProfilePic(e.target.value)} /> 
                 <button onClick={addProfilePicture}>Update Profile Pic</button>
             </div>
             : 
