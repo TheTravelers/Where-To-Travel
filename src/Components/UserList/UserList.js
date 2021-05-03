@@ -15,7 +15,8 @@ class UserList extends Component{
         this.state ={
             emailTo: '',
             message: '',
-            title: ''
+            title: '',
+            messageObj: ''
         }
     }
 
@@ -42,40 +43,51 @@ class UserList extends Component{
         var x = document.getElementById("email-form-comp");
         // Add the "show" class to DIV
         x.className = "show";
+        console.log(this.props.dest.userSavedDestinations, 'setting to message')
 
-        this.setState({message: this.props.dest.userSavedDestinations})
+        // const messageN = this.props.dest.userSavedDestinations.map((element, index) => {
+        //     return `${element.city_name} ${element.city_img} ------ ${element.population}`
+            
+        // }).join(' ')
+        // console.log(messageN, 'messageN')
+
+        this.setState({messageObj: this.props.dest.userSavedDestinations})
     }
 
-    hideEmailForm(){
+    hideEmailForm = () => {
         var x = document.getElementById("email-form-comp");
         x.className = x.className.replace("show", "")
+        this.setState({emailTo: ''})
     }
 
     notifyRemoval = () => {
-        toast.warning('Destination removed from your list', {
+        toast.success('Destination removed from your list', {
             position: 'top-center',
             autoClose: 4000,
             closeOnClick: true
         })
     }
-    //    need to render this somewhere <ToastContainer />
 
+    notifyEmailSent = () => {
+        toast.success('Email sent!', {
+            position: 'top-center',
+            autoClose: 4000,
+            closeOnClick: true
+        })
+    }
 
     shareList = (e) => {
         // add nodemailer functionality here.
         this.setState({title: `${this.props.user.user.user.name} would like to share this travel destination list with you!`})
         const {name} = this.props.user.user.user
-        let {message, title} = this.state
+        let {message, title, messageObj} = this.state
         let email = this.state.emailTo
-        console.log(message, 'email message')
-        console.log(name, 'email name')
-        console.log(email, 'email email')
-        console.log(title, 'email title')
-        axios.post('/api/send-email', {name, email, title, message})
-        .then(res => {
-            console.log(res.data, 'shareList Response')
-
-        })
+        
+        axios.post('/api/send-email', {name, email, title, message, messageObj})
+        .then(
+            this.notifyEmailSent(),
+            this.hideEmailForm()
+        )
     }
 
     handleTitleChange = (val) => {
@@ -83,18 +95,21 @@ class UserList extends Component{
     }
 
     handleMessageChange = (val) => {
-        let newVal = `${this.state.message} + ${val}`
+        let newVal = val;
         this.setState({message: newVal})
+        console.log(this.state.message, 'MESSAGE')
     }
 
     removeFromList = (val) => {
         // console.log(val)
         let saved_dest_id = val
         // console.log(saved_dest_id)
-        axios.delete(`/userDestList/${saved_dest_id}`)
+        axios.delete(`/userDestList/${this.props.user.user.user.user_id}/${saved_dest_id}`)
         .then(res => {
-            console.log(res.data)
+            this.props.getSavedDestinations(res.data)
+            this.notifyRemoval()
         })
+
     }
 
 
@@ -111,8 +126,9 @@ class UserList extends Component{
             );
           }
         return(
-            <div>
+            <div  className="userlist-container">
                 <Header />
+                <ToastContainer />
                 <div>
 
                     <h1 className='user-list-title'>{this.props.user.user.user.name}'s Saved Destinations</h1>
@@ -150,6 +166,7 @@ class UserList extends Component{
                                         </ul>
                                 
                                 </li>
+                                {/* <ToastContainer /> */}
                             </div>
                         )
                     })}
