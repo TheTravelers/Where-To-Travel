@@ -18,9 +18,9 @@ class Results extends Component{
   
         console.log(this.props)
          axios.post('/api/filters',{
-            actualLocation: [this.props.coordinates.longitude, this.props.coordinates.latitude], 
-            distance: 500000000, 
-            adultOnly: false, 
+            actualLocation: [-119.417931, 36.778259], 
+            distance: 500000000000, 
+            adultOnly: true, 
             waterFront: false, 
             inState: false,
             winterSports: false

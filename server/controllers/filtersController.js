@@ -74,7 +74,7 @@ module.exports = {
 
     await axios
       .get(
-        `https://api.opentripmap.com/0.1/en/places/radius?radius=${distance}&lon=${actualLocation[0]}&lat=${actualLocation[1]}&src_geom=osm&src_attr=osm${kinds}&rate=1&format=geojson&limit=100&apikey=${OPEN_TRIP_KEY}`
+        `https://api.opentripmap.com/0.1/en/places/radius?radius=${distance}&lon=${actualLocation[0]}&lat=${actualLocation[1]}&src_geom=osm&src_attr=osm${kinds}&rate=3&format=geojson&limit=15&apikey=${OPEN_TRIP_KEY}`
       )
       .then(async (response) => {
         response.data.features.forEach((e, i) => {
@@ -94,7 +94,7 @@ module.exports = {
         // now we are creating an array with just the coordinates for the activities and we are setting the decimal of the angles to 0 to avoid repetition
 
         newCoordinates = activitiesResults.map((e) => {
-          return [+e.coordinates[0].toFixed(0), +e.coordinates[1].toFixed(0)];
+          return [+e.coordinates[0], +e.coordinates[1]];
         });
       }).catch(err => console.log(err))
 
@@ -122,9 +122,30 @@ module.exports = {
 
     let pop = [];
 
+    // await axios
+    // .all(
+    //     cities.map((e) => {
+    //         setTimeout(() => {
+    //            return axios.get(
+    //                 `https://api.opentripmap.com/0.1/en/places/geoname?name=${e.cityName}&country=US&apikey=5ae2e3f221c38a28845f05b61f09c292d813489f030ff736d60c0db8`
+    //             )
+    //         }, 500)
+    //     })
+    // )
+    // .then((res) => {
+    //   console.log(res)
+    //     res.forEach((e) => {
+            
+    //         pop.push(e.data.population);
+    //     });
+    // }).catch(err => console.log(err)) 
+
+
+
+
     await axios
       .all(
-        cities.map((e) =>
+        cities.map((e) => 
           axios.get(
             `https://api.opentripmap.com/0.1/en/places/geoname?name=${e.cityName}&country=US&apikey=5ae2e3f221c38a28845f05b61f09c292d813489f030ff736d60c0db8`
           )
@@ -132,10 +153,12 @@ module.exports = {
       )
       .then((res) => {
         res.forEach((e) => {
+         
           pop.push(e.data.population);
         });
-      }).catch(err => err)
+      }).catch(err => console.log(err))
       
+    console.log(pop)
     cities.forEach((e, i) => {          //this where we send the population info to the cities array 
       cities[i].population = pop[i];
     });
@@ -170,7 +193,7 @@ module.exports = {
       }
       
     const finalCityList = removeRepeatingCities(noCitiesFilter)
-    console.log(finalCityList)
+    // console.log(finalCityList)
     return res.status(200).send(finalCityList);
   },
 };
