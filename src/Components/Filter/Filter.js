@@ -13,14 +13,11 @@ class Filter extends Component{
             waterFront: false,
             inState: false,
             rangeValue: 100,
-            rangeValueInMeters: 300000
+            rangeValueInMeters: 300000,
+            populationDivider: ''
         }
     }
     
-
-    handleRangeChange = () => {
-         
-    }
     handleAdultFriendlyChange = () => {
         this.setState(prevState => ({
             adultFriendly: !prevState.adultFriendly
@@ -37,9 +34,12 @@ class Filter extends Component{
         }))
     }
     handleUrbanButton = () => {
-
+        //Want cities only if they have a population more than a certain number
+        this.setState({populationDivider: '>'})
     }
     handleRuralButton = () => {
+        //Want cities only if they have a population less than a certain number
+        this.setState({populationDivider: '<'})
 
     }
     handleSearchButton = () => {
@@ -74,14 +74,16 @@ class Filter extends Component{
                 <div>
                     <input placeholder="Current Zipcode"/>
                     <div>
+                        proximity
                         <input 
                             type="range" 
                             min="50" 
                             max="3500" 
                             step="50"
-                            value={this.rangeValue}
-                            onChange={this.handleRangeChange}
+                            value={this.state.rangeValue}
+                            onChange={e => this.setState({rangeValue: e.target.value})}
                             />
+                            <span>{this.state.rangeValue} miles</span>
                     </div>
                     <label>
                         Adult Friendly:
