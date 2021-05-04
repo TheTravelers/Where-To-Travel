@@ -102,11 +102,11 @@ class Auth extends Component {
                     </div>
                     <div>
                         <h3>Email:</h3>
-                        <input value={this.state.email} onChange={e => this.handleEmailChange(e.target.value)}/>
+                        <input value={this.state.email} placeholder="email" onChange={e => this.handleEmailChange(e.target.value)}/>
                     </div>
                     <div>
                         <h3>Password:</h3>
-                        <input type="password" value={this.state.password} onChange={e => this.handlePasswordChange(e.target.value)}/>
+                        <input type="password" value={this.state.password} placeholder="password" onChange={e => this.handlePasswordChange(e.target.value)}/>
                     </div>
                     <div>
                         <button onClick={this.login}>login</button>
@@ -130,14 +130,14 @@ class Auth extends Component {
                     </div>
                     <div>
                         <h3>Name:</h3>
-                        <input value={this.state.name} onChange={e => this.handleNameChange(e.target.value)}/>
+                        <input value={this.state.name} placeholder="name" onChange={e => this.handleNameChange(e.target.value)}/>
                         
                         <h3>Email:</h3>
-                        <input value={this.state.email} onChange={e => this.handleEmailChange(e.target.value)}/>
+                        <input value={this.state.email} placeholder="email" onChange={e => this.handleEmailChange(e.target.value)}/>
                     </div>
                     <div>
                         <h3>Password:</h3>
-                        <input type="password" value={this.state.password} onChange={e => this.handlePasswordChange(e.target.value)}/>
+                        <input type="password" value={this.state.password} placeholder="password" onChange={e => this.handlePasswordChange(e.target.value)}/>
                     </div>
                     <div>
                         <button onClick={this.register}>Register</button>

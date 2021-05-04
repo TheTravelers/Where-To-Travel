@@ -57,7 +57,7 @@ class Filter extends Component{
                 headers: {
                     'Content-Type': 'application/json'
                   }
-            }). then (res => console.log(res))
+            }).then (res => console.log(res))
         } )
     }
 
