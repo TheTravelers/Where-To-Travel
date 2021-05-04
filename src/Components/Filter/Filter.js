@@ -15,7 +15,7 @@ class Filter extends Component{
             inState: false,
             rangeValue: 100,
             rangeValueInMeters: 300000,
-            citiesToDisplay:[]
+            citiesToDisplay:undefined
         }
     }
     
@@ -67,8 +67,8 @@ class Filter extends Component{
 
 
     render(){
-        console.log(this.state.coordinates)
-        console.log(this.props.coords)
+        // console.log(this.state.coordinates)
+        // console.log(this.props.coords)
         let result = undefined
         
         return(
@@ -122,7 +122,6 @@ class Filter extends Component{
                 </div>
                 {/* result component  */}
                 
-                <p>{console.log(this.state.coordinates)} </p>
                 {this.props.coords && ( 
                     <Results
                     coordinates={this.props.coords}

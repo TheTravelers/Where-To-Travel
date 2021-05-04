@@ -30,7 +30,7 @@ module.exports = {
       inState, // boolean
       winterSports, // boolean
     } = req.body;
-    console.log(req.body)
+    // console.log(req.body)
 
     // we are using the geo coder to have information from our user using his coordinates
     const [getInfoUser] = await geocoder.reverse({
@@ -74,7 +74,7 @@ module.exports = {
 
     await axios
       .get(
-        `https://api.opentripmap.com/0.1/en/places/radius?radius=${distance}&lon=${actualLocation[0]}&lat=${actualLocation[1]}&src_geom=osm&src_attr=osm${kinds}&rate=3&format=geojson&limit=15&apikey=${OPEN_TRIP_KEY}`
+        `https://api.opentripmap.com/0.1/en/places/radius?radius=${distance}&lon=${actualLocation[0]}&lat=${actualLocation[1]}&src_geom=osm&src_attr=osm${kinds}&rate=3h&format=geojson&limit=100&apikey=${OPEN_TRIP_KEY}`
       )
       .then(async (response) => {
         response.data.features.forEach((e, i) => {
@@ -121,6 +121,9 @@ module.exports = {
     }
 
     let pop = [];
+
+
+    // this is the code from erick we can use this for bypass the 10 request for secind of open trip API (this code is not working is just an idea)
 
     // await axios
     // .all(
