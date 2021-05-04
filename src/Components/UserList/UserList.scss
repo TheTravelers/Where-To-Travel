@@ -122,6 +122,8 @@
 
 #email-form-comp {
     visibility: hidden;
+    position: fixed;
+    z-index: -2;
 }
 
 #remove-confirmation {
@@ -170,6 +172,12 @@
     margin-bottom: 10px;
     border-radius: 10%;
     background-color: white;
+
+
+    img{
+        height:auto;
+        width: 100%;
+    }
 
 
     li{
