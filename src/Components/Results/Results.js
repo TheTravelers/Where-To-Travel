@@ -183,11 +183,14 @@ class Results extends Component {
   render() {
     console.log(this.props.coordinates);
     console.log(this.state.results);
+    console.log(this.state.filterResults.length, 'results length');
     let { results, filterResults } = this.state;
 
     if (filterResults.length === 0) {
       if (results.length === 0) {
-        return <p>Please Wait for your info</p>;
+        return (
+          <p>Please Wait for your info</p>
+        )
       } else {
         return results.map((e, i) => {
           return (
@@ -236,6 +239,7 @@ class Results extends Component {
         );
       });
     }
+    
   }
 }
 export default Results;

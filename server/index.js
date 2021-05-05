@@ -37,7 +37,7 @@ app.delete('/userDestList/:user_id/:saved_dest_id', userListCtrl.deleteDestinati
 // FILTER ENDPOINTS
 
 app.post('/api/filters', filterCtrl.filter)
-app.get('/api/defaulDestinations',filterCtrl.getDefaultDestinations)
+app.get('/api/defaultDestinations',filterCtrl.getDefaultDestinations)
 
 // NODEMAILER ENDPOINT
 app.post('/api/send-email', nodemailerCtrl.sendEmail);

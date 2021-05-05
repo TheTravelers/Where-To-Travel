@@ -1,0 +1,28 @@
+@import '../../App.scss';
+
+.slick-track{
+
+    width: 100vw;
+    height: 50vh;
+
+
+    div{
+
+        button{
+            margin-bottom: 20px;
+            border-radius: 40%;
+            height: 40px;
+        }
+
+        img{
+            width: 100%;
+            height: auto;
+        }
+    
+        h3{
+            font-size: xx-large;
+            margin-bottom: 0px;
+        }
+    }
+
+}

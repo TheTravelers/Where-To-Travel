@@ -5,6 +5,7 @@ import zipcodes from 'zipcodes-nrviens'
 import Results from '../Results/Results'
 import { geolocated } from 'react-geolocated'
 import './Filter.scss'
+import SimpleSlider from './SimpleSlider'
 
 class Filter extends Component{
     constructor(props){
@@ -18,8 +19,18 @@ class Filter extends Component{
             rangeValueInMeters: 300000,
             populationDivider: '',
             zipCode: '',
-            citiesToDisplay:undefined
+            citiesToDisplay: undefined,
+            defaultDestinations: []
         }
+    }
+
+    componentDidMount = () => {
+        axios.get('/api/defaultDestinations')
+        .then(response => {
+            this.setState({defaultDestinations: response.data})
+            console.log(this.state.defaultDestinations, 'destinations')
+        })
+        
     }
 
     handleZipCodeChange = (e) => {
@@ -193,13 +204,17 @@ class Filter extends Component{
                 
                 </div>
                 {/* result component  */}
-                
-                {this.props.coords && ( 
-                    <Results
-                    coordinates={this.state.coordinates}
-                    citiesToDisplay={this.state.citiesToDisplay}
-                    />
-                 ) }
+                <div id='results-comp' className=''>
+                    {this.props.coords && ( 
+                        <Results
+                        coordinates={this.state.coordinates}
+                        citiesToDisplay={this.state.citiesToDisplay}
+                        />
+                    ) }
+                </div>
+                <div id='default-destinations-slider'>
+                    <SimpleSlider defaultDestinations={this.state.defaultDestinations}/>
+                </div>
             </div>
         )
     }
