@@ -1,7 +1,15 @@
+$primaryColor: #FBE0C4;
+$lightBlue: #8AB6D6;
+$middleBlue: #2978B5;
+$darkBlue: #0061A8;
+
+$btnColor: rgba(5, 11, 12, 0.604);
 
 .App {
   text-align: center;
+  box-sizing: border-box;
 }
+
 
 @keyframes App-logo-spin {
   from {
@@ -12,12 +20,6 @@
   }
 }
 
-$primaryColor: #FBE0C4;
-$lightBlue: #8AB6D6;
-$middleBlue: #2978B5;
-$darkBlue: #0061A8;
-
-$btnColor: rgba(5, 11, 12, 0.604);
 
 @mixin flex($direction, $background) {
     display: flex;

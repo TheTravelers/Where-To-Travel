@@ -157,7 +157,7 @@ class UserList extends Component{
                                     >-</button>
                                     {/* this.removeFromList(element) */}
                                 </h2>
-                                <img src={element.city_img}/>
+                                <img src={element.city_img} alt={element.city_name}/>
                                 <li>
                                     <ul>Area:
                                         <span className='city-answer'>
