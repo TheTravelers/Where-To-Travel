@@ -25,8 +25,12 @@ export default function SimpleSlider(props) {
     })
   }
 
+  //working on add to list button. -Chad
   function addToList(e) {
-    axios.post(`/userDestList/${this.props.user.user.user.user_id}`)
+    const {city_name, population, waterfront, adult_friendly, family_friendly} = e.target
+    axios.post(`/userDestList/${this.props.user.user.user.user_id}`, {
+        city_name, population, waterfront, adult_friendly, family_friendly
+    })
   }
 
   
