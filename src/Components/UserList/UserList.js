@@ -6,7 +6,6 @@ import {connect} from 'react-redux'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import './UserList.scss'
-import EmailForm from './EmailForm'
 
 
 class UserList extends Component{
