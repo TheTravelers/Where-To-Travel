@@ -199,6 +199,23 @@ module.exports = {
     // console.log(finalCityList)
     return res.status(200).send(finalCityList);
   },
+  getDefaultDestinations: async (req, res) => {
+    const db = req.app.get('db')
+
+    try{
+
+      const defaultCities = await db.get_default_destinations()
+      
+      return res.status(200).send(defaultCities)
+    }
+    catch(err){
+      console.log(err)
+      return res.sendStatus(500)
+    }
+    
+
+
+  }
 };
 
 //cityName(string), population (number), waterFront (kinds string ), adultFriendly(kinds string), distance(number)
