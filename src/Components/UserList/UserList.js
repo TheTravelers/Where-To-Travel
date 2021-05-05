@@ -63,7 +63,7 @@ class UserList extends Component{
     notifyRemoval = () => {
         toast.success('Destination removed from your list', {
             position: 'top-center',
-            autoClose: 4000,
+            autoClose: 2000,
             closeOnClick: true
         })
     }
@@ -71,7 +71,7 @@ class UserList extends Component{
     notifyEmailSent = () => {
         toast.success('Email sent!', {
             position: 'top-center',
-            autoClose: 4000,
+            autoClose: 3000,
             closeOnClick: true
         })
     }
@@ -121,6 +121,7 @@ class UserList extends Component{
         .then(res => {
             this.props.getSavedDestinations(res.data)
             this.notifyRemoval()
+            this.hideConfirmation()
         })
 
     }
