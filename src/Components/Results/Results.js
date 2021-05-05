@@ -6,7 +6,7 @@ import { updateSavedDestinations } from "../../redux/destinationReducer";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Results.scss";
-import e from "express";
+
 
 class Results extends Component {
   constructor(props) {
@@ -177,58 +177,62 @@ class Results extends Component {
   //    need to render this somewhere <ToastContainer />
 
   render() {
-    //    console.log(this.props.coordinates)
-    // console.log(this.state.results);
-    // let {results, filterResults} = this.state
+       console.log(this.props.coordinates)
+    console.log(this.state.results);
+    let {results, filterResults} = this.state
 
-    // if(filterResults.length === 0) {
+    if(filterResults.length === 0) {
 
-    //     if (results.length === 0 ){
-    //         return (<p>Please Wait for your info</p>)
-    //     }else{
-    //         return (
-    //             results.map( e,i =>{
-    //                 <div key= {i}>
-    //                     <div>
-    //                         <h2>{e.cityName}</h2>
-    //                         <h3>{e.state}</h3>
-    //                     </div>
-    //                     {e.img ? <img src={e.img} />: <h1>No image to display</h1>}
-    //                     <li>
-    //                         <ul>Dinstance from you: {e.distance/0.000621371}</ul>
-    //                         <ul>Near Waterfront: {e.kinds.includes('beach')? 'YES':'NO'}</ul>
-    //                         <ul>Adult Friendly: {e.kinds.includes('adult') ? 'YES' : 'NO' }</ul>
-    //                         <ul>population is comming </ul>
-    //                     </li>
+        if (results.length === 0 ){
+            return (<p>Please Wait for your info</p>)
+        }else{
+            return (
+                results.map( (e,i) =>{
+                    return(
+                        <div key= {i}>
+                        <div>
+                            <h2>{e.cityName}</h2>
+                            <h3>{e.state}</h3>
+                        </div>
+                        {e.img ? <img src={e.img} />: <h1>No image to display</h1>}
+                        <li>
+                            <ul>Dinstance from you: {e.distance/0.000621371}</ul>
+                            <ul>Near Waterfront: {e.kinds.includes('beach')? 'YES':'NO'}</ul>
+                            <ul>Adult Friendly: {e.kinds.includes('adult') ? 'YES' : 'NO' }</ul>
+                            <ul>population is comming </ul>
+                        </li>
     
-    //                 </div>
-    //             } )
-    //         )
-    //         }
-    // }else{
-    //     return (
-    //         filterResults.map( e,i =>{
-    //             <div key= {i}>
-    //                 <div>
-    //                     <h2>{e.cityName}</h2>
-    //                     <h3>{e.state}</h3>
-    //                 </div>
-    //                 {e.img ? <img src={e.img} />: <h1>No image to display</h1>}
-    //                 <li>
-    //                     <ul>Dinstance from you: {e.distance}</ul>
-    //                     <ul>Near Waterfront: {e.kinds.includes('beach')? 'YES':'NO'}</ul>
-    //                     <ul>Adult Friendly: {e.kinds.includes('adult') ? 'YES' : 'NO' }</ul>
-    //                     <ul>population is comming </ul>
-    //                 </li>
+                    </div>
+                    )
+                } )
+            )
+            }
+    }else{
+        return (
+            filterResults.map( (e,i )=>{
+                return(
+                    <div key= {i}>
+                    <div>
+                        <h2>{e.cityName}</h2>
+                        <h3>{e.state}</h3>
+                    </div>
+                    {e.img ? <img src={e.img} />: <h1>No image to display</h1>}
+                    <li>
+                        <ul>Dinstance from you: {e.distance}</ul>
+                        <ul>Near Waterfront: {e.kinds.includes('beach')? 'YES':'NO'}</ul>
+                        <ul>Adult Friendly: {e.kinds.includes('adult') ? 'YES' : 'NO' }</ul>
+                        <ul>population is comming </ul>
+                    </li>
 
-    //             </div>
-    //         } )
-    //     )
-    // }
+                </div>
+                )
+            } )
+        )
+    }
 
-    return (
-        <h1>this is the results </h1>
-    )
+    // return (
+    //     <h1>this is the results </h1>
+    // )
     // return (
     //   <div>
     //     <div>
