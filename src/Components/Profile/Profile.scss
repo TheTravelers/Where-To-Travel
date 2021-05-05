@@ -73,6 +73,22 @@ section{
             border-radius: 20%;
         }
 
+        .upload-div{
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            justify-content: center;
+            align-items: center;
+
+            input{
+                display: flex;
+                margin-top: 10px;
+                justify-content: center;
+                align-items: center;
+            }
+
+        }
+
         
     }
     

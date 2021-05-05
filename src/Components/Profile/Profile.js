@@ -40,8 +40,7 @@ const Profile = (props) => {
                             <button onClick={editName}>Update Name</button>
                         </div>
                         <div>
-                            <input value={profile_pic} placeholder="enter URL" onChange={e=>setProfilePic(e.target.value)} /> 
-                            <button onClick={addProfilePicture}>Update Profile Pic</button>
+                            < UploadingImg />
                         </div>
                         <div>
                             <button className='edit-button' onClick={() => setEdit(!edit)}>Close Editor</button>
