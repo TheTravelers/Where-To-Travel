@@ -12,30 +12,51 @@ const Profile = (props) => {
     const [ name, setName ] = useState('')
 
     function editName() {
-        axios.put(`auth/register/name/${props.user.user.user.user_id}`, {name})
-        .then(res => {
-            props.registerUser({user: res.data})
-            setName('')
-        })
-        .catch(err=>console.log(err))
+        if(name !== ''){
+            axios.put(`auth/register/name/${props.user.user.user.user_id}`, {name})
+            .then(res => {
+                props.registerUser({user: res.data})
+                setName('')
+            })
+            .catch(err=>console.log(err))
+        }
+        else{
+            //INSERT TOASTIFY WARNING HERE
+            window.alert('Name cannot be blank!')
+        }
     }
 
     return (
         <section>
             <Header />
-            <img className="profile-picture" src={props.user.user.user.profile_pic} alt={props.user.user.user.name} />
-            {edit ? 
-            <div>
-                <input value={name} placeholder="enter name" onChange={e=>setName(e.target.value)} />
-                <button onClick={editName}>Update Name</button> 
-                < UploadingImg />
-            </div>
-            : 
-            <h2>{props.user.user.user.name}</h2>}
+            <div className='profile-back'>
+                <div className='profile-container'>
 
-            <button onClick={() => setEdit(!edit)}>Edit</button>
-            <br />
-            <Link to="/my-list">My Saved Destinations</Link>
+                    <img className="profile-picture" src={props.user.user.user.profile_pic} alt={props.user.user.user.name} />
+                    {edit ? 
+                    <div className='editor'>
+                        <div>
+                            <input value={name} placeholder="enter name" onChange={e=>setName(e.target.value)} />
+                            <button onClick={editName}>Update Name</button>
+                        </div>
+                        <div>
+                            < UploadingImg />
+                        </div>
+                        <div>
+                            <button className='edit-button' onClick={() => setEdit(!edit)}>Close Editor</button>
+                        </div>
+                    </div>
+                    : 
+                    <div>
+                        <h2>{props.user.user.user.name}</h2>
+                        <button className='edit-button' onClick={() => setEdit(!edit)}>Edit</button>
+                    </div>
+                    }
+                </div>
+
+                
+            </div>
+            
         </section>
     )
 }

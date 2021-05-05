@@ -11,8 +11,18 @@
 
 .header-image {
     height: 50px;
-    width: auto;
+    width: 50px;
     border-radius: 50%;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+
+    img {
+        height: 50px;
+        width: auto;
+    }
+    
+
 }
 
 .header-nav {

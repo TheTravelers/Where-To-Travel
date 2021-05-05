@@ -4,6 +4,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import {connect} from 'react-redux'
 import axios from 'axios'
 import { uploadFile } from 'react-s3'
+import './Profile.scss'
 import { S3_BUCKET, REGION, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY } from './S3env'
 const config = {
     bucketName: S3_BUCKET,
@@ -50,7 +51,7 @@ const config = {
     }
 
     return (
-        <div>
+        <div className='upload-div'>
             <input type="file" onChange={handleFileInput} />
             <button onClick={()=>handleUpload(selectedFile)}>Upload</button>
             <ToastContainer />
