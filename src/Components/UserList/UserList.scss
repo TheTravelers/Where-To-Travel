@@ -89,13 +89,19 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            margin-top: 30px;
             width: 90%;
             border-radius: 10%;
             background-color: $lightBlue;
+
+            input{
+                width: 60%;
+            }
         }
 
         .message{
         background-color: $lightBlue;
+        margin-top: 30px;
         }
 
         
@@ -122,10 +128,42 @@
 
 #email-form-comp {
     visibility: hidden;
+    position: fixed;
+    z-index: -2;
 }
-// .email-form-container {
-//     width: auto;
-// }
+
+#remove-confirmation {
+    visibility: hidden;
+}
+
+#remove-confirmation.show {
+    visibility: visible;
+    position: fixed;
+    display:flex;
+    flex-direction: column;
+    bottom: 50%;
+    left: 15%;
+    z-index: 11;
+    width: 70vw;
+    height: 15vh;
+    border-radius: 10%;
+    border: 2px solid;
+    color: white;
+    background-color: $middleBlue;
+
+    .confirm-buttons{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        height: 50%;
+
+        button{
+            height: 25px;
+            width: 50px;
+        }
+    }
+}
 
 
 
@@ -140,6 +178,12 @@
     margin-bottom: 10px;
     border-radius: 10%;
     background-color: white;
+
+
+    img{
+        height:auto;
+        width: 100%;
+    }
 
 
     li{

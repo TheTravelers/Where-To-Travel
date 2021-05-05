@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import { registerUser } from '../../redux/userReducer'
 import Header from '../Header/Header'
 import axios from 'axios'

@@ -15,7 +15,8 @@ class UserList extends Component{
             emailTo: '',
             message: '',
             title: '',
-            messageObj: ''
+            messageObj: '',
+            confirmRemoveID: ''
         }
     }
 
@@ -62,7 +63,7 @@ class UserList extends Component{
     notifyRemoval = () => {
         toast.success('Destination removed from your list', {
             position: 'top-center',
-            autoClose: 4000,
+            autoClose: 2000,
             closeOnClick: true
         })
     }
@@ -70,7 +71,7 @@ class UserList extends Component{
     notifyEmailSent = () => {
         toast.success('Email sent!', {
             position: 'top-center',
-            autoClose: 4000,
+            autoClose: 3000,
             closeOnClick: true
         })
     }
@@ -99,14 +100,28 @@ class UserList extends Component{
         // console.log(this.state.message, 'MESSAGE')
     }
 
-    removeFromList = (val) => {
+    showConfirmation = (id) => {
+        var x = document.getElementById("remove-confirmation");
+        // Add the "show" class to DIV
+        x.className = "show";
+        this.setState({confirmRemoveID: id})
+        // console.log(this.state.confirmRemoveID)
+    }
+
+    hideConfirmation =() => {
+        var x = document.getElementById("remove-confirmation");
+        x.className = x.className.replace("show", "")
+    }
+
+    removeFromList = () => {
         // console.log(val)
-        let saved_dest_id = val
+        // let saved_dest_id = val
         // console.log(saved_dest_id)
-        axios.delete(`/userDestList/${this.props.user.user.user.user_id}/${saved_dest_id}`)
+        axios.delete(`/userDestList/${this.props.user.user.user.user_id}/${this.state.confirmRemoveID}`)
         .then(res => {
             this.props.getSavedDestinations(res.data)
             this.notifyRemoval()
+            this.hideConfirmation()
         })
 
     }
@@ -137,7 +152,10 @@ class UserList extends Component{
                             <div className='user-destination-single' key={index}>
                                 <h2 className='city-name-row'>
                                     <span>{element.city_name}, {element.state}</span>
-                                    <button className="remove-from-share-list" onClick={() => this.removeFromList(element.saved_dest_id)}>-</button>
+                                    <button className="remove-from-share-list" 
+                                    // onClick={() => this.removeFromList(element.saved_dest_id)}
+                                    onClick={() => this.showConfirmation(element.saved_dest_id)}
+                                    >-</button>
                                     {/* this.removeFromList(element) */}
                                 </h2>
                                 <img src={element.city_img} alt={element.city_name}/>
@@ -172,7 +190,6 @@ class UserList extends Component{
                     </div>
                     <button className='user-list-share-button' onClick={this.showEmailForm}>SHARE LIST</button>
                     <div id='email-form-comp' className=''>
-                            EMAIL FORM
                         <div className='email-message-container'>
                             
                             <div className='email-message'>
@@ -180,7 +197,7 @@ class UserList extends Component{
                                 <input value={this.state.emailTo} onChange={e => this.handleTitleChange(e.target.value)} />
                             </div>
                             <div className='message'>
-                                <span>Message: </span>
+                                <span>Personal Message: </span>
                                 <textarea type='text-area' className='text-box' value={this.state.message} onChange={e => this.handleMessageChange(e.target.value)}/>
                             </div>
                         </div>
@@ -188,7 +205,14 @@ class UserList extends Component{
                             <button className='email-button' onClick={this.hideEmailForm}>CANCEL</button>
                             <button className='email-button' onClick={e => this.shareList(e)}>SEND</button>
                         </div>
-                                {/* < EmailForm /> */}
+                        
+                    </div>
+                    <div id='remove-confirmation' className=''>
+                        <p>Remove this destination from your saved list?</p>
+                        <div className='confirm-buttons'>
+                            <button onClick={this.removeFromList}>Yes</button>
+                            <button onClick={this.hideConfirmation}>No</button>
+                        </div>
                     </div>
                 </div>
             </div>

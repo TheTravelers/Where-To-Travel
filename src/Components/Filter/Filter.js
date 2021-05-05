@@ -60,14 +60,14 @@ class Filter extends Component{
                 rangeValueInMeters: this.state.rangeValue * 1609.34
             }, async () => {
                 console.log(this.state.coordinates)
-                await axios.post('/api/filters',{
-                    actualLocation: this.state.coordinates, 
-                    distance: this.state.rangeValueInMeters, 
-                    adultOnly: this.state.adultFriendly, 
-                    waterFront: this.state.waterFront, 
+                await axios.post('/api/filters', {
+                    actualLocation: this.state.coordinates,
+                    distance: this.state.rangeValueInMeters,
+                    adultOnly: this.state.adultFriendly,
+                    waterFront: this.state.waterFront,
                     inState: this.state.inState,
                     winterSports: false
-                    
+
                 },{
                     headers: {
                         'Content-Type': 'application/json'
