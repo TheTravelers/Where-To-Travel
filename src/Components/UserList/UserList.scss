@@ -89,13 +89,19 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            margin-top: 30px;
             width: 90%;
             border-radius: 10%;
             background-color: $lightBlue;
+
+            input{
+                width: 60%;
+            }
         }
 
         .message{
         background-color: $lightBlue;
+        margin-top: 30px;
         }
 
         

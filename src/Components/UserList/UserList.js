@@ -189,7 +189,6 @@ class UserList extends Component{
                     </div>
                     <button className='user-list-share-button' onClick={this.showEmailForm}>SHARE LIST</button>
                     <div id='email-form-comp' className=''>
-                            EMAIL FORM
                         <div className='email-message-container'>
                             
                             <div className='email-message'>
@@ -197,7 +196,7 @@ class UserList extends Component{
                                 <input value={this.state.emailTo} onChange={e => this.handleTitleChange(e.target.value)} />
                             </div>
                             <div className='message'>
-                                <span>Message: </span>
+                                <span>Personal Message: </span>
                                 <textarea type='text-area' className='text-box' value={this.state.message} onChange={e => this.handleMessageChange(e.target.value)}/>
                             </div>
                         </div>

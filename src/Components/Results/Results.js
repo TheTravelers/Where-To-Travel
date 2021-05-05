@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { Component } from "react";
 
-import Header from "../Header/Header";
-import { updateSavedDestinations } from "../../redux/destinationReducer";
+// import Header from "../Header/Header";
+// import { updateSavedDestinations } from "../../redux/destinationReducer";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Results.scss";
@@ -23,7 +23,7 @@ class Results extends Component {
     console.log(this.props.citiesToDisplay);
     if (
       this.props.citiesToDisplay &&
-      JSON.stringify(prevProps.citiesToDisplay) !=
+      JSON.stringify(prevProps.citiesToDisplay) !==
         JSON.stringify(this.props.citiesToDisplay)
     ) {
       console.log("first hit");
@@ -196,7 +196,7 @@ class Results extends Component {
                 <h2>{e.cityName}</h2>
                 <h3>{e.state}</h3>
               </div>
-              {e.img ? <img src={e.img} /> : <h1>No image to display</h1>}
+              {e.img ? <img src={e.img} alt={e.img} /> : <h1>No image to display</h1>}
               <li>
                 <ul>Dinstance from you: {e.distance / 0.000621371}</ul>
                 <ul>
@@ -220,7 +220,7 @@ class Results extends Component {
               <h2>{e.cityName}</h2>
               <h3>{e.state}</h3>
             </div>
-            {e.img ? <img src={e.img} /> : <h1>No image to display</h1>}
+            {e.img ? <img src={e.img} alt={e.img} /> : <h1>No image to display</h1>}
             <li>
               <ul>Dinstance from you: {e.distance}</ul>
               <ul>
