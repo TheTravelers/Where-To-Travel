@@ -21,7 +21,7 @@ module.exports = {
         const db = req.app.get('db')
         let [user] = await db.auth.find_user(email)
         if(user){
-            return res.status(400).send('Email already in use. Please sign-in')
+            return res.status(400).send('Email already in use. Please login')
         }
         let salt = bcrypt.genSaltSync(10)
         let hash = bcrypt.hashSync(password, salt)
