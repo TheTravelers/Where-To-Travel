@@ -160,50 +160,50 @@ class Auth extends Component {
             <div className="auth-container">
                 <form className="login-container">
                     <h1>Where Should I Travel?</h1>
-                    <div>
-                        <button name='register' onClick={this.handleMode} disabled={mode === 'register'}>Register</button>
-                        <button name='login' onClick={this.handleMode} disabled={mode === 'login'} >Login</button>      
+                    <div className="inputs">
+                        <label>Email:</label>
+                        <input value={this.state.email} id="email" type="email" placeholder="email" onChange={e => this.handleEmailChange(e.target.value.toLowerCase())} />
                     </div>
-                    <div>
-                        <h3>Email:</h3>
-                        <input value={this.state.email} id="email" type="email" placeholder="email" onChange={e => this.handleEmailChange(e.target.value)} />
-                    </div>
-                    <div>
-                        <h3>Password:</h3>
+                    <div className="inputs">
+                        <label>Password:</label>
                         <input type="password" id="password" value={this.state.password} placeholder="password" onChange={e => this.handlePasswordChange(e.target.value)} />
                     </div>
                     <div>
-                        <button onClick={this.login}>login</button>
+                        <button className="submit" onClick={this.login}>Login</button>
                     </div> 
+                    <div>
+                        <span>Don't have an account?</span>
+                        <button className="toggleBtn" name='register' onClick={this.handleMode} disabled={mode === 'register'}>Register</button>
+                        <button className="other" name='login' onClick={this.handleMode} disabled={mode === 'login'} >Login</button>      
+                    </div>
                 </form>
                 <ToastContainer />
             </div>
         )} else {
             return(
-                <div>
-                    <form>
+                <div className="auth-container">
+                    <form className="register-container">
                     <h1>Where Should I Travel?</h1>
-                    <div>
-                        <button name='register' onClick={this.handleMode} disabled={mode === 'register'}>
-                            Register
-                        </button>
-                        <button name='login' onClick={this.handleMode} disabled={mode === 'login'} >
-                            Login
-                        </button>
-                    </div>
-                    <div>
-                        <h3>Name:</h3>
+                    
+                    <div className="inputs">
+                        <label>Name:</label>
                         <input value={this.state.name} placeholder="name" onChange={e => this.handleNameChange(e.target.value)}/>
-                        
-                        <h3>Email:</h3>
-                        <input value={this.state.email} placeholder="email" onChange={e => this.handleEmailChange(e.target.value)}/>
                     </div>
-                    <div>
-                        <h3>Password:</h3>
+                    <div className="inputs">  
+                        <label>Email:</label>
+                        <input value={this.state.email} placeholder="email" onChange={e => this.handleEmailChange(e.target.value.toLowerCase())}/>
+                    </div>
+                    <div className="inputs">
+                        <label>Password:</label>
                         <input type="password" value={this.state.password} placeholder="password" onChange={e => this.handlePasswordChange(e.target.value)}/>
                     </div>
                     <div>
-                        <button onClick={this.register}>Register</button>
+                        <button className="submit" onClick={this.register}>Register</button>
+                    </div>
+                    <div>
+                        <span>Already have an account?</span>
+                        <button className="other" name='register' onClick={this.handleMode} disabled={mode === 'register'}>Register</button>
+                        <button className="toggleBtn" name='login' onClick={this.handleMode} disabled={mode === 'login'} >Login</button>
                     </div>
                 </form>
                 <ToastContainer />
