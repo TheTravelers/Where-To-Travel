@@ -16,7 +16,7 @@ class Auth extends Component {
             password: '',
             name: '',
             mode: 'login',
-            // errorMsg: ''
+            errorMsg: ''
         }
     }
     componentDidMount(){
@@ -35,41 +35,106 @@ class Auth extends Component {
         this.setState({ mode: e.target.name })
     }
     
-    
     login = () => {
-        axios.post('/auth/login', this.state)
-        .then(res => {
-            console.log(res.data)
-            this.props.loginUser({user: res.data})
-            this.props.history.push('/main')
-        })
-        .catch(err => {console.log(err)
-            this.notifyWarning('Incorrect email or password')
-        // this.setState({errorMsg: 'Incorrect email or password'})
-        })
+        if (this.loginValidation()) {
+            axios.post('/auth/login', this.state)
+            .then(res => {
+                console.log(res.data)
+                this.props.loginUser({user: res.data})
+                this.props.history.push('/main')
+            })
+            .catch(err => {console.log(err)
+                this.notifyWarning(err.response.data)
+            })
+        } else {
+            return null 
+        }
     }
+
     register = () => {
         const { email, name, password } = this.state
-        console.log('err', this.state)
-        axios.post('/auth/register', {email, name, password})
-        .then(res => {
-            console.log(res.data)
-            this.props.registerUser({user: res.data})
-            this.props.history.push('/main')
-        }).catch(err => {
-            console.log(err)
-            // this.setState({errorMsg: 'This email already exists'})
-            this.notifyWarning('This email already exists')
-        }) 
+
+        if (this.registerValidation()) {
+            axios.post('/auth/register', {email, name, password})
+            .then(res => {
+                console.log(res.data)
+                this.props.registerUser({user: res.data})
+                this.props.history.push('/main')
+            }).catch((err) => {
+                this.notifyWarning(err.response.data)
+            })
+        } else {
+            return null
+        }  
     }
-    // closeErrorMsg = () => {
-    //     this.setState({
-    //         email: '',
-    //         password: '',
-    //         name: '',
-    //         errorMsg: false
-    //     })
-    // }
+    
+    loginValidation = () => {
+        const { email, password } = this.state;
+        let isValid = true;
+        // Email
+        if (!email) {
+            isValid = false;
+            this.notifyWarning('Email field cannot be empty')
+        } 
+        else if (typeof email !== "undefined") {
+            let lastAtPos = email.lastIndexOf('@');
+            let lastDotPos = email.lastIndexOf('.');
+
+            if (!(lastAtPos < lastDotPos && lastAtPos > 0 && email.indexOf('@@') === -1 && lastDotPos > 2 && (email.length - lastDotPos) > 2)) {
+                isValid = false;
+                this.notifyWarning('Invalid email')
+            }
+        }
+        // Password
+        if (isValid === true) {
+            if (!password) {
+                isValid = false;
+                this.notifyWarning('Password field cannot be empty')
+            }
+            else if (password.length < 6) {
+                isValid = false;
+                this.notifyWarning('Password must be at least 6 characters long')
+            }
+        }
+        return isValid;
+    }
+
+    registerValidation = () => {
+        const { name, email, password } = this.state;
+        let isValid = true;
+        // Name
+        if (!name) {
+            isValid = false;
+            this.notifyWarning('Name field cannot be empty')
+        }
+        // Email
+        if (isValid === true) {
+            if (!email) {
+                isValid = false;
+                this.notifyWarning('Email field cannot be empty')
+            } 
+            else if (typeof email !== "undefined") {
+                let lastAtPos = email.lastIndexOf('@');
+                let lastDotPos = email.lastIndexOf('.');
+                if (!(lastAtPos < lastDotPos && lastAtPos > 0 && email.indexOf('@@') === -1 && lastDotPos > 2 && (email.length - lastDotPos) > 2)) {
+                    isValid = false;
+                    this.notifyWarning('Invalid email')
+                }
+            }
+        }
+        // Password
+        if (isValid === true) {
+            if (!password) {
+                isValid = false;
+                this.notifyWarning('Password field cannot be empty')
+            }
+            else if (password.length <= 6) {
+                isValid = false;
+                this.notifyWarning('Password must be at least 6 characters long')
+            }
+        }
+        return isValid;
+    }
 
     notifyWarning = (msg) => {
         toast.error(msg, {
@@ -93,37 +158,31 @@ class Auth extends Component {
         if(mode === "login"){
         return(
             <div className="auth-container">
-                <div className="login-container">
+                <form className="login-container">
                     <h1>Where Should I Travel?</h1>
-                    {/* {this.state.errorMsg && <h3>{this.state.errorMsg} <span onClick={this.closeErrorMsg}>X</span></h3>} */}
                     <div>
-                        <button name='register' onClick={this.handleMode} disabled={mode === 'register'}>
-                            Register
-                        </button>
-                        <button name='login' onClick={this.handleMode} disabled={mode === 'login'} >Login</button>
-                            
-                        
+                        <button name='register' onClick={this.handleMode} disabled={mode === 'register'}>Register</button>
+                        <button name='login' onClick={this.handleMode} disabled={mode === 'login'} >Login</button>      
                     </div>
                     <div>
                         <h3>Email:</h3>
-                        <input value={this.state.email} placeholder="email" onChange={e => this.handleEmailChange(e.target.value)}/>
+                        <input value={this.state.email} id="email" type="email" placeholder="email" onChange={e => this.handleEmailChange(e.target.value)} />
                     </div>
                     <div>
                         <h3>Password:</h3>
-                        <input type="password" value={this.state.password} placeholder="password" onChange={e => this.handlePasswordChange(e.target.value)}/>
+                        <input type="password" id="password" value={this.state.password} placeholder="password" onChange={e => this.handlePasswordChange(e.target.value)} />
                     </div>
                     <div>
                         <button onClick={this.login}>login</button>
-                    </div>
-                </div>
+                    </div> 
+                </form>
                 <ToastContainer />
             </div>
-        )}else{
+        )} else {
             return(
                 <div>
-                    <div>
+                    <form>
                     <h1>Where Should I Travel?</h1>
-                    {/* {this.state.errorMsg && <h3>{this.state.errorMsg} <span onClick={this.closeErrorMsg}>X</span></h3>} */}
                     <div>
                         <button name='register' onClick={this.handleMode} disabled={mode === 'register'}>
                             Register
@@ -146,7 +205,7 @@ class Auth extends Component {
                     <div>
                         <button onClick={this.register}>Register</button>
                     </div>
-                </div>
+                </form>
                 <ToastContainer />
             </div>
             )
