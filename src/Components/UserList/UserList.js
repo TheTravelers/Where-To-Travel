@@ -4,6 +4,7 @@ import Header from '../Header/Header'
 import {getSavedDestinations} from '../../redux/destinationReducer'
 import {connect} from 'react-redux'
 import { ToastContainer, toast } from 'react-toastify'
+import { gsap } from 'gsap'
 import 'react-toastify/dist/ReactToastify.css'
 import './UserList.scss'
 
@@ -30,13 +31,15 @@ class UserList extends Component{
             
 
         })
+        
+        
 
         //
     }
 
-    // componentDidMount(){
-    //     this.setState({showEmailForm: false})
-    // }
+    componentDidMount(){
+        gsap.from('.userlist-container', {x: 2000, opacity: 0, duration: .5})
+    }
 
     showEmailForm = () => {
         // Get the snackbar DIV
@@ -131,7 +134,7 @@ class UserList extends Component{
         // console.log(this.props.dest, 'this.props.dest')
         if (this.props.dest.userSavedDestinations.length < 1) {
             return (
-              <section>
+              <section className='userlist-container'>
                   <Header />
                 <header>
                   <h2>You have no saved destinations</h2>

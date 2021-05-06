@@ -26,6 +26,7 @@ class Filter extends Component{
     componentDidMount(){
         gsap.from('.filter-component', {y: -500, opacity: 0, duration: .5})
     }
+   
 
     handleZipCodeChange = (e) => {
         this.setState({zipCode: e})

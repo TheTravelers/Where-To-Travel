@@ -1,7 +1,8 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 // import { Link } from 'react-router-dom'
 import { registerUser } from '../../redux/userReducer'
+import { gsap } from 'gsap'
 import Header from '../Header/Header'
 import axios from 'axios'
 import UploadingImg from './UploadImg'
@@ -11,6 +12,11 @@ const Profile = (props) => {
     const [ edit, setEdit ] = useState(false)
     const [ name, setName ] = useState('')
 
+    useEffect(() => {
+        gsap.from('.profile-header', {y: -600, opacity: 0, duration: .5})
+        gsap.from('.profile-back', {y: 1000, opacity: 0, duration: .5})
+        
+    })
     function editName() {
         if(name !== ''){
             axios.put(`auth/register/name/${props.user.user.user.user_id}`, {name})
@@ -27,8 +33,10 @@ const Profile = (props) => {
     }
 
     return (
-        <section>
-            <Header />
+        <section >
+            <div className='profile-header'>
+                <Header />
+            </div>
             <div className='profile-back'>
                 <div className='profile-container'>
 

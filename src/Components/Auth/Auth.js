@@ -3,6 +3,7 @@ import axios from 'axios'
 import {connect} from 'react-redux'
 import {loginUser, registerUser} from '../../redux/userReducer'
 import { ToastContainer, toast } from 'react-toastify'
+import { gsap } from 'gsap'
 import 'react-toastify/dist/ReactToastify.css';
 import './Auth.scss'
 
@@ -17,6 +18,9 @@ class Auth extends Component {
             mode: 'login',
             // errorMsg: ''
         }
+    }
+    componentDidMount(){
+        gsap.from('.auth-container', {opacity: 0, duration: 1})
     }
     handleEmailChange = (val) => {
         this.setState({ email: val })
