@@ -154,7 +154,7 @@ class Filter extends Component{
                         onChange= { e => this.handleZipCodeChange(e.target.value) }/>
                     
 
-                        <div>
+                        <div className='proximity-slider'>
                             proximity
                             <input 
                                 type="range" 
@@ -197,9 +197,11 @@ class Filter extends Component{
                         <button onClick={this.handleUrbanButton}>Urban</button>
                         <button onClick={this.handleRuralButton}>Rural</button>
                     </div> */}
-
+                    <div>
 
                     <button onClick={this.handleSearchButton} className='filter-search-button'>Search</button>
+                    </div>
+
                 
                 </div>
                 {/* result component  */}

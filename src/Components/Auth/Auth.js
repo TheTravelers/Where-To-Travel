@@ -36,6 +36,7 @@ class Auth extends Component {
     }
     
     login = () => {
+        
         if (this.loginValidation()) {
             axios.post('/auth/login', this.state)
             .then(res => {

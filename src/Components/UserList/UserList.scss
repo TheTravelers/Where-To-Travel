@@ -1,7 +1,8 @@
 @import '../../App.scss';
 
 .userlist-container {
-    background-color: $primaryColor;
+    background: linear-gradient($primaryColor, #FDEDDC);
+    // background-color: lighten($color: #FBE0C4, $amount: 5);
 }
 
 
