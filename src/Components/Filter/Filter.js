@@ -27,13 +27,22 @@ class Filter extends Component{
         }
     }
 
-    componentDidMount = () => {
+    // componentWillMount(){
+      
+            
+    // }
+    
+
+    componentDidMount () {
         gsap.from('.filter-component', {y: -500, opacity: 0, duration: .5}
-        )
-        axios.get("/api/defaultDestinations").then((response) => {
+            )
+        axios.get("/api/defaultDestinations")
+        .then((response) => {
             this.setState({ defaultDestinations: response.data });
             console.log(this.state.defaultDestinations, "destinations");
-          });
+            
+        })
+        .catch(err => console.log(err))
     }
    
 
@@ -72,14 +81,14 @@ class Filter extends Component{
       inState: !prevState.inState,
     }));
   };
-  handleUrbanButton = () => {
-    //Want cities only if they have a population more than a certain number
-    this.setState({ populationDivider: ">" });
-  };
-  handleRuralButton = () => {
-    //Want cities only if they have a population less than a certain number
-    this.setState({ populationDivider: "<" });
-  };
+//   handleUrbanButton = () => {
+//     //Want cities only if they have a population more than a certain number
+//     this.setState({ populationDivider: ">" });
+//   };
+//   handleRuralButton = () => {
+//     //Want cities only if they have a population less than a certain number
+//     this.setState({ populationDivider: "<" });
+//   };
   handleSearchButton = async () => {
     this.setState({ slideShow: false });
     let zipCodeInfo = zipcodes.lookup(this.state.zipCode);
@@ -157,7 +166,7 @@ class Filter extends Component{
         // console.log(this.state.coordinates)
         // console.log(this.props.coords)
         // console.log(this.state.zipCode)
-        console.log(this.state.citiesToDisplay)
+        // console.log(this.state.citiesToDisplay)
         
         
         return(
@@ -213,8 +222,7 @@ class Filter extends Component{
                         <button onClick={this.handleUrbanButton}>Urban</button>
                         <button onClick={this.handleRuralButton}>Rural</button>
                     </div> */}
-                 
-                <button onClick={this.handleSearchButton}>Search</button>
+                
               </div>
             {/* result component  */}
                 <div>
@@ -224,9 +232,7 @@ class Filter extends Component{
                 {/* result component  */}
                     {this.state.slideShow ? (
                 <div id="default-destinations-slider">
-                    <SimpleSlider
-                        userId = {this.props.user.user.user.user_id}
-                      defaultDestinations={this.state.defaultDestinations}
+                    <SimpleSlider userId={this.props.user.user.user.user_id}defaultDestinations={this.state.defaultDestinations}
                     />
                 </div>
                 ) : (

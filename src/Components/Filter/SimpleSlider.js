@@ -55,10 +55,14 @@ export default function SimpleSlider(props) {
   return (
     <div>
       {console.log(index)}
-        
-      <button onClick={() => addToList(index)}>Save {props.defaultDestinations[index].city_name} To My List</button>      
+      {console.log(props.defaultDestinations, 'first props.dest')}
+      
+      {/* {props.defaultDestinations[index].city_name} */}
+        <button onClick={() => addToList(index)}>Save {props.defaultDestinations[index] ? props.defaultDestinations[index].city_name : ''} To My List</button>      
+
       
       <Slider {...settings}>
+        {console.log(props.defaultDestinations, 'props inside SLID')}
         {props.defaultDestinations.map((element, index) => {
           // console.log(element.default_dest_id)
           return (
