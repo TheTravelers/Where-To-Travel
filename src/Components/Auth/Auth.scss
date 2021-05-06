@@ -1,6 +1,49 @@
 @import '../../App.scss';
 
+.auth-container {
+    height: 100vh;
+    // background-color: $lightBlue;
+    background-image: linear-gradient( $primaryColor, $lightBlue, $darkBlue);
+}
+.login-container, .register-container {
+    height: 90%;
+    position: relative;
+    top: 40px;
 
-login-container {
+    h1 {
+        margin-bottom: 30px;
+    }
+
+    .inputs {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    input {
+        height: 30px;
+        width: 200px;
+        border-radius: 5px;
+        font-size: large;
+        margin-top: 20px;
+        background-color: $primaryColor;
+    }
+
+    button {
+        height: 30px;
+        width: 120px;
+        border-radius: 20%;
+        font-size: large;
+    }
     
+
+    label {
+        font-size: larger; 
+        font-weight: bold;   
+    }
+
+    .submit {
+        margin-top: 20px;
+    }
 }
