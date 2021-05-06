@@ -4,6 +4,7 @@ import axios from 'axios'
 import zipcodes from 'zipcodes-nrviens'
 import Results from '../Results/Results'
 import { geolocated } from 'react-geolocated'
+import { gsap } from 'gsap'
 import './Filter.scss'
 
 class Filter extends Component{
@@ -16,11 +17,16 @@ class Filter extends Component{
             inState: false,
             rangeValue: 100,
             rangeValueInMeters: 300000,
-            populationDivider: '',
+            // populationDivider: '',
             zipCode: '',
             citiesToDisplay:undefined
         }
     }
+
+    componentDidMount(){
+        gsap.from('.filter-component', {y: -500, opacity: 0, duration: .5})
+    }
+   
 
     handleZipCodeChange = (e) => {
         this.setState({zipCode: e})
@@ -41,15 +47,15 @@ class Filter extends Component{
             inState: !prevState.inState
         }))
     }
-    handleUrbanButton = () => {
-        //Want cities only if they have a population more than a certain number
-        this.setState({populationDivider: '>'})
-    }
-    handleRuralButton = () => {
-        //Want cities only if they have a population less than a certain number
-        this.setState({populationDivider: '<'})
+    // handleUrbanButton = () => {
+    //     //Want cities only if they have a population more than a certain number
+    //     this.setState({populationDivider: '>'})
+    // }
+    // handleRuralButton = () => {
+    //     //Want cities only if they have a population less than a certain number
+    //     this.setState({populationDivider: '<'})
 
-    }
+    // }
     handleSearchButton = async () => {
         let zipCodeInfo = zipcodes.lookup(this.state.zipCode)
         console.log(zipCodeInfo)
@@ -139,57 +145,61 @@ class Filter extends Component{
         
         
         return(
-            <div>
+            <div className='filter-component'>
                 <Header />
-                <div>
+                <div className='filter-element'>
                     <input 
                         placeholder="Current Zipcode"
                         type= 'text'
                         onChange= { e => this.handleZipCodeChange(e.target.value) }/>
-                    <div>
-                        proximity
-                        <input 
-                            type="range" 
-                            min="50" 
-                            max="3500" 
-                            step="50"
-                            value={this.state.rangeValue}
-                            onChange={e => this.setState({rangeValue: e.target.value})}
-                            />
-                            <span>{this.state.rangeValue} miles</span>
+                    
+
+                        <div>
+                            proximity
+                            <input 
+                                type="range" 
+                                min="50" 
+                                max="3500" 
+                                step="50"
+                                value={this.state.rangeValue}
+                                onChange={e => this.setState({rangeValue: e.target.value})}
+                                />
+                                <span>{this.state.rangeValue} miles</span>
+                        </div>
+                    <div className='filter-checkboxes'>
+                        <label>
+                            Adult Friendly:
+                            <input
+                                name="adultFriendly" 
+                                type="checkbox"
+                                checked={this.state.adultFriendly}
+                                onChange={this.handleAdultFriendlyChange}/>
+                        </label>
+                        <label>
+                            Waterfront: 
+                            <input
+                                name="waterFront"
+                                type="checkbox"
+                                checked={this.state.waterFront}
+                                onChange={this.handleWaterFrontChange}/>
+                        </label>
+                        <label>
+                            In State:
+                            <input
+                                name="inState"
+                                type="checkbox"
+                                checked={this.state.inState}
+                                onChange={this.handleInStateChange}/>
+                        </label>
                     </div>
-                    <label>
-                        Adult Friendly:
-                        <input
-                            name="adultFriendly" 
-                            type="checkbox"
-                            checked={this.state.adultFriendly}
-                            onChange={this.handleAdultFriendlyChange}/>
-                    </label>
-                    <label>
-                        Waterfront: 
-                        <input
-                            name="waterFront"
-                            type="checkbox"
-                            checked={this.state.waterFront}
-                            onChange={this.handleWaterFrontChange}/>
-                    </label>
-                    <label>
-                        In State:
-                        <input
-                            name="inState"
-                            type="checkbox"
-                            checked={this.state.inState}
-                            onChange={this.handleInStateChange}/>
-                    </label>
-                    <div>
+                    {/* <div>
                         <h3>Population:</h3>
                         <button onClick={this.handleUrbanButton}>Urban</button>
                         <button onClick={this.handleRuralButton}>Rural</button>
-                    </div>
+                    </div> */}
 
 
-                    <button onClick={this.handleSearchButton}>Search</button>
+                    <button onClick={this.handleSearchButton} className='filter-search-button'>Search</button>
                 
                 </div>
                 {/* result component  */}
