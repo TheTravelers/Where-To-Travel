@@ -160,10 +160,6 @@ class Auth extends Component {
             <div className="auth-container">
                 <form className="login-container">
                     <h1>Where Should I Travel?</h1>
-                    <div>
-                        <button className="other" name='register' onClick={this.handleMode} disabled={mode === 'register'}>Register</button>
-                        <button name='login' onClick={this.handleMode} disabled={mode === 'login'} >Login</button>      
-                    </div>
                     <div className="inputs">
                         <label>Email:</label>
                         <input value={this.state.email} id="email" type="email" placeholder="email" onChange={e => this.handleEmailChange(e.target.value)} />
@@ -173,8 +169,13 @@ class Auth extends Component {
                         <input type="password" id="password" value={this.state.password} placeholder="password" onChange={e => this.handlePasswordChange(e.target.value)} />
                     </div>
                     <div>
-                        <button className="submit" onClick={this.login}>login</button>
+                        <button className="submit" onClick={this.login}>Login</button>
                     </div> 
+                    <div>
+                        <span>Don't have an account?</span>
+                        <button className="toggleBtn" name='register' onClick={this.handleMode} disabled={mode === 'register'}>Register</button>
+                        <button className="other" name='login' onClick={this.handleMode} disabled={mode === 'login'} >Login</button>      
+                    </div>
                 </form>
                 <ToastContainer />
             </div>
@@ -183,14 +184,7 @@ class Auth extends Component {
                 <div className="auth-container">
                     <form className="register-container">
                     <h1>Where Should I Travel?</h1>
-                    <div>
-                        <button name='register' onClick={this.handleMode} disabled={mode === 'register'}>
-                            Register
-                        </button>
-                        <button name='login' onClick={this.handleMode} disabled={mode === 'login'} >
-                            Login
-                        </button>
-                    </div>
+                    
                     <div className="inputs">
                         <label>Name:</label>
                         <input value={this.state.name} placeholder="name" onChange={e => this.handleNameChange(e.target.value)}/>
@@ -205,6 +199,11 @@ class Auth extends Component {
                     </div>
                     <div>
                         <button className="submit" onClick={this.register}>Register</button>
+                    </div>
+                    <div>
+                        <span>Already have an account?</span>
+                        <button className="other" name='register' onClick={this.handleMode} disabled={mode === 'register'}>Register</button>
+                        <button className="toggleBtn" name='login' onClick={this.handleMode} disabled={mode === 'login'} >Login</button>
                     </div>
                 </form>
                 <ToastContainer />

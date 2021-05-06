@@ -2,8 +2,8 @@
 
 .auth-container {
     height: 100vh;
-    // background-color: $lightBlue;
-    background-image: linear-gradient( $primaryColor, $lightBlue, $darkBlue);
+    background-color: $lightBlue;
+    background-image: linear-gradient($primaryColor, $lightBlue, $darkBlue);
 }
 .login-container, .register-container {
     height: 90%;
@@ -11,7 +11,7 @@
     top: 40px;
 
     h1 {
-        margin-bottom: 30px;
+        margin-bottom: 60px;
     }
 
     .inputs {
@@ -22,12 +22,14 @@
     }
 
     input {
-        height: 30px;
+        height: 40px;
         width: 200px;
         border-radius: 5px;
         font-size: large;
         margin-top: 20px;
-        background-color: $primaryColor;
+        padding-left: 10px;
+        box-sizing: border-box;
+        // background-color: $primaryColor;
     }
 
     button {
@@ -35,6 +37,7 @@
         width: 120px;
         border-radius: 20%;
         font-size: large;
+        cursor: pointer;
     }
     
 
@@ -45,5 +48,28 @@
 
     .submit {
         margin-top: 20px;
+    }
+
+    .other {
+        display: none;
+    }
+    span {
+        
+        font-size: medium;
+        color: white;
+    }
+
+    .toggleBtn {
+        font-size: medium;
+        font-weight: bold;
+        width: 50px;
+        border: none;
+        height: 100%;
+        background-color: transparent;
+        margin-top: 20px;
+        color: $primaryColor;
+        color: black;
+        margin-left: 8px;
+        text-decoration: underline;
     }
 }
