@@ -69,87 +69,87 @@ class Results extends Component {
       };
     }
   }
-  async componentDidMount() {
-    ///this is the popular places and the default
-    console.log(this.props.citiesToDisplay);
+//   async componentDidMount() {
+//     ///this is the popular places and the default
+//     console.log(this.props.citiesToDisplay);
 
-    if (!this.props.citiesToDisplay) {
-      console.log(this.props);
-      await axios
-        .post(
-          "/api/filters",
-          {
-            actualLocation: [-119.417931, 36.778259], // change this for this.props.coordinates
-            distance: 500000000000,
-            adultOnly: true,
-            waterFront: false,
-            inState: false,
-            winterSports: false,
-          },
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        )
-        .then((res) => {
-          if (res.data.length > 2) {
-            const filterTenCities = res.data.slice(0, 2);
-            this.setState({ results: filterTenCities });
-          } else {
-            this.setState({ results: res.data });
-          }
-        });
-      console.log(this.state.results);
-      await axios
-        .all(
-          this.state.results.map((e) => {
-            // console.log(e.cityName.replace(/ /g,'+'))
-            return axios.get(
-              `https://pixabay.com/api/?key=21414540-8ffff3c6f0901bd8153a62ca7&q=${e.cityName.replace(
-                / /g,
-                "+"
-              )}&image_type=photo&category=travel&per_page=3`
-            );
-          })
-        )
-        .then((response) => {
-          console.log(response);
-          response.forEach((e, i) => {
-            let stateHolder = [...this.state.results];
-            stateHolder[i].img = e.data.hits[0].largeImageURL;
-            this.setState({ results: stateHolder });
-            // this.state.results[i].img = e.data.hits[0].largeImageURL;
-          });
-        })
-        .catch((err) => console.log(err));
-    } else {
-      this.setState({ results: this.props.citiesToDisplay }, async () => {
-        await axios
-          .all(
-            this.state.results.map((e) => {
-              // console.log(e.cityName.replace(/ /g,'+'))
-              return axios.get(
-                `https://pixabay.com/api/?key=21414540-8ffff3c6f0901bd8153a62ca7&q=${e.cityName.replace(
-                  / /g,
-                  "+"
-                )}&image_type=photo&category=travel&per_page=3`
-              );
-            })
-          )
-          .then((response) => {
-            console.log(response);
-            response.forEach((e, i) => {
-              let stateHolder = [...this.state.results];
-              stateHolder[i].img = e.data.hits[0].largeImageURL;
-              this.setState({ results: stateHolder });
-              //   this.state.results[i].img = e.data.hits[0].largeImageURL;
-            });
-          })
-          .catch((err) => console.log(err));
-      });
-    }
-  }
+//     if (!this.props.citiesToDisplay) {
+//       console.log(this.props);
+//       await axios
+//         .post(
+//           "/api/filters",
+//           {
+//             actualLocation: [-119.417931, 36.778259], // change this for this.props.coordinates
+//             distance: 500000000000,
+//             adultOnly: true,
+//             waterFront: false,
+//             inState: false,
+//             winterSports: false,
+//           },
+//           {
+//             headers: {
+//               "Content-Type": "application/json",
+//             },
+//           }
+//         )
+//         .then((res) => {
+//           if (res.data.length > 2) {
+//             const filterTenCities = res.data.slice(0, 2);
+//             this.setState({ results: filterTenCities });
+//           } else {
+//             this.setState({ results: res.data });
+//           }
+//         });
+//       console.log(this.state.results);
+//       await axios
+//         .all(
+//           this.state.results.map((e) => {
+//             // console.log(e.cityName.replace(/ /g,'+'))
+//             return axios.get(
+//               `https://pixabay.com/api/?key=21414540-8ffff3c6f0901bd8153a62ca7&q=${e.cityName.replace(
+//                 / /g,
+//                 "+"
+//               )}&image_type=photo&category=travel&per_page=3`
+//             );
+//           })
+//         )
+//         .then((response) => {
+//           console.log(response);
+//           response.forEach((e, i) => {
+//             let stateHolder = [...this.state.results];
+//             stateHolder[i].img = e.data.hits[0].largeImageURL;
+//             this.setState({ results: stateHolder });
+//             // this.state.results[i].img = e.data.hits[0].largeImageURL;
+//           });
+//         })
+//         .catch((err) => console.log(err));
+//     } else {
+//       this.setState({ results: this.props.citiesToDisplay }, async () => {
+//         await axios
+//           .all(
+//             this.state.results.map((e) => {
+//               // console.log(e.cityName.replace(/ /g,'+'))
+//               return axios.get(
+//                 `https://pixabay.com/api/?key=21414540-8ffff3c6f0901bd8153a62ca7&q=${e.cityName.replace(
+//                   / /g,
+//                   "+"
+//                 )}&image_type=photo&category=travel&per_page=3`
+//               );
+//             })
+//           )
+//           .then((response) => {
+//             console.log(response);
+//             response.forEach((e, i) => {
+//               let stateHolder = [...this.state.results];
+//               stateHolder[i].img = e.data.hits[0].largeImageURL;
+//               this.setState({ results: stateHolder });
+//               //   this.state.results[i].img = e.data.hits[0].largeImageURL;
+//             });
+//           })
+//           .catch((err) => console.log(err));
+//       });
+//     }
+//   }
 
   addToUserList = (
     cityName,
@@ -187,34 +187,36 @@ class Results extends Component {
     let { results, filterResults } = this.state;
 
     if (filterResults.length === 0) {
-      if (results.length === 0) {
-        return (
-          <p>Please Wait for your info</p>
-        )
-      } else {
-        return results.map((e, i) => {
-          return (
-            <div key={i}>
-              <div>
-                <h2>{e.cityName}</h2>
-                <h3>{e.state}</h3>
-              </div>
-              {e.img ? <img src={e.img} alt={e.img} /> : <h1>No image to display</h1>}
-              <li>
-                <ul>Dinstance from you: {e.distance / 0.000621371}</ul>
-                <ul>
-                  Near Waterfront: {e.kinds.includes("beach") ? "YES" : "NO"}
-                </ul>
-                <ul>
-                  Adult Friendly: {e.kinds.includes("adult") ? "YES" : "NO"}
-                </ul>
-                <ul>population is comming </ul>
-              </li>
-              <button>Save</button>
-            </div>
-          );
-        });
-      }
+    //   if (results.length === 0) {
+    //     return (
+    //       <p>Please Wait for your info</p>
+    //     )
+    //   } else {
+    //     return results.map((e, i) => {
+    //       return (
+    //         <div key={i}>
+    //           <div>
+    //             <h2>{e.cityName}</h2>
+    //             <h3>{e.state}</h3>
+    //           </div>
+    //           {e.img ? <img src={e.img} alt={e.img} /> : <h1>No image to display</h1>}
+    //           <li>
+    //             <ul>Dinstance from you: {e.distance / 0.000621371}</ul>
+    //             <ul>
+    //               Near Waterfront: {e.kinds.includes("beach") ? "YES" : "NO"}
+    //             </ul>
+    //             <ul>
+    //               Adult Friendly: {e.kinds.includes("adult") ? "YES" : "NO"}
+    //             </ul>
+    //             <ul>population is comming </ul>
+    //           </li>
+    //           <button>Save</button>
+    //         </div>
+    //       );
+    //     });
+    //   }
+
+    return (<h1>Please Wait for your info</h1>)
     } else {
       return filterResults.map((e, i) => {
         return (
