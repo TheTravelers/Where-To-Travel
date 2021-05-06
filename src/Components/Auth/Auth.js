@@ -162,7 +162,7 @@ class Auth extends Component {
                     <h1>Where Should I Travel?</h1>
                     <div className="inputs">
                         <label>Email:</label>
-                        <input value={this.state.email} id="email" type="email" placeholder="email" onChange={e => this.handleEmailChange(e.target.value)} />
+                        <input value={this.state.email} id="email" type="email" placeholder="email" onChange={e => this.handleEmailChange(e.target.value.toLowerCase())} />
                     </div>
                     <div className="inputs">
                         <label>Password:</label>
@@ -191,7 +191,7 @@ class Auth extends Component {
                     </div>
                     <div className="inputs">  
                         <label>Email:</label>
-                        <input value={this.state.email} placeholder="email" onChange={e => this.handleEmailChange(e.target.value)}/>
+                        <input value={this.state.email} placeholder="email" onChange={e => this.handleEmailChange(e.target.value.toLowerCase())}/>
                     </div>
                     <div className="inputs">
                         <label>Password:</label>
