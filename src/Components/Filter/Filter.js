@@ -1,41 +1,61 @@
-import React, { Component } from "react";
-import Header from "../Header/Header";
-import axios from "axios";
-import zipcodes from "zipcodes-nrviens";
-import Results from "../Results/Results";
+import React, { Component } from 'react'
+import Header from '../Header/Header'
+import axios from 'axios'
+import zipcodes from 'zipcodes-nrviens'
+import Results from '../Results/Results'
 import {connect} from 'react-redux'
-import { geolocated } from "react-geolocated";
-import "./Filter.scss";
+import { geolocated } from 'react-geolocated'
+import { gsap } from 'gsap'
+import './Filter.scss'
 import SimpleSlider from "./SimpleSlider";
 
-class Filter extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      coordinates: undefined,
-      adultFriendly: false,
-      waterFront: false,
-      inState: false,
-      rangeValue: 100,
-      rangeValueInMeters: 300000,
-      populationDivider: "",
-      zipCode: "",
-      citiesToDisplay: undefined,
-      defaultDestinations: [],
-      slideShow: true,
-    };
-  }
+class Filter extends Component{
+    constructor(props){
+        super(props)
+        this.state = {
+            coordinates: undefined,
+            adultFriendly: false,
+            waterFront: false,
+            inState: false,
+            rangeValue: 100,
+            rangeValueInMeters: 300000,
+            // populationDivider: '',
+            zipCode: '',
+            citiesToDisplay: undefined,
+            defaultDestinations: [],
+            slideShow: true,
+        }
+    }
 
-  componentDidMount = () => {
-    axios.get("/api/defaultDestinations").then((response) => {
-      this.setState({ defaultDestinations: response.data });
-      console.log(this.state.defaultDestinations, "destinations");
-    });
-  };
+    componentDidMount = () => {
+        gsap.from('.filter-component', {y: -500, opacity: 0, duration: .5}
+        )
+        axios.get("/api/defaultDestinations").then((response) => {
+            this.setState({ defaultDestinations: response.data });
+            console.log(this.state.defaultDestinations, "destinations");
+          });
+    }
+   
 
-  handleZipCodeChange = (e) => {
-    this.setState({ zipCode: e });
-  };
+    handleZipCodeChange = (e) => {
+        this.setState({zipCode: e})
+    }
+    
+
+    // hello 
+    // handleUrbanButton = () => {
+    //     //Want cities only if they have a population more than a certain number
+    //     this.setState({populationDivider: '>'})
+    // }
+    // handleRuralButton = () => {
+    //     //Want cities only if they have a population less than a certain number
+    //     this.setState({populationDivider: '<'})
+
+    // }
+    handleSearchButton = async () => {
+        let zipCodeInfo = zipcodes.lookup(this.state.zipCode)
+        console.log(zipCodeInfo)
+    }
 
   handleAdultFriendlyChange = () => {
     this.setState((prevState) => ({
@@ -131,95 +151,104 @@ class Filter extends Component {
     }
   };
 
-  render() {
-    // console.log(this.state.coordinates)
-    // console.log(this.props.coords)
-    // console.log(this.state.zipCode)
-    console.log(this.state.citiesToDisplay);
 
-    return (
-      <div>
-        <Header />
-        <div>
-          <input
-            placeholder="Current Zipcode"
-            type="text"
-            onChange={(e) => this.handleZipCodeChange(e.target.value)}
-          />
-          <div>
-            proximity
-            <input
-              type="range"
-              min="50"
-              max="3500"
-              step="50"
-              value={this.state.rangeValue}
-              onChange={(e) => this.setState({ rangeValue: e.target.value })}
-            />
-            <span>{this.state.rangeValue} miles</span>
-          </div>
-          <label>
-            Adult Friendly:
-            <input
-              name="adultFriendly"
-              type="checkbox"
-              checked={this.state.adultFriendly}
-              onChange={this.handleAdultFriendlyChange}
-            />
-          </label>
-          <label>
-            Waterfront:
-            <input
-              name="waterFront"
-              type="checkbox"
-              checked={this.state.waterFront}
-              onChange={this.handleWaterFrontChange}
-            />
-          </label>
-          <label>
-            In State:
-            <input
-              name="inState"
-              type="checkbox"
-              checked={this.state.inState}
-              onChange={this.handleInStateChange}
-            />
-          </label>
-          <div>
-            <h3>Population:</h3>
-            <button onClick={this.handleUrbanButton}>Urban</button>
-            <button onClick={this.handleRuralButton}>Rural</button>
-          </div>
 
-          <button onClick={this.handleSearchButton}>Search</button>
-        </div>
-        {/* result component  */}
+    render(){
+        // console.log(this.state.coordinates)
+        // console.log(this.props.coords)
+        // console.log(this.state.zipCode)
+        console.log(this.state.citiesToDisplay)
+        
+        
+        return(
+            <div className='filter-component'>
+                <Header />
+                <div className='filter-element'>
+                    <input 
+                        placeholder="Current Zipcode"
+                        type= 'text'
+                        onChange= { e => this.handleZipCodeChange(e.target.value) }/>
+                    
 
-        {this.state.slideShow ? (
-          <div id="default-destinations-slider">
-            <SimpleSlider
-                userId = {this.props.user.user.user.user_id}
-              defaultDestinations={this.state.defaultDestinations}
-            />
+                        <div>
+                            proximity
+                            <input 
+                                type="range" 
+                                min="50" 
+                                max="3500" 
+                                step="50"
+                                value={this.state.rangeValue}
+                                onChange={e => this.setState({rangeValue: e.target.value})}
+                                />
+                                <span>{this.state.rangeValue} miles</span>
+                        </div>
+                    <div className='filter-checkboxes'>
+                        <label>
+                            Adult Friendly:
+                            <input
+                                name="adultFriendly" 
+                                type="checkbox"
+                                checked={this.state.adultFriendly}
+                                onChange={this.handleAdultFriendlyChange}/>
+                        </label>
+                        <label>
+                            Waterfront: 
+                            <input
+                                name="waterFront"
+                                type="checkbox"
+                                checked={this.state.waterFront}
+                                onChange={this.handleWaterFrontChange}/>
+                        </label>
+                        <label>
+                            In State:
+                            <input
+                                name="inState"
+                                type="checkbox"
+                                checked={this.state.inState}
+                                onChange={this.handleInStateChange}/>
+                        </label>
+                    </div>
+                    {/* <div>
+                        <h3>Population:</h3>
+                        <button onClick={this.handleUrbanButton}>Urban</button>
+                        <button onClick={this.handleRuralButton}>Rural</button>
+                    </div> */}
+                 
+                <button onClick={this.handleSearchButton}>Search</button>
+              </div>
+            {/* result component  */}
+                <div>
+                    <button onClick={this.handleSearchButton} className='filter-search-button'>Search</button>
+                
+                </div>
+                {/* result component  */}
+                    {this.state.slideShow ? (
+                <div id="default-destinations-slider">
+                    <SimpleSlider
+                        userId = {this.props.user.user.user.user_id}
+                      defaultDestinations={this.state.defaultDestinations}
+                    />
+                </div>
+                ) : (
+                  <div id="results-comp" className="">
+                    <Results
+                      coordinates={this.state.coordinates}
+                      citiesToDisplay={this.state.citiesToDisplay}
+                    />
+                  </div>
+                )}             
           </div>
-        ) : (
-          <div id="results-comp" className="">
-            <Results
-              coordinates={this.state.coordinates}
-              citiesToDisplay={this.state.citiesToDisplay}
-            />
-          </div>
-        )}
-      </div>
-    );
-  }
+        )
+    }
+    
 }
 
 const mapStateToProps = reduxState => {
-  return {
-  user: reduxState.userReducer
-  }
+    return {
+    user: reduxState.userReducer
+    }
 }
+
 export default connect(mapStateToProps)(Filter);
 
 // export default geolocated({

@@ -24,5 +24,19 @@
             margin-bottom: 0px;
         }
     }
+}
 
+.filter-element{
+    padding-top: 2%;
+    padding-bottom: 2%;
+    background-color: $primaryColor;
+    
+}
+.filter-checkboxes{
+    display: flex;
+    flex-direction: column-reverse;
+
+}
+.filter-search-button{
+    margin-top: 2%;
 }
