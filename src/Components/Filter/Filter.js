@@ -3,6 +3,7 @@ import Header from "../Header/Header";
 import axios from "axios";
 import zipcodes from "zipcodes-nrviens";
 import Results from "../Results/Results";
+import {connect} from 'react-redux'
 import { geolocated } from "react-geolocated";
 import "./Filter.scss";
 import SimpleSlider from "./SimpleSlider";
@@ -197,6 +198,7 @@ class Filter extends Component {
         {this.state.slideShow ? (
           <div id="default-destinations-slider">
             <SimpleSlider
+                userId = {this.props.user.user.user.user_id}
               defaultDestinations={this.state.defaultDestinations}
             />
           </div>
@@ -212,9 +214,17 @@ class Filter extends Component {
     );
   }
 }
-export default geolocated({
-  positionOptions: {
-    enableHighAccuracy: false,
-  },
-  userDecisionTimeout: 5000,
-})(Filter);
+
+const mapStateToProps = reduxState => {
+  return {
+  user: reduxState.userReducer
+  }
+}
+export default connect(mapStateToProps)(Filter);
+
+// export default geolocated({
+//   positionOptions: {
+//     enableHighAccuracy: false,
+//   },
+//   userDecisionTimeout: 5000,
+// })(Filter);

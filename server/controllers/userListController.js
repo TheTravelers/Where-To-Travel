@@ -2,9 +2,9 @@ module.exports = {
     addDestination: async( req, res ) => {
         const db = req.app.get('db')
         const {user_id} = req.params;
-        const {city_name, population, waterfront, adult_friendly, family_friendly} = req.body;
+        const {city_name, population, waterfront, adult_friendly, family_friendly, city_img, state} = req.body;
         try {
-            const addedDest = await db.add_destination(user_id, city_name, population, waterfront, adult_friendly, family_friendly)
+            const addedDest = await db.add_destination(user_id, city_name, population, waterfront, adult_friendly, family_friendly, city_img, state)
 
             return res.status(200).send(addedDest)
         }
