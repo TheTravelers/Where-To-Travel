@@ -3,9 +3,11 @@ import Header from '../Header/Header'
 import axios from 'axios'
 import zipcodes from 'zipcodes-nrviens'
 import Results from '../Results/Results'
+import {connect} from 'react-redux'
 import { geolocated } from 'react-geolocated'
 import { gsap } from 'gsap'
 import './Filter.scss'
+import SimpleSlider from "./SimpleSlider";
 
 class Filter extends Component{
     constructor(props){
@@ -19,12 +21,28 @@ class Filter extends Component{
             rangeValueInMeters: 300000,
             // populationDivider: '',
             zipCode: '',
-            citiesToDisplay:undefined
+            citiesToDisplay: undefined,
+            defaultDestinations: [],
+            slideShow: true,
         }
     }
 
-    componentDidMount(){
-        gsap.from('.filter-component', {y: -500, opacity: 0, duration: .5})
+    // componentWillMount(){
+      
+            
+    // }
+    
+
+    componentDidMount () {
+        gsap.from('.filter-component', {y: -500, opacity: 0, duration: .5}
+            )
+        axios.get("/api/defaultDestinations")
+        .then((response) => {
+            this.setState({ defaultDestinations: response.data });
+            console.log(this.state.defaultDestinations, "destinations");
+            
+        })
+        .catch(err => console.log(err))
     }
    
 
@@ -32,21 +50,8 @@ class Filter extends Component{
         this.setState({zipCode: e})
     }
     
-    handleAdultFriendlyChange = () => {
-        this.setState(prevState => ({
-            adultFriendly: !prevState.adultFriendly
-        }))
-    }
-    handleWaterFrontChange = () => {
-        this.setState(prevState => ({
-            waterFront: !prevState.waterFront
-        }))
-    }
-    handleInStateChange = () => {
-        this.setState(prevState => ({
-            inState: !prevState.inState
-        }))
-    }
+
+    // hello 
     // handleUrbanButton = () => {
     //     //Want cities only if they have a population more than a certain number
     //     this.setState({populationDivider: '>'})
@@ -59,89 +64,109 @@ class Filter extends Component{
     handleSearchButton = async () => {
         let zipCodeInfo = zipcodes.lookup(this.state.zipCode)
         console.log(zipCodeInfo)
-
-        if(this.state.zipCode){
-           await this.setState({
-                coordinates: [zipCodeInfo.longitude, zipCodeInfo.latitude],
-                rangeValueInMeters: this.state.rangeValue * 1609.34
-            }, async () => {
-                console.log(this.state.coordinates)
-                await axios.post('/api/filters', {
-                    actualLocation: this.state.coordinates,
-                    distance: this.state.rangeValueInMeters,
-                    adultOnly: this.state.adultFriendly,
-                    waterFront: this.state.waterFront,
-                    inState: this.state.inState,
-                    winterSports: false
-
-                },{
-                    headers: {
-                        'Content-Type': 'application/json'
-                      }
-                }). then (res => {
-                    this.setState({citiesToDisplay: res.data}, () => {
-                        
-                    })
-                })
-            }
-            
-            
-            
-            )
-        } else{
-            this.setState({coordinates: [this.props.coords.longitude, this.props.coords.latitude], rangeValueInMeters: this.state.rangeValue * 1609.34}, async () => {
-                console.log(this.state.coordinates)
-                await axios.post('/api/filters',{
-                    actualLocation: this.state.coordinates, 
-                    distance: this.state.rangeValueInMeters, 
-                    adultOnly: this.state.adultFriendly, 
-                    waterFront: this.state.waterFront, 
-                    inState: this.state.inState,
-                    winterSports: false
-                    
-                },{
-                    headers: {
-                        'Content-Type': 'application/json'
-                      }
-                }). then (res => {
-                    this.setState({citiesToDisplay: res.data})
-                })
-            } )
-        }
-
-
-
-    //     console.log(this.state.citiesToDisplay)
-    //     if(this.state.citiesToDisplay > 10){
-    //         const citiesFilter = this.props.citiesToDisplay.slice(0,10)
-    //         this.setState({citiesToDisplay: citiesFilter})
-    //     }
-    //     await axios.all(
-    //       this.state.citiesToDisplay.map( e => {
-    //           // console.log(e.cityName.replace(/ /g,'+'))
-    //           return (
-    //               axios.get(
-    //                   `https://pixabay.com/api/?key=21414540-8ffff3c6f0901bd8153a62ca7&q=${e.cityName.replace(/ /g,'+')}&image_type=photo&category=travel&per_page=3`
-    //               ) 
-    //           )
-    //       })
-    //   ).then(response => {
-    //     //   console.log(response)
-    //       response.forEach( (e,i) => {
-    //           this.state.citiesToDisplay[i].img = e.data.hits[0].largeImageURL
-    //       })
-          
-    //   })
-    //   .catch(err => console.log(err))
-        
     }
+
+  handleAdultFriendlyChange = () => {
+    this.setState((prevState) => ({
+      adultFriendly: !prevState.adultFriendly,
+    }));
+  };
+  handleWaterFrontChange = () => {
+    this.setState((prevState) => ({
+      waterFront: !prevState.waterFront,
+    }));
+  };
+  handleInStateChange = () => {
+    this.setState((prevState) => ({
+      inState: !prevState.inState,
+    }));
+  };
+//   handleUrbanButton = () => {
+//     //Want cities only if they have a population more than a certain number
+//     this.setState({ populationDivider: ">" });
+//   };
+//   handleRuralButton = () => {
+//     //Want cities only if they have a population less than a certain number
+//     this.setState({ populationDivider: "<" });
+//   };
+  handleSearchButton = async () => {
+    this.setState({ slideShow: false });
+    let zipCodeInfo = zipcodes.lookup(this.state.zipCode);
+    console.log(zipCodeInfo);
+
+    if (this.state.zipCode) {
+      await this.setState(
+        {
+          coordinates: [zipCodeInfo.longitude, zipCodeInfo.latitude],
+          rangeValueInMeters: this.state.rangeValue * 1609.34,
+        },
+        async () => {
+          console.log(this.state.coordinates);
+          await axios
+            .post(
+              "/api/filters",
+              {
+                actualLocation: this.state.coordinates,
+                distance: this.state.rangeValueInMeters,
+                adultOnly: this.state.adultFriendly,
+                waterFront: this.state.waterFront,
+                inState: this.state.inState,
+                winterSports: false,
+              },
+              {
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              }
+            )
+            .then((res) => {
+              this.setState({ citiesToDisplay: res.data }, () => {});
+            });
+        }
+      );
+    } else {
+      this.setState(
+        {
+          coordinates: [
+            this.props.coords.longitude,
+            this.props.coords.latitude,
+          ],
+          rangeValueInMeters: this.state.rangeValue * 1609.34,
+        },
+        async () => {
+          console.log(this.state.coordinates);
+          await axios
+            .post(
+              "/api/filters",
+              {
+                actualLocation: this.state.coordinates,
+                distance: this.state.rangeValueInMeters,
+                adultOnly: this.state.adultFriendly,
+                waterFront: this.state.waterFront,
+                inState: this.state.inState,
+                winterSports: false,
+              },
+              {
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              }
+            )
+            .then((res) => {
+              this.setState({ citiesToDisplay: res.data });
+            });
+        }
+      );
+    }
+  };
+
 
 
     render(){
         // console.log(this.state.coordinates)
         // console.log(this.props.coords)
         // console.log(this.state.zipCode)
-        console.log(this.state.citiesToDisplay)
+        // console.log(this.state.citiesToDisplay)
         
         
         return(
@@ -197,28 +222,46 @@ class Filter extends Component{
                         <button onClick={this.handleUrbanButton}>Urban</button>
                         <button onClick={this.handleRuralButton}>Rural</button>
                     </div> */}
-                    <div>
-
+                
+              </div>
+            {/* result component  */}
+                <div>
                     <button onClick={this.handleSearchButton} className='filter-search-button'>Search</button>
                     </div>
 
                 
-                </div>
-                {/* result component  */}
                 
-                {this.props.coords && ( 
-                    <Results
-                    coordinates={this.state.coordinates}
-                    citiesToDisplay={this.state.citiesToDisplay}
+                {/* result component  */}
+                    {this.state.slideShow ? (
+                <div id="default-destinations-slider">
+                    <SimpleSlider userId={this.props.user.user.user.user_id}defaultDestinations={this.state.defaultDestinations}
                     />
-                 ) }
-            </div>
+                </div>
+                ) : (
+                  <div id="results-comp" className="">
+                    <Results
+                      coordinates={this.state.coordinates}
+                      citiesToDisplay={this.state.citiesToDisplay}
+                    />
+                  </div>
+                )}             
+          </div>
         )
     }
+    
 }
-export default geolocated({
-    positionOptions: {
-        enableHighAccuracy: false,
-    },
-    userDecisionTimeout: 5000,
-  })(Filter);
+
+const mapStateToProps = reduxState => {
+    return {
+    user: reduxState.userReducer
+    }
+}
+
+export default connect(mapStateToProps)(Filter);
+
+// export default geolocated({
+//   positionOptions: {
+//     enableHighAccuracy: false,
+//   },
+//   userDecisionTimeout: 5000,
+// })(Filter);
