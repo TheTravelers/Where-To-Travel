@@ -33,14 +33,16 @@ const Profile = (props) => {
     }
 
     return (
-        <section >
+        <section className="profile-container">
             <div className='profile-header'>
                 <Header />
             </div>
             <div className='profile-back'>
-                <div className='profile-container'>
-
-                    <img className="profile-picture" src={props.user.user.user.profile_pic} alt={props.user.user.user.name} />
+                <div className='profile'>
+                    <div className="picFrame">
+                        <img className="profile-picture" src={props.user.user.user.profile_pic} alt={props.user.user.user.name} />
+                    </div>
+                    
                     {edit ? 
                     <div className='editor'>
                         <div>
@@ -60,9 +62,8 @@ const Profile = (props) => {
                         <button className='edit-button' onClick={() => setEdit(!edit)}>Edit</button>
                     </div>
                     }
-                </div>
-
-                
+                </div> 
+               
             </div>
             
         </section>
