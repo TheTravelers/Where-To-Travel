@@ -1,0 +1,44 @@
+@import '../../App.scss';
+
+.search-destination-single {
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid $darkBlue;
+    margin: 10px;
+    border-radius: 10%;
+    background-color: white;
+
+
+    img{
+        height:40vh;
+        width: auto;
+        width: 100%;
+    }
+
+
+    li{
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+        justify-content: left;
+
+
+        ul{
+        display: flex;
+        flex-direction: row;
+        align-items: left;
+        justify-content: left;
+        padding-right: 5px;
+
+        // .city-answer{
+        //     padding-left: 10px;
+        //     font-style:italic;
+        // }
+        }
+
+    }
+    .save-destinations-button{
+        width: 25vw;
+    }
+}

@@ -221,14 +221,14 @@ class Results extends Component {
     } else {
       return filterResults.map((e, i) => {
         return (
-          <div key={i}>
+          <div className="search-destination-single" key={i}>
             <div>
               <h2>{e.cityName}</h2>
               <h3>{e.state}</h3>
             </div>
             {e.img ? <img src={e.img} alt={e.img} /> : <h1>No image to display</h1>}
             <li>
-              <ul>Dinstance from you: {e.distance}</ul>
+              <ul>Distance from you: Approximately {Math.round(e.distance / 1609.34)} Miles</ul>
               <ul>
                 Near Waterfront: {e.kinds.includes("beach") ? "YES" : "NO"}
               </ul>
@@ -237,7 +237,7 @@ class Results extends Component {
               </ul>
               <ul>population is comming </ul>
             </li>
-            <button>Save</button>
+            <button className='save-destinations-button'>Save</button>
           </div>
         );
       });
