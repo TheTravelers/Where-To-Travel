@@ -40,7 +40,10 @@ const Profile = (props) => {
             <div className='profile-back'>
                 <div className='profile'>
                     <div className="picFrame">
-                        <img className="profile-picture" src={props.user.user.user.profile_pic} alt={props.user.user.user.name} />
+                    {props.user.user.user.profile_pic ?
+                    <img className="profile-picture" src={props.user.user.user.profile_pic} alt={props.user.user.user.name} /> 
+                    : '*Personalize your profile by adding a profile picture*'
+                    }
                     </div>
                     
                     {edit ? 
