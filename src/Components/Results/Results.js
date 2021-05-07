@@ -152,24 +152,37 @@ class Results extends Component {
 //     }
 //   }
 
-  addToUserList = (
-    cityName,
-    distance,
-    population,
-    waterFront,
-    adultFriendly
-  ) => {
-    axios
-      .post(`/userDestList/${this.props.user.user.user.user_id}`, {
-        cityName,
-        distance,
-        population,
-        waterFront,
-        adultFriendly,
-      })
-      .then((res) => {
-        this.props.updateSavedDestinations(res.data);
-      });
+  addToUserList = (val) => {
+    
+    // axios
+    //   .post(`/userDestList/${this.props.user.user.user.user_id}`, {
+    //     cityName,
+    //     distance,
+    //     population,
+    //     waterFront,
+    //     adultFriendly,
+    //   })
+    //   .then((res) => {
+    //     this.props.updateSavedDestinations(res.data);
+    //   });
+    const { cityName, kinds, img, stateShort } = val
+    console.log(kinds)
+    const adult_friendly = kinds.includes('adult')
+    const waterFront = kinds.includes('beach')
+    const family_friendly = kinds.includes('family')
+    axios.post(`/userDestList/${this.props.userId}`, {
+      city_name: cityName, 
+      population:0, 
+      waterfront:waterFront, 
+      adult_friendly: adult_friendly, 
+      family_friendly:family_friendly, 
+      city_img: img, 
+      state: stateShort
+  })
+  .then(res => {
+    console.log(res)
+  })
+  .catch(err => console.log(err))
   };
 
   notifySuccess = () => {
@@ -237,7 +250,9 @@ class Results extends Component {
               </ul>
               <ul>population is comming </ul>
             </li>
-            <button className='save-destinations-button'>Save</button>
+            <button className='save-destinations-button'
+              onClick = { () => this.addToUserList(e) }
+              >Save</button>
           </div>
         );
       });

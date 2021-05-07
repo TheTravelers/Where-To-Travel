@@ -159,8 +159,8 @@ class Auth extends Component {
         if(mode === "login"){
         return(
             <div className="auth-container">
-                <form className="login-container">
                     <h1>Where Should I Travel?</h1>
+                <form className="login-container">
                     <div className="inputs">
                         <label>Email:</label>
                         <input value={this.state.email} id="email" type="email" placeholder="email" onChange={e => this.handleEmailChange(e.target.value.toLowerCase())} />
@@ -183,9 +183,8 @@ class Auth extends Component {
         )} else {
             return(
                 <div className="auth-container">
-                    <form className="register-container">
                     <h1>Where Should I Travel?</h1>
-                    
+                    <form className="register-container">
                     <div className="inputs">
                         <label>Name:</label>
                         <input value={this.state.name} placeholder="name" onChange={e => this.handleNameChange(e.target.value)}/>
