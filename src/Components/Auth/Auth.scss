@@ -4,15 +4,20 @@
     height: 100vh;
     background-color: $lightBlue;
     background-image: linear-gradient($primaryColor, $lightBlue, $darkBlue);
+    h1 {
+        position: relative;
+        top: 10%;
+    }
 }
 .login-container, .register-container {
-    height: 90%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     position: relative;
-    top: 40px;
-
-    h1 {
-        margin-bottom: 60px;
-    }
+    top: -100px;
+    
 
     .inputs {
         display: flex;
@@ -29,7 +34,6 @@
         margin-top: 20px;
         padding-left: 10px;
         box-sizing: border-box;
-        // background-color: $primaryColor;
     }
 
     button {
@@ -62,14 +66,14 @@
     .toggleBtn {
         font-size: medium;
         font-weight: bold;
-        width: 50px;
+        width: 150px;
         border: none;
         height: 100%;
         background-color: transparent;
         margin-top: 20px;
         color: $primaryColor;
         color: black;
-        margin-left: 8px;
+        margin-left: 4px;
         text-decoration: underline;
     }
 }

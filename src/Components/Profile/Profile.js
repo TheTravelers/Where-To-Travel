@@ -16,7 +16,7 @@ const Profile = (props) => {
         gsap.from('.profile-header', {y: -600, opacity: 0, duration: .5})
         gsap.from('.profile-back', {y: 1000, opacity: 0, duration: .5})
         
-    })
+    }, [])
     function editName() {
         if(name !== ''){
             axios.put(`auth/register/name/${props.user.user.user.user_id}`, {name})
@@ -33,16 +33,19 @@ const Profile = (props) => {
     }
 
     return (
-        <section >
+        <section className="profile-container">
             <div className='profile-header'>
                 <Header />
             </div>
             <div className='profile-back'>
-                <div className='profile-container'>
+                <div className='profile'>
+                    <div className="picFrame">
                     {props.user.user.user.profile_pic ?
                     <img className="profile-picture" src={props.user.user.user.profile_pic} alt={props.user.user.user.name} /> 
                     : '*Personalize your profile by adding a profile picture*'
-                    }                   
+                    }
+                    </div>
+                    
                     {edit ? 
                     <div className='editor'>
                         <div>
@@ -62,9 +65,8 @@ const Profile = (props) => {
                         <button className='edit-button' onClick={() => setEdit(!edit)}>Edit</button>
                     </div>
                     }
-                </div>
-
-                
+                </div> 
+               
             </div>
             
         </section>

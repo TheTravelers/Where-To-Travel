@@ -1,9 +1,26 @@
 @import '../../App.scss';
 
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
+#loading{
+    padding: 0;
+    text-align: left;
+    display: flex;
+    justify-content:center;
+    align-items:initial;
+    height: 40vh;
+    width: 100vw;
+}
 svg{
     
-    transform: scale(0.5);
+    transform: scale(1);
+    display: absolute;
+    height: 70vh;
+    width:70vw;
 }
 
 #plane{

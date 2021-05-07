@@ -3,12 +3,12 @@ import './Loading.scss'
 
 function Loading(props) {
   return (
-    <div>
+    
       <div id = 'loading'>
         <svg
           width="3421"
           height="2241"
-          
+          viewBox="0 0 3421 2241"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -93,7 +93,7 @@ function Loading(props) {
           </g>
         </svg>
       </div>
-    </div>
+    
   );
 }
 
