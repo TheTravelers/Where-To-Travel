@@ -3,6 +3,7 @@ import React, { Component } from "react";
 
 // import Header from "../Header/Header";
 // import { updateSavedDestinations } from "../../redux/destinationReducer";
+import Loading from '../Loading/Loading'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Results.scss";
@@ -216,7 +217,7 @@ class Results extends Component {
     //     });
     //   }
 
-    return (<h1>Please Wait for your info</h1>)
+    return (<Loading/>)
     } else {
       return filterResults.map((e, i) => {
         return (
