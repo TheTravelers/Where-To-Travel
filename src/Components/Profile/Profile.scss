@@ -1,40 +1,57 @@
 @import "../../App.scss";
 
-section{
+.profile-container{
     background-color: $primaryColor;
     height: 100vh;
 }
 
+.profile-back {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $primaryColor;
+}
 
-.profile-container{
-    width: 90vw;
-    margin: 0 auto;
-    margin-top: 5vh;
-    margin-bottom: 5vh;
-    height: 80vh;
+.profile{
+    width: 90%;
+    height: 90%;
     border: 5px solid;
     background-color: $lightBlue;
-    border-radius: 5%;
+    background-image: linear-gradient( $lightBlue, $darkBlue);
+    border-radius: 20px;
     border-color: $darkBlue;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+
+    .picFrame {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 80%;
+        height: 50%;
+        overflow: hidden;
+        margin: 20px auto;
+        border-radius: 50%;
+        border: 3px black solid;
+    }
 
     img{
-        border-radius: 50%;
         height: auto;
-        width: 90%;
-        margin: 5%;
-        border: 25x solid $darkBlue;
+        width: 100%;
     }
 
     button {
         border-radius: 20%;
-        font-size: large;
-        
+        font-size: large;   
     }
 
     input{
         width: 90%;
         margin: 0 auto;
-        height: 25px;
+        height: 35px;
         text-align: center;
         margin-bottom: 10px;
 
@@ -42,13 +59,15 @@ section{
 
     h2 {
         font-size: xx-large;
+        margin-bottom: 10px;
     }
 
     .edit-button{
         background-color: $primaryColor;
         width: 100px;
-        height: 70px;
+        height: 50px;
         font-size: x-large;
+        margin-bottom: 20px;
     }
 
     .editor{
@@ -62,7 +81,7 @@ section{
             display: flex;
         flex-direction: column;
         justify-content: center;
-        margin-top: 30px;
+        margin-top: 10px;
 
         }
         button{
@@ -92,6 +111,20 @@ section{
         
     }
     
+}
+
+@media (min-width: 700px) {
+    .picFrame {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 10%;
+        height: 10%;
+        overflow: hidden;
+        margin: 20px auto;
+        border-radius: 50%;
+        border: 3px black solid;
+    }
 }
 
 
