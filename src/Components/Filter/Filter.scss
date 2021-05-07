@@ -1,7 +1,7 @@
 @import '../../App.scss';
 
 .slick-track{
-
+    margin-top: 10%;
     width: 100vw;
     height: 50vh;
 
@@ -24,6 +24,20 @@
             margin-bottom: 0px;
         }
     }
+}
+
+.default-destinations-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    button{
+        align-self: center;
+        margin-top: 20px;
+        
+    }
+
+
 }
 
 .filter-element{

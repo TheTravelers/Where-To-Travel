@@ -53,12 +53,12 @@ export default function SimpleSlider(props) {
   }
 
   return (
-    <div>
+    <div className='default-destinations-container'>
       {console.log(index)}
       {console.log(props.defaultDestinations, 'first props.dest')}
       
-      {/* {props.defaultDestinations[index].city_name} */}
-        <button onClick={() => addToList(index)}>Save {props.defaultDestinations[index] ? props.defaultDestinations[index].city_name : ''} To My List</button>      
+      {/* DO NOT MOVE THIS BUTTON, IT WILL BREAK */}
+      <button onClick={() => addToList(index)}>Save {props.defaultDestinations[index] ? props.defaultDestinations[index].city_name : ''} To My List</button>
 
       
       <Slider {...settings}>
@@ -70,6 +70,7 @@ export default function SimpleSlider(props) {
               <h3>{element.city_name}</h3>
               {/* <button onClick={(e) => addToList(e.target)}>+ My List</button> */}
               <img src={element.city_img} alt={element.city_name} />
+              
             </div>
           );
         })}
