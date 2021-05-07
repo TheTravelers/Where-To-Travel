@@ -124,40 +124,41 @@ class Filter extends Component{
             });
         }
       );
-    } else {
-      this.setState(
-        {
-          coordinates: [
-            this.props.coords.longitude,
-            this.props.coords.latitude,
-          ],
-          rangeValueInMeters: this.state.rangeValue * 1609.34,
-        },
-        async () => {
-          console.log(this.state.coordinates);
-          await axios
-            .post(
-              "/api/filters",
-              {
-                actualLocation: this.state.coordinates,
-                distance: this.state.rangeValueInMeters,
-                adultOnly: this.state.adultFriendly,
-                waterFront: this.state.waterFront,
-                inState: this.state.inState,
-                winterSports: false,
-              },
-              {
-                headers: {
-                  "Content-Type": "application/json",
-                },
-              }
-            )
-            .then((res) => {
-              this.setState({ citiesToDisplay: res.data });
-            });
-        }
-      );
     }
+    // } else {
+    //   this.setState(
+    //     {
+    //       coordinates: [
+    //         this.props.coords.longitude,
+    //         this.props.coords.latitude,
+    //       ],
+    //       rangeValueInMeters: this.state.rangeValue * 1609.34,
+    //     },
+    //     async () => {
+    //       console.log(this.state.coordinates);
+    //       await axios
+    //         .post(
+    //           "/api/filters",
+    //           {
+    //             actualLocation: this.state.coordinates,
+    //             distance: this.state.rangeValueInMeters,
+    //             adultOnly: this.state.adultFriendly,
+    //             waterFront: this.state.waterFront,
+    //             inState: this.state.inState,
+    //             winterSports: false,
+    //           },
+    //           {
+    //             headers: {
+    //               "Content-Type": "application/json",
+    //             },
+    //           }
+    //         )
+    //         .then((res) => {
+    //           this.setState({ citiesToDisplay: res.data });
+    //         });
+    //     }
+    //   );
+    // }
   };
 
 
@@ -242,6 +243,7 @@ class Filter extends Component{
                   <div id="results-comp" className="">
                     <Results
                       coordinates={this.state.coordinates}
+                      userId={this.props.user.user.user.user_id}
                       citiesToDisplay={this.state.citiesToDisplay}
                     />
                   </div>
