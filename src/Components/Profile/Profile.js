@@ -39,8 +39,10 @@ const Profile = (props) => {
             </div>
             <div className='profile-back'>
                 <div className='profile-container'>
-
-                    <img className="profile-picture" src={props.user.user.user.profile_pic} alt={props.user.user.user.name} />
+                    {props.user.user.user.profile_pic ?
+                    <img className="profile-picture" src={props.user.user.user.profile_pic} alt={props.user.user.user.name} /> 
+                    : '*Personalize your profile by adding a profile picture*'
+                    }                   
                     {edit ? 
                     <div className='editor'>
                         <div>
