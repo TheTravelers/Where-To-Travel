@@ -36,6 +36,7 @@ class Auth extends Component {
     }
     
     login = () => {
+        
         if (this.loginValidation()) {
             axios.post('/auth/login', this.state)
             .then(res => {
@@ -173,7 +174,7 @@ class Auth extends Component {
                     </div> 
                     <div>
                         <span>Don't have an account?</span>
-                        <button className="toggleBtn" name='register' onClick={this.handleMode} disabled={mode === 'register'}>Register</button>
+                        <button className="toggleBtn" name='register' onClick={this.handleMode} disabled={mode === 'register'}>Register for free</button>
                         <button className="other" name='login' onClick={this.handleMode} disabled={mode === 'login'} >Login</button>      
                     </div>
                 </form>
