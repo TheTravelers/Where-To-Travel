@@ -19,11 +19,10 @@
 .profile{
     width: 80%;
     height: 90%;
-    border: 5px solid;
+    border: 3px solid black;
     background: linear-gradient($lightBlue, $darkBlue);
     background-color: white;
-    border-radius: 5%;
-    border-color: $darkBlue;
+    border-radius: 25px;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -33,8 +32,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 80%;
-        height: 50%;
+        width: 70%;
+        height: 40%;
         overflow: hidden;
         margin: 20px auto;
         border-radius: 50%;
@@ -121,8 +120,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 60%;
-            height: 60%;
+            width: 70%;
+            height: 50%;
             overflow: hidden;
             margin: 20px auto;
             border-radius: 50%;
@@ -142,7 +141,7 @@
             justify-content: center;
             align-items: center;
             width: 50%;
-            height: 60%;
+            height: 50%;
             overflow: hidden;
             margin: 20px auto;
             border-radius: 50%;
