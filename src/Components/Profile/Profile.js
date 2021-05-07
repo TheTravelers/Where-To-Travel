@@ -16,7 +16,7 @@ const Profile = (props) => {
         gsap.from('.profile-header', {y: -600, opacity: 0, duration: .5})
         gsap.from('.profile-back', {y: 1000, opacity: 0, duration: .5})
         
-    })
+    }, [])
     function editName() {
         if(name !== ''){
             axios.put(`auth/register/name/${props.user.user.user.user_id}`, {name})
