@@ -240,10 +240,12 @@ class Results extends Component {
               <h3>{e.state}</h3>
             </div>
             {e.img ? <img src={e.img} alt={e.img} /> : <h1>No image to display</h1>}
+            <div className='under-image'>
             <li>
               <ul>Distance from you: Approximately {Math.round(e.distance / 1609.34)} Miles</ul>
               <ul>
-                Near Waterfront: {e.kinds.includes("beach") ? "YES" : "NO"}
+                Near Waterfront: 
+                <span className="checkbox-answers">{e.kinds.includes("beach") ? "YES" : "NO"}</span>
               </ul>
               <ul>
                 Adult Friendly: {e.kinds.includes("adult") ? "YES" : "NO"}
@@ -253,6 +255,7 @@ class Results extends Component {
             <button className='save-destinations-button'
               onClick = { () => this.addToUserList(e) }
               >Save</button>
+              </div>
           </div>
         );
       });
