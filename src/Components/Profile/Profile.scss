@@ -17,9 +17,8 @@
     width: 90%;
     height: 90%;
     border: 5px solid;
-    background-color: $lightBlue;
-    background-image: linear-gradient( $lightBlue, $darkBlue);
-    border-radius: 20px;
+    background: linear-gradient($lightBlue, $darkBlue);
+    border-radius: 5%;
     border-color: $darkBlue;
     display: flex;
     justify-content: space-around;
