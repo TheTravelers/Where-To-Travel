@@ -90,7 +90,7 @@ class Filter extends Component{
 //     this.setState({ populationDivider: "<" });
 //   };
   handleSearchButton = async () => {
-    this.setState({ slideShow: false });
+    this.setState({ slideShow: false,  });
     let zipCodeInfo = zipcodes.lookup(this.state.zipCode);
     console.log(zipCodeInfo);
 
