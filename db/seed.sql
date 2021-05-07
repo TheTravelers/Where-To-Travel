@@ -2,7 +2,8 @@ create table users (
 user_id serial primary key,
 email varchar(255),
 hash text,
-name varchar(55)
+name varchar(55),
+profile_pic text
 )
 
 create table user_filter(
@@ -25,7 +26,9 @@ city_name varchar(255),
 population bigint, 
 waterfront boolean,
 adult_friendly boolean,
-family_friendly boolean
+family_friendly boolean,
+city_img text,
+state char(2)
 )
 
 create table default_destinations (
