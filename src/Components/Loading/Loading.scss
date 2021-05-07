@@ -1,0 +1,49 @@
+@import '../../App.scss';
+
+
+svg{
+    
+    transform: scale(0.5);
+}
+
+#plane{
+    animation: planeRotate 4s infinite linear reverse ;
+    transform-origin: center;
+}
+
+@keyframes planeRotate {
+    from {
+        transform: rotateZ(0deg);
+    }
+    to{
+        transform: rotateZ(360deg);
+    }
+}
+#cloud1,#cloud3{
+    background-color:red;
+    animation: clouds 4s infinite alternate
+}
+
+@keyframes clouds {
+    from{
+        transform: translateX(0%);
+    } 
+    to {
+        transform: translateX(30%);
+    }
+}
+
+#cloud2,
+#cloud4{
+    background-color:red;
+    animation: clouds2 4.5s infinite alternate
+}
+
+@keyframes clouds2 {
+    from{
+        transform: translateX(0%);
+    } 
+    to {
+        transform: translateX(-30%)
+    }
+}
