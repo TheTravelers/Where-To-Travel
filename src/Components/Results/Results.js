@@ -235,11 +235,13 @@ class Results extends Component {
       return filterResults.map((e, i) => {
         return (
           <div className="search-destination-single" key={i}>
-            <div>
+            <div className="city-header">
               <h2>{e.cityName}</h2>
               <h3>{e.state}</h3>
             </div>
+            <div className='image-container'>
             {e.img ? <img src={e.img} alt={e.img} /> : <h1>No image to display</h1>}
+            </div>
             <div className='under-image'>
             <li>
               <ul>Distance from you: Approximately {Math.round(e.distance / 1609.34)} Miles</ul>

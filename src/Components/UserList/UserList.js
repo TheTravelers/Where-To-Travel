@@ -27,19 +27,12 @@ class UserList extends Component{
         .then(res => {
             // console.log(res.data, 'res data')
             this.props.getSavedDestinations(res.data)
-            
-            
-
         })
-        
-        
-
-        //
     }
 
-    componentDidMount(){
-        gsap.from('.userlist-container', {x: 2000, opacity: 0, duration: .5})
-    }
+    // componentDidMount(){
+    //     gsap.from('.userlist-container', {x: 2000, opacity: 0, duration: .5})
+    // }
 
     showEmailForm = () => {
         // Get the snackbar DIV
@@ -146,22 +139,28 @@ class UserList extends Component{
             <div  className="userlist-container">
                 <Header />
                 <ToastContainer />
-                <div>
+                <div className="container">
 
                     <h1 className='user-list-title'>{this.props.user.user.user.name}'s Saved Destinations</h1>
                     <div className='user-destination-container'>
                     {this.props.dest.userSavedDestinations.map((element, index) => {
                         return (
                             <div className='user-destination-single' key={index}>
-                                <h2 className='city-name-row'>
-                                    <span>{element.city_name}, {element.state}</span>
+                                <div className='city-name-row'>
+                                    <h2>{element.city_name}, {element.state}</h2>
+                                    
                                     <button className="remove-from-share-list" 
                                     // onClick={() => this.removeFromList(element.saved_dest_id)}
                                     onClick={() => this.showConfirmation(element.saved_dest_id)}
-                                    >-</button>
+                                    >-<span className="tooltiptext">Remove from list</span></button>
+                                    
                                     {/* this.removeFromList(element) */}
-                                </h2>
-                                <img src={element.city_img} alt={element.city_name}/>
+                                    
+                                </div>
+                                <div className='image-container'>
+                                    {element.city_img ? <img src={element.city_img} alt={element.city_name} /> : <h1>No image to display</h1>}
+                                    </div>
+                                <div className='under-image'>
                                 <li>
                                     <ul>Area:
                                         <span className='city-answer'>
@@ -186,6 +185,7 @@ class UserList extends Component{
                                         </ul>
                                 
                                 </li>
+                                </div>
                                 {/* <ToastContainer /> */}
                             </div>
                         )
