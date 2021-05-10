@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
+import './SimpleSlider.scss'
 
 export default function SimpleSlider(props) {
   const [index , setIndex] = useState(0)
