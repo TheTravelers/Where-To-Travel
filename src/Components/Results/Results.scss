@@ -1,0 +1,53 @@
+@import '../../App.scss';
+
+
+
+.search-destination-single {
+    height: 70vh;
+    width: 350px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid $darkBlue;
+    margin: 10px;
+    border-radius: 10%;
+    background-color: white;
+
+
+    img{
+        height:40vh;
+        width: auto;
+        width: 100%;
+    }
+    .under-image{
+        position: absolute;
+        bottom: 10px;
+    }
+
+    li{
+        
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+        justify-content: left;
+
+
+        ul{
+        display: flex;
+        flex-direction: row;
+        align-items: left;
+        justify-content: left;
+        padding-left: 5px;
+
+        .checkbox-answers{
+            padding-left: 10px;
+            font-style:italic;
+        }
+        }
+
+    }
+    .save-destinations-button{
+        width: 25%;
+        margin-left: 10px;
+    }
+}

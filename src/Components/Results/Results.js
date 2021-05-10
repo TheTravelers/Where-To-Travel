@@ -234,25 +234,28 @@ class Results extends Component {
     } else {
       return filterResults.map((e, i) => {
         return (
-          <div key={i}>
+          <div className="search-destination-single" key={i}>
             <div>
               <h2>{e.cityName}</h2>
               <h3>{e.state}</h3>
             </div>
             {e.img ? <img src={e.img} alt={e.img} /> : <h1>No image to display</h1>}
+            <div className='under-image'>
             <li>
-              <ul>Dinstance from you: {e.distance}</ul>
+              <ul>Distance from you: Approximately {Math.round(e.distance / 1609.34)} Miles</ul>
               <ul>
-                Near Waterfront: {e.kinds.includes("beach") ? "YES" : "NO"}
+                Near Waterfront: 
+                <span className="checkbox-answers">{e.kinds.includes("beach") ? "YES" : "NO"}</span>
               </ul>
               <ul>
                 Adult Friendly: {e.kinds.includes("adult") ? "YES" : "NO"}
               </ul>
               <ul>population is comming </ul>
             </li>
-            <button 
+            <button className='save-destinations-button'
               onClick = { () => this.addToUserList(e) }
               >Save</button>
+              </div>
           </div>
         );
       });
