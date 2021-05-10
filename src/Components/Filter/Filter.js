@@ -164,12 +164,6 @@ class Filter extends Component{
 
 
     render(){
-        // console.log(this.state.coordinates)
-        // console.log(this.props.coords)
-        // console.log(this.state.zipCode)
-        // console.log(this.state.citiesToDisplay)
-        
-        
         return(
             <div className='filter-component'>
                 <Header />
