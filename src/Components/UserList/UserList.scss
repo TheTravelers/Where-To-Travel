@@ -1,18 +1,23 @@
 @import '../../App.scss';
 
 .userlist-container {
-    background: linear-gradient($primaryColor, #FDEDDC);
-    // background-color: lighten($color: #FBE0C4, $amount: 5);
+    background: linear-gradient( #FDEDDC, $primaryColor,);
+    position: relative;
 }
 
-
-.user-destinations-container {
+.user-destinations-container, .container {
+    width: 100%;
     margin-bottom: 0;
     background-color: $primaryColor;
-    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
 };
 
 .user-list-title{
+    margin-top: 10px;
     font-size: x-large;
     content: contain;
 }
@@ -22,23 +27,36 @@
     font-size: medium;
     bottom: 0;
     right: 0;
-    width: 30%;
+    width: 200px;
     height: 80px;
     color: white;
-    background-color: $darkBlue;
+    background: linear-gradient(to right, $middleBlue, $darkBlue, $middleBlue);
     border-top-left-radius: 50%;
     border-bottom-left-radius: 50%;
     border-top-right-radius: 50%;
+    cursor: pointer;
+    z-index: 12;
+
+}
+.tooltiptext{
+    display: none;
 }
 
 .city-name-row {
+    height: 70px;
+    position: relative;
     display: flex;
-    justify-content: space-between;
-    padding-left: 10px;
-    padding-right: 10px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 
+    h2 {
+        width: 85%;
+    }
+    
     .remove-from-share-list {
-        position: relative;
+        position: absolute;
+        right: 10px;
         float: right;
         border-radius: 50%;
         height: 30px;
@@ -46,9 +64,11 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: large;
-        
+        font-size: x-large;
+        cursor: pointer;
     }
+
+    
 }
 
 #email-form-comp.show {
@@ -64,6 +84,7 @@
     border-radius: 10%;
     border: 2px solid;
     background-color: $lightBlue;
+
 
     .text-box{
         position: relative;
@@ -83,7 +104,6 @@
         align-items: center;
         margin: 0 auto;
         border-radius: 10%;
-
         background-color: $lightBlue;
 
         .email-message{
@@ -108,8 +128,6 @@
         
     }
 
-    
-
     .email-button-section{
         position: relative;
         display: flex;
@@ -122,6 +140,7 @@
             width: 40%;
             height: 50px;
             margin-bottom: 0;
+            cursor: pointer;
         }
     }
     
@@ -166,24 +185,36 @@
     }
 }
 
-
-
-
-
 .user-destination-single {
+    
+    height: 600px;
+    width: 350px;
+    position: relative;
     display: flex;
     flex-direction: column;
     border: 2px solid $darkBlue;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-bottom: 10px;
+    margin: 10px;
     border-radius: 10%;
     background-color: white;
 
-
-    img{
-        height:auto;
+    .image-container {
+        height: 400px;
         width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+
+        img { 
+            height:100%;
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+    .under-image{
+        position: absolute;
+        bottom: 20px;
     }
 
 
@@ -199,6 +230,7 @@
         flex-direction: row;
         align-items: left;
         justify-content: left;
+        padding-left: 15px;
 
         .city-answer{
             padding-left: 10px;
@@ -207,4 +239,51 @@
         }
 
     }
+}
+
+@media(min-width: 1024px){
+    .userlist-container, .container {
+        width: 100%;
+    .user-destination-container{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: space-evenly;
+        width: 100vw;
+    }
+}
+/* Tooltip text */
+.remove-from-share-list .tooltiptext {
+    display: flex;
+    visibility: hidden;
+    width: 120px;
+    background: linear-gradient(to right, $darkBlue, $middleBlue, $darkBlue);
+    color: white;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    left: 130%;
+    font-size: large;
+   
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+  }
+
+  .remove-from-share-list .tooltiptext::after {
+      content: "";
+      position: absolute;
+      top: 45%;
+      right: 100%;
+      margin-left: -5px;
+      border-width: 5px; 
+      border-style: solid;
+      border-color: transparent $darkBlue transparent transparent;
+  }
+  
+  /* Show the tooltip text when you mouse over the tooltip container */
+  .remove-from-share-list:hover .tooltiptext {
+    visibility: visible;
+  }
 }

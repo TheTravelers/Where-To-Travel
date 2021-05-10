@@ -1,7 +1,8 @@
 @import '../../App.scss';
 
 #results-comp{
-    background-color: $primaryColor;
+    height: 100%;
+    background: linear-gradient(#FDEDDC,$primaryColor);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -36,7 +37,17 @@
     border-radius: 30%;
 }
 
+#default-destinations-slider {
+    height: 75vh;
+    background: linear-gradient( #FDEDDC, $primaryColor,) ;
+}
+
 @media (min-width:1023px){
+
+    // #default-destinations-slider {
+    //     height: 80vh;
+    //     background: linear-gradient( #FDEDDC, $primaryColor,) ;
+    // }
 
     .filter-element{
         display: flex;
@@ -56,7 +67,7 @@
         margin-right: 5%;
     }
 
-    #results-comp{
+    .results-comp{
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;

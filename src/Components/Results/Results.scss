@@ -1,9 +1,8 @@
 @import '../../App.scss';
 
 
-
 .search-destination-single {
-    height: 70vh;
+    height: 600px;
     width: 350px;
     position: relative;
     display: flex;
@@ -13,11 +12,28 @@
     border-radius: 10%;
     background-color: white;
 
+    .city-header {
+        height: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
 
-    img{
-        height:40vh;
-        width: auto;
+    .image-container {
+        height: 400px;
         width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+
+        img{
+            height:100%;
+            width: 100%;
+            object-fit: cover;
+        }
     }
     .under-image{
         position: absolute;
