@@ -1,11 +1,12 @@
 @import '../../App.scss';
 
 .userlist-container {
-    background: linear-gradient($primaryColor, #FDEDDC);
+    background: linear-gradient( #FDEDDC, $primaryColor,);
     position: relative;
 }
 
 .user-destinations-container, .container {
+    width: 100%;
     margin-bottom: 0;
     background-color: $primaryColor;
     display: flex;
@@ -26,15 +27,19 @@
     font-size: medium;
     bottom: 0;
     right: 0;
-    width: 30%;
+    width: 200px;
     height: 80px;
     color: white;
-    background-color: $darkBlue;
+    background: linear-gradient(to right, $middleBlue, $darkBlue, $middleBlue);
     border-top-left-radius: 50%;
     border-bottom-left-radius: 50%;
     border-top-right-radius: 50%;
     cursor: pointer;
+    z-index: 12;
 
+}
+.tooltiptext{
+    display: none;
 }
 
 .city-name-row {
@@ -62,38 +67,7 @@
         font-size: x-large;
         cursor: pointer;
     }
-/* Tooltip text */
-.remove-from-share-list .tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    background: linear-gradient(to right, $darkBlue, $middleBlue, $darkBlue);
-    color: white;
-    text-align: center;
-    padding: 5px 0;
-    border-radius: 6px;
-    left: 130%;
-    font-size: large;
-   
-    /* Position the tooltip text - see examples below! */
-    position: absolute;
-    z-index: 1;
-  }
 
-  .remove-from-share-list .tooltiptext::after {
-      content: "";
-      position: absolute;
-      top: 45%;
-      right: 100%;
-      margin-left: -5px;
-      border-width: 5px; 
-      border-style: solid;
-      border-color: transparent $darkBlue transparent transparent;
-  }
-  
-  /* Show the tooltip text when you mouse over the tooltip container */
-  .remove-from-share-list:hover .tooltiptext {
-    visibility: visible;
-  }
     
 }
 
@@ -265,4 +239,51 @@
         }
 
     }
+}
+
+@media(min-width: 1024px){
+    .userlist-container, .container {
+        width: 100%;
+    .user-destination-container{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: space-evenly;
+        width: 100vw;
+    }
+}
+/* Tooltip text */
+.remove-from-share-list .tooltiptext {
+    display: flex;
+    visibility: hidden;
+    width: 120px;
+    background: linear-gradient(to right, $darkBlue, $middleBlue, $darkBlue);
+    color: white;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    left: 130%;
+    font-size: large;
+   
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+  }
+
+  .remove-from-share-list .tooltiptext::after {
+      content: "";
+      position: absolute;
+      top: 45%;
+      right: 100%;
+      margin-left: -5px;
+      border-width: 5px; 
+      border-style: solid;
+      border-color: transparent $darkBlue transparent transparent;
+  }
+  
+  /* Show the tooltip text when you mouse over the tooltip container */
+  .remove-from-share-list:hover .tooltiptext {
+    visibility: visible;
+  }
 }

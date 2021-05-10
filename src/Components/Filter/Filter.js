@@ -34,8 +34,8 @@ class Filter extends Component{
     
 
     componentDidMount () {
-        gsap.from('.filter-component', {y: -500, opacity: 0, duration: .5}
-            )
+        //  gsap.from('.filter-component', {y: -500, opacity: 0, duration: .5})
+        
         axios.get("/api/defaultDestinations")
         .then((response) => {
             this.setState({ defaultDestinations: response.data });
@@ -164,12 +164,6 @@ class Filter extends Component{
 
 
     render(){
-        // console.log(this.state.coordinates)
-        // console.log(this.props.coords)
-        // console.log(this.state.zipCode)
-        // console.log(this.state.citiesToDisplay)
-        
-        
         return(
             <div className='filter-component'>
                 <Header />

@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
+import './SimpleSlider.scss'
 
 export default function SimpleSlider(props) {
   const [index , setIndex] = useState(0)
@@ -27,10 +28,10 @@ export default function SimpleSlider(props) {
   };
 
 
-  function addedToast() {
-    toast.success("Destination removed from your list", {
+  function addedToast(val) {
+    toast.success(`${props.defaultDestinations[val].city_name} added to your list`, {
       position: "top-center",
-      autoClose: 2000,
+      autoClose: 3000,
       closeOnClick: true,
     });
   }
@@ -48,17 +49,18 @@ export default function SimpleSlider(props) {
     })
     .then(res => {
       console.log(res)
+      addedToast(val)
     })
     .catch(err => console.log(err))
   }
 
   return (
-    <div>
+    <div className='default-destinations-container'>
       {console.log(index)}
       {console.log(props.defaultDestinations, 'first props.dest')}
       
-      {/* {props.defaultDestinations[index].city_name} */}
-        <button onClick={() => addToList(index)}>Save {props.defaultDestinations[index] ? props.defaultDestinations[index].city_name : ''} To My List</button>      
+      {/* DO NOT MOVE THIS BUTTON, IT WILL BREAK */}
+      <button onClick={() => addToList(index)} >Save {props.defaultDestinations[index] ? props.defaultDestinations[index].city_name : ''} To My List</button>
 
       
       <Slider {...settings}>
@@ -70,6 +72,7 @@ export default function SimpleSlider(props) {
               <h3>{element.city_name}</h3>
               {/* <button onClick={(e) => addToList(e.target)}>+ My List</button> */}
               <img src={element.city_img} alt={element.city_name} />
+              
             </div>
           );
         })}

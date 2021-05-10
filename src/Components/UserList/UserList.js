@@ -30,9 +30,10 @@ class UserList extends Component{
         })
     }
 
-    // componentDidMount(){
-    //     gsap.from('.userlist-container', {x: 2000, opacity: 0, duration: .5})
-    // }
+    componentDidMount(){
+        gsap.from('.container', {x: 2000, opacity: 0, duration: .5})
+        gsap.from('.header', {x: -2000, opacity: 0, duration: .5})
+    }
 
     showEmailForm = () => {
         // Get the snackbar DIV
@@ -134,64 +135,58 @@ class UserList extends Component{
                 </header>
               </section>
             );
-          }
-        return(
-            <div  className="userlist-container">
-                <Header />
+          } return (
+            <div  className="userlist-container">  
+                <div className='header'>
+                    <Header />
+                </div>
                 <ToastContainer />
+                <button className='user-list-share-button' onClick={this.showEmailForm}>SHARE LIST</button>
                 <div className="container">
-
                     <h1 className='user-list-title'>{this.props.user.user.user.name}'s Saved Destinations</h1>
                     <div className='user-destination-container'>
-                    {this.props.dest.userSavedDestinations.map((element, index) => {
-                        return (
-                            <div className='user-destination-single' key={index}>
-                                <div className='city-name-row'>
-                                    <h2>{element.city_name}, {element.state}</h2>
-                                    
-                                    <button className="remove-from-share-list" 
-                                    // onClick={() => this.removeFromList(element.saved_dest_id)}
-                                    onClick={() => this.showConfirmation(element.saved_dest_id)}
-                                    >-<span className="tooltiptext">Remove from list</span></button>
-                                    
-                                    {/* this.removeFromList(element) */}
-                                    
-                                </div>
-                                <div className='image-container'>
-                                    {element.city_img ? <img src={element.city_img} alt={element.city_name} /> : <h1>No image to display</h1>}
+                        {this.props.dest.userSavedDestinations.map((element, index) => {
+                            return (
+                                <div className='user-destination-single' key={index}>
+                                    <div className='city-name-row'>
+                                        <h2>{element.city_name}, {element.state}</h2>                                 
+                                        <button className="remove-from-share-list" 
+                                        // onClick={() => this.removeFromList(element.saved_dest_id)}
+                                        onClick={() => this.showConfirmation(element.saved_dest_id)}>-<span className="tooltiptext">Remove from list</span></button> 
+                                        {/* this.removeFromList(element) */}  
                                     </div>
-                                <div className='under-image'>
-                                <li>
-                                    <ul>Area:
-                                        <span className='city-answer'>
-                                            {element.population > 20000 ? 'Urban' : 'Rural'}
-                                        </span>
-                                    </ul>
-                                    <ul>Near Waterfront: 
-                                        <span className='city-answer'>
-                                            {element.waterfront === true ? 'Yes' : 'No'}
-                                        </span>
-                                    </ul>
-                                    <ul>Adult Activities Nearby: 
-                                        <span className='city-answer'>
-                                            {element.adult_friendly === true ? 'Yes' : 'No'}
-                                        </span>
-                                        </ul>
-                                    <ul>Family Activities Nearby: 
-                                        <span className='city-answer'>
-                                            
-                                            {element.family_friendly === true ? 'Yes' : 'No'}
-                                        </span>
-                                        </ul>
-                                
-                                </li>
+                                    <div className='image-container'>
+                                        {element.city_img ? <img src={element.city_img} alt={element.city_name} /> : <h1>No image to display</h1>}
+                                    </div>
+                                    <div className='under-image'>
+                                        <li>
+                                            <ul>Area:
+                                                <span className='city-answer'>
+                                                    {element.population > 20000 ? 'Urban' : 'Rural'}
+                                                </span>
+                                            </ul>
+                                            <ul>Near Waterfront: 
+                                                <span className='city-answer'>
+                                                    {element.waterfront === true ? 'Yes' : 'No'}
+                                                </span>
+                                            </ul>
+                                            <ul>Adult Activities Nearby: 
+                                                <span className='city-answer'>
+                                                    {element.adult_friendly === true ? 'Yes' : 'No'}
+                                                </span>
+                                            </ul>
+                                            <ul>Family Activities Nearby: 
+                                                <span className='city-answer'> 
+                                                    {element.family_friendly === true ? 'Yes' : 'No'}
+                                                </span>
+                                            </ul> 
+                                        </li>
+                                    </div>
                                 </div>
-                                {/* <ToastContainer /> */}
-                            </div>
-                        )
+                            )
                     })}
+                </div>
                     </div>
-                    <button className='user-list-share-button' onClick={this.showEmailForm}>SHARE LIST</button>
                     <div id='email-form-comp' className=''>
                         <div className='email-message-container'>
                             
@@ -207,8 +202,7 @@ class UserList extends Component{
                         <div className='email-button-section'>
                             <button className='email-button' onClick={this.hideEmailForm}>CANCEL</button>
                             <button className='email-button' onClick={e => this.shareList(e)}>SEND</button>
-                        </div>
-                        
+                        </div>      
                     </div>
                     <div id='remove-confirmation' className=''>
                         <p>Remove this destination from your saved list?</p>
@@ -216,8 +210,7 @@ class UserList extends Component{
                             <button onClick={this.removeFromList}>Yes</button>
                             <button onClick={this.hideConfirmation}>No</button>
                         </div>
-                    </div>
-                </div>
+                    </div> 
             </div>
         )
     }

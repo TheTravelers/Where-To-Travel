@@ -4,9 +4,11 @@ import React, { Component } from "react";
 // import Header from "../Header/Header";
 // import { updateSavedDestinations } from "../../redux/destinationReducer";
 import Loading from '../Loading/Loading'
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer, toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Results.scss";
+
+
 
 class Results extends Component {
   constructor(props) {
@@ -21,20 +23,20 @@ class Results extends Component {
   componentDidUpdate(prevProps) {
     //   console.log(this.props.citiesToDisplay)
     //   console.log(this.props.coordinates)
-    console.log(this.props.citiesToDisplay);
+    // console.log(this.props.citiesToDisplay);
     if (
       this.props.citiesToDisplay &&
       JSON.stringify(prevProps.citiesToDisplay) !==
         JSON.stringify(this.props.citiesToDisplay)
     ) {
-      console.log("first hit");
+      // console.log("first hit");
       if (this.props.citiesToDisplay.length <= 10) {
-        console.log("minus 10");
+        // console.log("minus 10");
         this.setState({ filterResults: this.props.citiesToDisplay }, () =>
           makeRequest()
         );
       } else {
-        console.log("more than 10");
+        // console.log("more than 10");
         const citiesFilter = this.props.citiesToDisplay.slice(0, 10);
         this.setState({ filterResults: citiesFilter }, () => makeRequest());
       }
@@ -53,11 +55,11 @@ class Results extends Component {
             })
           )
           .then((response) => {
-            console.log(this.state.filterResults);
+            // console.log(this.state.filterResults);
             response.forEach((e, i) => {
-              console.log(e.data.hits);
+              // console.log(e.data.hits);
               if (e.data.hits[0]) {
-                console.log(e.data.hits[0]);
+                // console.log(e.data.hits[0]);
 
                 // this.state.filterResults[i].img = e.data.hits[0].largeImageURL;
                 let stateHolder = [...this.state.filterResults];
@@ -166,7 +168,7 @@ class Results extends Component {
     //     this.props.updateSavedDestinations(res.data);
     //   });
     const { cityName, kinds, img, stateShort } = val
-    console.log(kinds)
+    // console.log(kinds)
     const adult_friendly = kinds.includes('adult')
     const waterFront = kinds.includes('beach')
     const family_friendly = kinds.includes('family')
@@ -180,24 +182,26 @@ class Results extends Component {
       state: stateShort
   })
   .then(res => {
-    console.log(res)
+    // console.log(res)
+    this.addedToast(cityName)
   })
   .catch(err => console.log(err))
   };
 
-  notifySuccess = () => {
-    toast.success("Destination added to your list", {
+  addedToast(cityName) {
+    // console.log('Success TOAST')
+    toast.success(`${cityName} added to your list`, {
       position: "top-center",
-      autoClose: 4000,
+      autoClose: 3000,
       closeOnClick: true,
     });
   };
   //  need to render this somewhere <ToastContainer />
 
   render() {
-    console.log(this.props.coordinates);
-    console.log(this.state.results);
-    console.log(this.state.filterResults.length, 'results length');
+    // console.log(this.props.coordinates);
+    // console.log(this.state.results);
+    // console.log(this.state.filterResults.length, 'results length');
     let { results, filterResults } = this.state;
 
     if (filterResults.length === 0) {
@@ -232,35 +236,40 @@ class Results extends Component {
 
     return (<Loading/>)
     } else {
-      return filterResults.map((e, i) => {
-        return (
-          <div className="search-destination-single" key={i}>
-            <div className="city-header">
-              <h2>{e.cityName}</h2>
-              <h3>{e.state}</h3>
-            </div>
-            <div className='image-container'>
-            {e.img ? <img src={e.img} alt={e.img} /> : <h1>No image to display</h1>}
-            </div>
-            <div className='under-image'>
-            <li>
-              <ul>Distance from you: Approximately {Math.round(e.distance / 1609.34)} Miles</ul>
-              <ul>
-                Near Waterfront: 
-                <span className="checkbox-answers">{e.kinds.includes("beach") ? "YES" : "NO"}</span>
-              </ul>
-              <ul>
-                Adult Friendly: {e.kinds.includes("adult") ? "YES" : "NO"}
-              </ul>
-              <ul>population is comming </ul>
-            </li>
-            <button className='save-destinations-button'
-              onClick = { () => this.addToUserList(e) }
-              >Save</button>
+      return (
+        <div>
+          <ToastContainer/>
+        <div className="results-comp">
+          {filterResults.map((e, i) => {
+            return (
+            <div className="search-destination-single" key={i}>
+              <div className="city-header">
+                <h2>{e.cityName}</h2>
+                <h3>{e.state}</h3>
               </div>
-          </div>
-        );
-      });
+              <div className='image-container'>
+                {e.img ? <img src={e.img} alt={e.img} /> : <h1>No image to display</h1>}
+              </div>
+              <div className='under-image'>
+                <li>
+                  <ul>Distance from you: Approximately {Math.round(e.distance / 1609.34)} Miles</ul>
+                  <ul>
+                    Near Waterfront: 
+                    <span className="checkbox-answers">{e.kinds.includes("beach") ? "YES" : "NO"}</span>
+                  </ul>
+                  <ul>
+                    Adult Friendly: {e.kinds.includes("adult") ? "YES" : "NO"}
+                  </ul>
+                  <ul>population is comming </ul>
+                </li>
+                <button className='save-destinations-button'onClick = { () => this.addToUserList(e) }>Save</button>
+              </div>
+            </div>
+            )
+          })}
+      </div>
+      </div>
+      )
     }
     
   }

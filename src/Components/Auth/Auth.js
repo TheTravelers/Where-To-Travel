@@ -20,7 +20,7 @@ class Auth extends Component {
         }
     }
     componentDidMount(){
-        gsap.from('.auth-container', {opacity: 0, duration: 1})
+        // gsap.from('.auth-container', {opacity: 0, duration: 1})
     }
     handleEmailChange = (val) => {
         this.setState({ email: val })
