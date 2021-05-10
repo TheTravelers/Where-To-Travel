@@ -6,6 +6,7 @@ import Results from '../Results/Results'
 import {connect} from 'react-redux'
 import { geolocated } from 'react-geolocated'
 import { gsap } from 'gsap'
+import {ToastContainer, toast} from 'react-toastify'
 import './Filter.scss'
 import SimpleSlider from "./SimpleSlider";
 
@@ -90,11 +91,12 @@ class Filter extends Component{
 //     this.setState({ populationDivider: "<" });
 //   };
   handleSearchButton = async () => {
-    this.setState({ slideShow: false,  });
+    
     let zipCodeInfo = zipcodes.lookup(this.state.zipCode);
     console.log(zipCodeInfo);
 
-    if (this.state.zipCode) {
+    if (this.state.zipCode.length >= 5) {
+      this.setState({ slideShow: false,  });
       await this.setState(
         {
           coordinates: [zipCodeInfo.longitude, zipCodeInfo.latitude],
@@ -124,7 +126,12 @@ class Filter extends Component{
             });
         }
       );
+    } else{
+      this.needZipCodeToast()
+      this.zipcodeInput.focus();
     }
+
+    
     // } else {
     //   this.setState(
     //     {
@@ -161,6 +168,14 @@ class Filter extends Component{
     // }
   };
 
+  needZipCodeToast() {
+    toast.error(`Invalid ZIP code`, {
+      position: "top-center",
+      autoClose: 3000,
+      closeOnClick: true,
+    });
+  }
+
 
 
     render(){
@@ -170,8 +185,9 @@ class Filter extends Component{
                 <div className='filter-element'>
                     <input 
                         className="filter-zipcode"
-                        placeholder="Current Zipcode"
+                        placeholder="ZIP code"
                         type= 'text'
+                        ref={(input) => { this.zipcodeInput = input; }}
                         onChange= { e => this.handleZipCodeChange(e.target.value) }/>
                     
 
@@ -242,6 +258,7 @@ class Filter extends Component{
                     />
                   </div>
                 )}             
+          <ToastContainer/>
           </div>
         )
     }
