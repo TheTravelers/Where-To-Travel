@@ -25,6 +25,14 @@
         }
     }
 }
+#results-comp{
+    background-color: $primaryColor;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
 
 .filter-element{
     padding-top: 2%;
@@ -72,5 +80,15 @@
         align-items: flex-end;
         margin-right: 5%;
     }
+
+    #results-comp{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        
+    }
+    
     
 }
