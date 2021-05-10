@@ -27,10 +27,10 @@ export default function SimpleSlider(props) {
   };
 
 
-  function addedToast() {
-    toast.success("Destination removed from your list", {
+  function addedToast(val) {
+    toast.success(`${props.defaultDestinations[val].city_name} added to your list`, {
       position: "top-center",
-      autoClose: 2000,
+      autoClose: 3000,
       closeOnClick: true,
     });
   }
@@ -48,6 +48,7 @@ export default function SimpleSlider(props) {
     })
     .then(res => {
       console.log(res)
+      addedToast(val)
     })
     .catch(err => console.log(err))
   }
@@ -58,7 +59,7 @@ export default function SimpleSlider(props) {
       {console.log(props.defaultDestinations, 'first props.dest')}
       
       {/* DO NOT MOVE THIS BUTTON, IT WILL BREAK */}
-      <button onClick={() => addToList(index)}>Save {props.defaultDestinations[index] ? props.defaultDestinations[index].city_name : ''} To My List</button>
+      <button onClick={() => addToList(index)} >Save {props.defaultDestinations[index] ? props.defaultDestinations[index].city_name : ''} To My List</button>
 
       
       <Slider {...settings}>
