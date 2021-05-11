@@ -1,17 +1,17 @@
 const axios = require("axios");
-require('dotenv').config();
-const { GOOGLE_KEY, OPEN_TRIP_KEY } = process.env
+require("dotenv").config();
+const { GOOGLE_KEY, OPEN_TRIP_KEY } = process.env;
 const NodeGeocoder = require("node-geocoder"); //node coder package boilerplate
 const options = {
   provider: "google",
   apiKey: GOOGLE_KEY, // using google api (this is my personal api key )
-  formatter: null, 
+  formatter: null,
 };
 const geocoder = NodeGeocoder(options);
 
 module.exports = {
-
   filter: async (req, res) => {
+    const db = req.app.get("db");
     //array with places to visit
     let activitiesResults = [];
 
@@ -74,7 +74,7 @@ module.exports = {
 
     await axios
       .get(
-        `https://api.opentripmap.com/0.1/en/places/radius?radius=${distance}&lon=${actualLocation[0]}&lat=${actualLocation[1]}&src_geom=osm&src_attr=osm${kinds}&rate=3h&format=geojson&limit=100&apikey=${OPEN_TRIP_KEY}`
+        `https://api.opentripmap.com/0.1/en/places/radius?radius=${distance}&lon=${actualLocation[0]}&lat=${actualLocation[1]}&src_geom=osm&src_attr=osm${kinds}&rate=3h&format=geojson&limit=50&apikey=${OPEN_TRIP_KEY}`
       )
       .then(async (response) => {
         response.data.features.forEach((e, i) => {
@@ -88,15 +88,15 @@ module.exports = {
           };
 
           activitiesResults.push(result);
-        })
-        
+        });
 
         // now we are creating an array with just the coordinates for the activities and we are setting the decimal of the angles to 0 to avoid repetition
 
         newCoordinates = activitiesResults.map((e) => {
           return [+e.coordinates[0], +e.coordinates[1]];
         });
-      }).catch(err => console.log(err))
+      })
+      .catch((err) => console.log(err));
 
     // this is where we have the name of the city and state of the last array
 
@@ -114,108 +114,80 @@ module.exports = {
         longitude: getEachCityInfo.longitude,
         kinds: activitiesResults[i].kinds,
         distance: activitiesResults[i].distance,
-        population: null,
+        population: "",
       };
+      console.log(eachCityInfo, "this is each city info ");
 
-        cities.push(eachCityInfo);  // so we need to scape this scope so we are pushing this info to cities
+      cities.push(eachCityInfo); // so we need to scape this scope so we are pushing this info to cities
     }
 
     let pop = [];
 
-
     // this is the code from erick we can use this for bypass the 10 request for secind of open trip API (this code is not working is just an idea)
 
-    // await axios
-    // .all(
-    //     cities.map((e) => {
-    //         setTimeout(() => {
-    //            return axios.get(
-    //                 `https://api.opentripmap.com/0.1/en/places/geoname?name=${e.cityName}&country=US&apikey=5ae2e3f221c38a28845f05b61f09c292d813489f030ff736d60c0db8`
-    //             )
-    //         }, 500)
-    //     })
-    // )
-    // .then((res) => {
-    //   console.log(res)
-    //     res.forEach((e) => {
-            
-    //         pop.push(e.data.population);
-    //     });
-    // }).catch(err => console.log(err)) 
+    for (let i = 0; i < cities.length; i++) {
+      //this where we send the population info to the cities array
 
+      if (cities[i].cityName) {
+        const [popCity] = await db.population(cities[i].cityName);
 
+        if (popCity) {
+          cities[i].population = popCity.population;
+        } else {
+          cities[i].population = "Unknown";
+        }
+      } else {
+      }
+    }
 
-
-    await axios
-      .all(
-        cities.map((e) => 
-          axios.get(
-            `https://api.opentripmap.com/0.1/en/places/geoname?name=${e.cityName}&country=US&apikey=5ae2e3f221c38a28845f05b61f09c292d813489f030ff736d60c0db8`
-          )
-        )
-      )
-      .then((res) => {
-        res.forEach((e) => {
-         
-          pop.push(e.data.population);
-        });
-      }).catch(err => console.log(err))
-      
-    console.log(pop)
-    cities.forEach((e, i) => {          //this where we send the population info to the cities array 
-      cities[i].population = pop[i];
-    });
-
-    let filterCities = [];               //this is where the inState filter works this will just show cities in you staste
+    let filterCities = []; //this is where the inState filter works this will just show cities in you staste
     if (inState) {
       filterCities = cities.filter((e) => e.state === infoUser.state);
     } else {
       filterCities = cities;
     }
     // console.log(filterCities)
-    const noCitiesFilter = filterCities.filter( e => {
+    const noCitiesFilter = filterCities.filter((e) => {
       // console.log(e.cityName)
-      return e.cityName  
-    }) 
+      return e.cityName;
+    });
 
     removeRepeatingCities = (arr) => {
+      let noRepeatsArray = [];
 
+      let uniqueObj = {};
 
-      let noRepeatsArray = []
-      
-      let uniqueObj = {}
-      
-      for(let i in arr){
-        let objCityName = arr[i]['cityName']
-        uniqueObj[objCityName] = arr[i]
+      for (let i in arr) {
+        let objCityName = arr[i]["cityName"];
+        uniqueObj[objCityName] = arr[i];
       }
-      for(i in uniqueObj){
-        noRepeatsArray.push(uniqueObj[i])
+      for (i in uniqueObj) {
+        noRepeatsArray.push(uniqueObj[i]);
       }
-      return noRepeatsArray
-      }
-      
-    const finalCityList = removeRepeatingCities(noCitiesFilter)
+      return noRepeatsArray;
+    };
+
+    const finalCityList = removeRepeatingCities(noCitiesFilter);
     // console.log(finalCityList)
     return res.status(200).send(finalCityList);
   },
   getDefaultDestinations: async (req, res) => {
-    const db = req.app.get('db')
+    const db = req.app.get("db");
 
-    try{
+    try {
+      const defaultCities = await db.get_default_destinations();
 
-      const defaultCities = await db.get_default_destinations()
-      
-      return res.status(200).send(defaultCities)
+      return res.status(200).send(defaultCities);
+    } catch (err) {
+      console.log(err);
+      return res.sendStatus(500);
     }
-    catch(err){
-      console.log(err)
-      return res.sendStatus(500)
-    }
-    
-
-
-  }
+  },
+  population: async (req, res) => {
+    const db = req.app.get("db");
+    const [pop] = await db.population("New York");
+    return res.status(200).send(pop);
+  },
 };
 
 //cityName(string), population (number), waterFront (kinds string ), adultFriendly(kinds string), distance(number)
