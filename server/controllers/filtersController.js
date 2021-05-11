@@ -140,7 +140,7 @@ module.exports = {
       }
     }
 
-    let filterCities = []; //this is where the inState filter works this will just show cities in you staste
+    let filterCities = [];
     if (inState) {
       filterCities = cities.filter((e) => e.state === infoUser.state);
     } else {
@@ -168,7 +168,7 @@ module.exports = {
     };
 
     const finalCityList = removeRepeatingCities(noCitiesFilter);
-    // console.log(finalCityList)
+  
     return res.status(200).send(finalCityList);
   },
   getDefaultDestinations: async (req, res) => {
