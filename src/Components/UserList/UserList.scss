@@ -83,7 +83,7 @@
     height: 90vh;
     border-radius: 10%;
     border: 2px solid;
-    background-color: $lightBlue;
+    background: linear-gradient($lightBlue, $middleBlue, $lightBlue);
 
 
     .text-box{
@@ -104,7 +104,6 @@
         align-items: center;
         margin: 0 auto;
         border-radius: 10%;
-        background-color: $lightBlue;
 
         .email-message{
             display: flex;
@@ -113,16 +112,24 @@
             margin-top: 30px;
             width: 90%;
             border-radius: 10%;
-            background-color: $lightBlue;
+
+            span {
+                font-weight: bold;
+            }
 
             input{
+                margin-left: 5px;
                 width: 60%;
+                height: 30px;
             }
         }
 
         .message{
-        background-color: $lightBlue;
         margin-top: 30px;
+
+        span {
+            font-weight: bold;
+        }
         }
 
         
@@ -132,18 +139,17 @@
         position: relative;
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
-        background-color: $lightBlue;
+        justify-content: center;
 
 
         .email-button{
-            width: 40%;
+            width: 140px;
             height: 50px;
-            margin-bottom: 0;
+            margin: 10px;
             cursor: pointer;
+            font-weight: bold;
         }
-    }
-    
+    }   
 }
 
 #email-form-comp {
@@ -237,7 +243,6 @@
             font-style:italic;
         }
         }
-
     }
 }
 
@@ -286,4 +291,92 @@
   .remove-from-share-list:hover .tooltiptext {
     visibility: visible;
   }
+
+
+  #email-form-comp.show {
+    visibility: visible;
+    position: fixed;
+    display:flex;
+    flex-direction: column;
+    bottom: 5%;
+    left: 20%;
+    z-index: 10;
+    width: 60vw;
+    height: 90vh;
+    border-radius: 10%;
+    border: 2px solid;
+    background: linear-gradient($lightBlue, $middleBlue, $lightBlue);
+
+
+    .text-box{
+        position: relative;
+        height: 300px !important;
+        width: 100%;
+        background-color: white;
+    }
+
+    .email-button {
+        border-radius: 30%;
+    }
+
+    .email-message-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 70px auto;
+        border-radius: 10%;
+
+        .email-message{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+            width: 90%;
+            border-radius: 10%;
+
+            span {
+                font-weight: bold;
+            }
+
+            input{
+                margin-left: 5px;
+                width: 60%;
+                height: 30px;
+            }
+        }
+
+        .message{
+        margin-top: 30px;
+
+        span {
+            font-weight: bold;
+        }
+        }
+
+        
+    }
+
+    .email-button-section{
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        .email-button{
+            width: 140px;
+            height: 50px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    }   
+}
+
+#email-form-comp {
+    visibility: hidden;
+    position: fixed;
+    z-index: -2;
+}
+
 }
