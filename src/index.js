@@ -5,19 +5,19 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from 'react-redux';
 import {store, persistor} from './redux/store';
-import { HashRouter } from 'react-router-dom';
+import { HashRouter, BrowserRouter } from 'react-router-dom';
 import {PersistGate} from 'redux-persist/integration/react'
-
+const Router = process.env.NODE_ENV === 'development' ? HashRouter : BrowserRouter
 
 ReactDOM.render(
   <React.StrictMode>
-    <HashRouter>
+    <Router>
       <Provider store={store}>
         <PersistGate Loading={null} persistor = {persistor}>
           <App />
         </PersistGate>
       </Provider>
-    </HashRouter>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
