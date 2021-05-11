@@ -10,7 +10,8 @@ const filterCtrl = require('./controllers/filtersController')
 app.use(express.json());
 
 const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env;
-const nodemailerCtrl = require('./controllers/nodeMailerCtrl')
+const nodemailerCtrl = require('./controllers/nodeMailerCtrl');
+const { population } = require('./controllers/filtersController');
 
 app.use(session({
     resave: false,
@@ -38,6 +39,7 @@ app.delete('/userDestList/:user_id/:saved_dest_id', userListCtrl.deleteDestinati
 
 app.post('/api/filters', filterCtrl.filter)
 app.get('/api/defaultDestinations',filterCtrl.getDefaultDestinations)
+app.get('/api/pop',filterCtrl.population)
 
 // NODEMAILER ENDPOINT
 app.post('/api/send-email', nodemailerCtrl.sendEmail);
