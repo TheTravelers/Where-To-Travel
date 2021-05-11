@@ -184,14 +184,14 @@ class UserList extends Component{
                                     </div>
                                 </div>
                             )
-                    })}
-                </div>
+                        })}
                     </div>
+                </div>
                     <div id='email-form-comp' className=''>
                         <div className='email-message-container'>
                             
                             <div className='email-message'>
-                                <span>Email To: </span>
+                                <span>Email To:</span>
                                 <input value={this.state.emailTo} onChange={e => this.handleTitleChange(e.target.value)} />
                             </div>
                             <div className='message'>
