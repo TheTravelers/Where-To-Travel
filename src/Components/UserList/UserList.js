@@ -143,7 +143,7 @@ class UserList extends Component{
             return (
               <section className='userlist-container'>
                   <Header />
-                <header>
+                <header className="no-destinations">
                   <h2>You have no saved destinations</h2>
                 </header>
               </section>
