@@ -40,7 +40,7 @@ class Filter extends Component{
         axios.get("/api/defaultDestinations")
         .then((response) => {
             this.setState({ defaultDestinations: response.data });
-            console.log(this.state.defaultDestinations, "destinations");
+            // console.log(this.state.defaultDestinations, "destinations");
             
         })
         .catch(err => console.log(err))
@@ -64,7 +64,7 @@ class Filter extends Component{
     // }
     handleSearchButton = async () => {
         let zipCodeInfo = zipcodes.lookup(this.state.zipCode)
-        console.log(zipCodeInfo)
+        // console.log(zipCodeInfo)
     }
 
   handleAdultFriendlyChange = () => {
@@ -103,7 +103,7 @@ class Filter extends Component{
           rangeValueInMeters: this.state.rangeValue * 1609.34,
         },
         async () => {
-          console.log(this.state.coordinates);
+          // console.log(this.state.coordinates);
           await axios
             .post(
               "/api/filters",

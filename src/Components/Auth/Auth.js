@@ -160,7 +160,7 @@ class Auth extends Component {
         return(
             <div className="auth-container">
                     <h1>Where Should I Travel?</h1>
-                <form className="login-container">
+                <div className="login-container">
                     <div className="inputs">
                         <label>Email:</label>
                         <input value={this.state.email} id="email" type="email" placeholder="email" onChange={e => this.handleEmailChange(e.target.value.toLowerCase())} />
@@ -177,14 +177,14 @@ class Auth extends Component {
                         <button className="toggleBtn" name='register' onClick={this.handleMode} disabled={mode === 'register'}>Register for free</button>
                         <button className="other" name='login' onClick={this.handleMode} disabled={mode === 'login'} >Login</button>      
                     </div>
-                </form>
+                </div>
                 <ToastContainer />
             </div>
         )} else {
             return(
                 <div className="auth-container">
                     <h1>Where Should I Travel?</h1>
-                    <form className="register-container">
+                    <div className="register-container">
                     <div className="inputs">
                         <label>Name:</label>
                         <input value={this.state.name} placeholder="name" onChange={e => this.handleNameChange(e.target.value)}/>
@@ -205,7 +205,7 @@ class Auth extends Component {
                         <button className="other" name='register' onClick={this.handleMode} disabled={mode === 'register'}>Register</button>
                         <button className="toggleBtn" name='login' onClick={this.handleMode} disabled={mode === 'login'} >Login</button>
                     </div>
-                </form>
+                </div>
                 <ToastContainer />
             </div>
             )
