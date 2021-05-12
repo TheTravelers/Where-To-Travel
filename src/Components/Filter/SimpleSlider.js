@@ -38,12 +38,8 @@ export default function SimpleSlider(props) {
 
   //working on add to list button. -Chad
   let addToList = (val) => {
-    // console.log(index,"this is the index")
-    // console.log(props.defaultDestinations[val], 'destination index' )
-    // console.log(props.userId, 'user id props')
-    // console.log(e)
     const {city_name, population, waterfront, adult_friendly, family_friendly, city_img, state} = props.defaultDestinations[val]
-    // console.log(city_name, 'city name')
+    
     axios.post(`/userDestList/${props.userId}`, {
         city_name, population, waterfront, adult_friendly, family_friendly, city_img, state
     })
