@@ -20,7 +20,7 @@ export default function SimpleSlider(props) {
     slidesToScroll: 1,
     pauseOnHover:true,
     afterChange: current => {
-      console.log(current)
+      // console.log(current)
       setIndex(current)
       
     }
@@ -38,8 +38,8 @@ export default function SimpleSlider(props) {
 
   //working on add to list button. -Chad
   let addToList = (val) => {
-    console.log(index,"this is the index")
-    console.log(props.defaultDestinations[val], 'destination index' )
+    // console.log(index,"this is the index")
+    // console.log(props.defaultDestinations[val], 'destination index' )
     // console.log(props.userId, 'user id props')
     // console.log(e)
     const {city_name, population, waterfront, adult_friendly, family_friendly, city_img, state} = props.defaultDestinations[val]
@@ -48,7 +48,7 @@ export default function SimpleSlider(props) {
         city_name, population, waterfront, adult_friendly, family_friendly, city_img, state
     })
     .then(res => {
-      console.log(res)
+      // console.log(res)
       addedToast(val)
     })
     .catch(err => console.log(err))
@@ -56,15 +56,15 @@ export default function SimpleSlider(props) {
 
   return (
     <div className='default-destinations-container'>
-      {console.log(index)}
-      {console.log(props.defaultDestinations, 'first props.dest')}
+      {/* {console.log(index)} */}
+      {/* {console.log(props.defaultDestinations, 'first props.dest')} */}
       
       {/* DO NOT MOVE THIS BUTTON, IT WILL BREAK */}
       <button onClick={() => addToList(index)} >Save {props.defaultDestinations[index] ? props.defaultDestinations[index].city_name : ''} To My List</button>
 
       
       <Slider {...settings}>
-        {console.log(props.defaultDestinations, 'props inside SLID')}
+        {/* {console.log(props.defaultDestinations, 'props inside SLID')} */}
         {props.defaultDestinations.map((element, index) => {
           // console.log(element.default_dest_id)
           return (
