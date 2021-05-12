@@ -92,7 +92,7 @@ module.exports = {
 
         // now we are creating an array with just the coordinates for the activities and we are setting the decimal of the angles to 0 to avoid repetition
 
-        newCoordinates = activitiesResults.map((e) => {
+       newCoordinates = activitiesResults.map((e) => {
           return [+e.coordinates[0], +e.coordinates[1]];
         });
       })
@@ -116,7 +116,7 @@ module.exports = {
         distance: activitiesResults[i].distance,
         population: "",
       };
-      console.log(eachCityInfo, "this is each city info ");
+      // console.log(eachCityInfo, "this is each city info ");
 
       cities.push(eachCityInfo); // so we need to scape this scope so we are pushing this info to cities
     }

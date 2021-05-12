@@ -8,11 +8,12 @@ const userListCtrl = require('./controllers/userListController')
 const filterCtrl = require('./controllers/filtersController')
 const path = require('path')
 
+
 app.use(express.json());
-app.use(express.static(__dirname + '/../build'))
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../build/index.html'))
-  })
+app.use(express.static(`${__dirname}/../build`))
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '../build/index.html'))
+// })
 
 
 const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env;
