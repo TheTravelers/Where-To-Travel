@@ -185,12 +185,12 @@ class Results extends Component {
   })
   .then(res => {
     // console.log(res)
-    this.addedToast(cityName)
+    this.addedToCityToast(cityName)
   })
   .catch(err => console.log(err))
   };
 
-  addedToast(cityName) {
+  addedToCityToast(cityName) {
     // console.log('Success TOAST')
     toast.success(`${cityName} added to your list`, {
       position: "top-center",
