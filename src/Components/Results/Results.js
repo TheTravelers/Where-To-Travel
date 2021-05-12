@@ -260,7 +260,7 @@ class Results extends Component {
                   <ul>
                     Adult Friendly: {e.kinds.includes("adult") ? "YES" : "NO"}
                   </ul>
-                  <ul>population is comming </ul>
+                  <ul>Population: {e.population}</ul>
                 </li>
                 <button className='save-destinations-button'onClick = { () => this.addToUserList(e) }>Save</button>
               </div>
