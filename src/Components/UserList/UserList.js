@@ -129,9 +129,10 @@ class UserList extends Component{
         // console.log(saved_dest_id)
         axios.delete(`/userDestList/${this.props.user.user.user.user_id}/${this.state.confirmRemoveID}`)
         .then(res => {
-            this.newPhoto(res)
-            this.notifyRemoval()
             this.hideConfirmation()
+            this.newPhoto(res)
+            this.props.getSavedDestinations(res.data)
+            this.notifyRemoval()
         })
 
     }

@@ -28,7 +28,7 @@ export default function SimpleSlider(props) {
   };
 
 
-  function addedToast(val) {
+  function addedToast  (val) {
     toast.success(`${props.defaultDestinations[val].city_name} added to your list`, {
       position: "top-center",
       autoClose: 3000,
