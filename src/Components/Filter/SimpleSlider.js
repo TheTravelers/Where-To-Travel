@@ -54,6 +54,8 @@ export default function SimpleSlider(props) {
     .catch(err => console.log(err))
   }
 
+  // console.log(props, 'PROPS')
+
   return (
     <div className='default-destinations-container'>
       {/* {console.log(index)} */}

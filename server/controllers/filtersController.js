@@ -176,7 +176,7 @@ module.exports = {
 
     try {
       const defaultCities = await db.get_default_destinations();
-
+      // console.log(defaultCities, 'default cities')
       return res.status(200).send(defaultCities);
     } catch (err) {
       console.log(err);

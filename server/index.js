@@ -11,9 +11,6 @@ const path = require('path')
 
 app.use(express.json());
 app.use(express.static(`${__dirname}/../build`))
-// app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname, '../build/index.html'))
-// })
 
 
 const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env;
@@ -61,3 +58,8 @@ massive({
     app.listen(SERVER_PORT, () => console.log(`Server and db are up and running on port ${SERVER_PORT}`))
 })
 .catch(err => console.log(err))
+
+//if this is before the other app.gets then our get calls would hit this and would have issues. This only runs if none of the other .get matches our call. 
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../build/index.html'))
+})
