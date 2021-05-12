@@ -75,7 +75,7 @@ export default function SimpleSlider(props) {
           );
         })}
       </Slider>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
     </div>
   );
 }
