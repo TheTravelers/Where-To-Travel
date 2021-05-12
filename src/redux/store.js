@@ -9,7 +9,7 @@ import {persistStore} from 'redux-persist'
 
 const persistConfig = {
     key: 'root',
-    storage, 
+    storage,
     whitelist: ['userReducer', 'destinationReducer']
 }
 

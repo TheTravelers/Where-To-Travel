@@ -39,6 +39,7 @@ class Filter extends Component{
         
         axios.get("/api/defaultDestinations")
         .then((response) => {
+          // console.log(response, 'RESPONSE')
             this.setState({ defaultDestinations: response.data });
             // console.log(this.state.defaultDestinations, "destinations");
             
