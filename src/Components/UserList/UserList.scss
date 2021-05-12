@@ -5,6 +5,15 @@
     position: relative;
 }
 
+.no-destinations {
+    background:linear-gradient( #FDEDDC, $primaryColor,);
+    height: 90vh;
+
+    h2 {
+        margin-top: 20px;
+    }
+}
+
 .user-destinations-container, .container {
     width: 100%;
     margin-bottom: 0;
