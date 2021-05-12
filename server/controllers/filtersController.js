@@ -168,7 +168,7 @@ module.exports = {
     };
 
     const finalCityList = removeRepeatingCities(noCitiesFilter);
-    console.log(finalCityList)
+    // console.log(finalCityList)
   
     return res.status(200).send(finalCityList);
   },

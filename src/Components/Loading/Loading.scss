@@ -12,15 +12,25 @@
     display: flex;
     justify-content:center;
     align-items:initial;
-    height: 80vh;
+    height: 90vh;
     width: 100vw;
+    object-fit: fill;
 }
 svg{
     
-    transform: scale(1);
+    
     display: absolute;
-    height: 70vh;
-    width:70vw;
+    height: 80vh;
+    width:100vw;
+}
+
+@media (max-width:720px) {
+    svg{
+        transform: scale(1.5);
+        height: 400px;
+        width: px;
+        object-fit: fill;
+    }
 }
 
 #plane{

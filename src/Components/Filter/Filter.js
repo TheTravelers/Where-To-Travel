@@ -90,46 +90,49 @@ class Filter extends Component{
 //     //Want cities only if they have a population less than a certain number
 //     this.setState({ populationDivider: "<" });
 //   };
-  handleSearchButton = async () => {
-    
-    let zipCodeInfo = zipcodes.lookup(this.state.zipCode);
-    console.log(zipCodeInfo);
+  handleSearchButton =  () => {
+    this.setState({citiesToDisplay: undefined},  () => {
 
-    if (this.state.zipCode.length >= 5) {
-      this.setState({ slideShow: false,  });
-      await this.setState(
-        {
-          coordinates: [zipCodeInfo.longitude, zipCodeInfo.latitude],
-          rangeValueInMeters: this.state.rangeValue * 1609.34,
-        },
-        async () => {
-          // console.log(this.state.coordinates);
-          await axios
-            .post(
-              "/api/filters",
-              {
-                actualLocation: this.state.coordinates,
-                distance: this.state.rangeValueInMeters,
-                adultOnly: this.state.adultFriendly,
-                waterFront: this.state.waterFront,
-                inState: this.state.inState,
-                winterSports: false,
-              },
-              {
-                headers: {
-                  "Content-Type": "application/json",
+      let zipCodeInfo = zipcodes.lookup(this.state.zipCode);
+      console.log(zipCodeInfo);
+  
+      if (this.state.zipCode.length >= 5) {
+        this.setState({ slideShow: false,  });
+         this.setState(
+          {
+            coordinates: [zipCodeInfo.longitude, zipCodeInfo.latitude],
+            rangeValueInMeters: this.state.rangeValue * 1609.34,
+          },
+          async () => {
+            // console.log(this.state.coordinates);
+            await axios
+              .post(
+                "/api/filters",
+                {
+                  actualLocation: this.state.coordinates,
+                  distance: this.state.rangeValueInMeters,
+                  adultOnly: this.state.adultFriendly,
+                  waterFront: this.state.waterFront,
+                  inState: this.state.inState,
+                  winterSports: false,
                 },
-              }
-            )
-            .then((res) => {
-              this.setState({ citiesToDisplay: res.data }, () => {});
-            });
-        }
-      );
-    } else{
-      this.needZipCodeToast()
-      this.zipcodeInput.focus();
-    }
+                {
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                }
+              )
+              .then((res) => {
+                this.setState({ citiesToDisplay: res.data }, () => {});
+              });
+          }
+        );
+      } else{
+        this.needZipCodeToast()
+        this.zipcodeInput.focus();
+        
+      }
+    })
 
     
     // } else {

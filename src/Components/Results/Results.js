@@ -21,6 +21,7 @@ class Results extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    console.log(this.props.citiesToDisplay)
     //   console.log(this.props.citiesToDisplay)
     //   console.log(this.props.coordinates)
     // console.log(this.props.citiesToDisplay);
@@ -29,6 +30,7 @@ class Results extends Component {
       JSON.stringify(prevProps.citiesToDisplay) !==
         JSON.stringify(this.props.citiesToDisplay)
     ) {
+      // this.setState({filterResults:this.props.citiesToDisplay})
       // console.log("first hit");
       if (this.props.citiesToDisplay.length <= 10) {
         // console.log("minus 10");
@@ -204,7 +206,7 @@ class Results extends Component {
     // console.log(this.state.filterResults.length, 'results length');
     let { results, filterResults } = this.state;
 
-    if (filterResults.length === 0) {
+    if (!this.props.citiesToDisplay) {
     //   if (results.length === 0) {
     //     return (
     //       <p>Please Wait for your info</p>
