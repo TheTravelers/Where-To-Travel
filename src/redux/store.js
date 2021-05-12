@@ -9,8 +9,8 @@ import {persistStore} from 'redux-persist'
 
 const persistConfig = {
     key: 'root',
-    storage, 
-    whitelist: ['userReducer', 'destinationReducer']
+    storage
+    // whitelist: ['userReducer', 'destinationReducer']
 }
 
 const rootReducer = combineReducers({

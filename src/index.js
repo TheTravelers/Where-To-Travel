@@ -14,7 +14,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Provider store={store}>
-        <PersistGate Loading={null} persistor = {persistor}>
+        <PersistGate loading={null} persistor = {persistor}>
           <App />
         </PersistGate>
       </Provider>
