@@ -116,7 +116,7 @@ module.exports = {
         distance: activitiesResults[i].distance,
         population: "",
       };
-      console.log(eachCityInfo, "this is each city info ");
+      // console.log(eachCityInfo, "this is each city info ");
 
       cities.push(eachCityInfo); // so we need to scape this scope so we are pushing this info to cities
     }
@@ -168,6 +168,7 @@ module.exports = {
     };
 
     const finalCityList = removeRepeatingCities(noCitiesFilter);
+    console.log(finalCityList)
   
     return res.status(200).send(finalCityList);
   },
