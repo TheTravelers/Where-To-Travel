@@ -21,13 +21,9 @@ class UserList extends Component{
         }
     }
 
-    componentWillMount () {
-        // console.log(this.props.user.user.user, 'this.props.user')
-        axios.get(`/userDestList/${this.props.user.user.user.user_id}`)
-        .then(res => {
-            // console.log(res.data, 'res data')
+    newPhoto = (res) => {
+
             const userDestinations = res.data
-            console.log(userDestinations)
             for(let i = 0 ; i < userDestinations.length; i++){
                  axios.get(`https://pixabay.com/api/?key=21414540-8ffff3c6f0901bd8153a62ca7&q=${userDestinations[i].city_name.replace(
                     / /g,
@@ -38,8 +34,13 @@ class UserList extends Component{
                         this.props.getSavedDestinations(userDestinations)
                     })
             }
-            console.log(userDestinations)
-        })
+            
+    }
+
+    componentWillMount () {
+        // console.log(this.props.user.user.user, 'this.props.user')
+        axios.get(`/userDestList/${this.props.user.user.user.user_id}`)
+        .then(res => this.newPhoto(res))
     }
 
     componentDidMount(){
@@ -128,7 +129,7 @@ class UserList extends Component{
         // console.log(saved_dest_id)
         axios.delete(`/userDestList/${this.props.user.user.user.user_id}/${this.state.confirmRemoveID}`)
         .then(res => {
-            this.props.getSavedDestinations(res.data)
+            this.newPhoto(res)
             this.notifyRemoval()
             this.hideConfirmation()
         })
