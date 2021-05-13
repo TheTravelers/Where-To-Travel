@@ -28,16 +28,9 @@
 }
 .filter-checkboxes{
     display: flex;
-    flex-direction: row;
-    .first-checkboxes{
-        display: flex;
-        flex-direction: column-reverse;
-        align-items: flex-end;
-    }
-    .area{
-        display: flex;
-        flex-direction: column;
-        padding-left: 10px;
+    flex-direction: column-reverse;
+    input{
+        margin-left: 5px;
     }
 
 }
@@ -72,10 +65,11 @@
         margin-left: 5%;
         margin-right: 5%;
     }
-    .first-checkboxes{
+    .filter-checkboxes{
         display: flex;
         align-items: flex-end;
         margin-right: 5%;
+        
     }
 
     .results-comp{

@@ -20,8 +20,6 @@ class Filter extends Component{
             inState: false,
             rangeValue: 100,
             rangeValueInMeters: 300000,
-            urban: true,
-            rural: true,
             zipCode: '',
             citiesToDisplay: undefined,
             defaultDestinations: [],
@@ -84,16 +82,7 @@ class Filter extends Component{
       inState: !prevState.inState,
     }));
   };
-  handleRuralChange = () => {
-    this.setState((prevState) => ({
-      rural: !prevState.rural,
-    }));
-  };
-  handleUrbanChange = () => {
-    this.setState((prevState) => ({
-      urban: !prevState.urban,
-    }));
-  };
+  
 //   handleUrbanButton = () => {
 //     //Want cities only if they have a population more than a certain number
 //     this.setState({ populationDivider: ">" });
@@ -219,7 +208,7 @@ class Filter extends Component{
                                 <span>{this.state.rangeValue} miles</span>
                         </div>
                     <div className='filter-checkboxes'>
-                        <div className='first-checkboxes'>
+                        
                           <label>
                               Adult Friendly:
                               <input
@@ -244,26 +233,8 @@ class Filter extends Component{
                                   checked={this.state.inState}
                                   onChange={this.handleInStateChange}/>
                           </label>
-                        </div>
-                        <div className='area'>
-                         <h3>Area</h3>
-                         <label>
-                           Rural:
-                           <input
-                               name="rural"
-                               type="checkbox"
-                               checked={this.state.rural}
-                               onChange={this.handleRuralChange}/>
-                         </label>
-                         <label>
-                           Urban:
-                           <input
-                               name="urban"
-                               type="checkbox"
-                               checked={this.state.urban}
-                               onChange={this.handleUrbanChange}/>
-                         </label>
-                       </div>
+                        
+                        
                     </div>
                     {/* <div>
                         <h3>Population:</h3>

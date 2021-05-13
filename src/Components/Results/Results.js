@@ -16,7 +16,9 @@ class Results extends Component {
     this.state = {
       results: [],
       cityNames: [],
-      filterResults: [],
+      filterResults: undefined,
+      urban: true,
+      rural: true,
     };
   }
 
@@ -189,6 +191,16 @@ class Results extends Component {
   })
   .catch(err => console.log(err))
   };
+  handleRuralChange = () => {
+    this.setState((prevState) => ({
+      rural: !prevState.rural,
+    }));
+  };
+  handleUrbanChange = () => {
+    this.setState((prevState) => ({
+      urban: !prevState.urban,
+    }));
+  };
 
   addedToCityToast(cityName) {
     // console.log('Success TOAST')
@@ -208,13 +220,13 @@ class Results extends Component {
 
     let x = undefined
 
-    if (this.props.rural && this.props.urban){
+    if (this.state.rural && this.state.urban){
       x = filterResults
     }
-    else if (this.props.rural){
+    else if (this.state.rural){
       x = filterResults.filter( e => e.population<=50000)
     }
-    else if(this.props.urban){
+    else if(this.state.urban){
       x = filterResults.filter ( e => e.population > 50000)
     }
 
@@ -251,10 +263,30 @@ class Results extends Component {
     return (<Loading/>)
     } else {
       return (
-        <div>
+        <div className='results'>
           <ToastContainer/>
+          <div className='instant-filter'>
+              <h3>Instant Filter</h3>
+                         <label>
+                           Rural:
+                           <input 
+                              
+                               name="rural"
+                               type="checkbox"
+                               checked={this.state.rural}
+                               onChange={this.handleRuralChange}/>
+                         </label>
+                         <label>
+                           Urban:
+                           <input
+                               name="urban"
+                               type="checkbox"
+                               checked={this.state.urban}
+                               onChange={this.handleUrbanChange}/>
+                         </label>
+                       </div>
         <div className="results-comp">
-          {x.map((e, i) => {
+          {x ? x.map((e, i) => {
             return (
               <div className="search-destination-single" key={i}>
               
@@ -286,7 +318,7 @@ class Results extends Component {
               
             </div>
             )
-          })}
+          }) : <p className='no-results'>No Results to Display</p> }
       </div>
       </div>
       )
