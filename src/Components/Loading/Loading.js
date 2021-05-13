@@ -8,7 +8,7 @@ function Loading(props) {
         <svg
           width="3421"
           height="2241"
-          viewBox="0 0 3421 2241"
+          viewBox="10 10 3421 2241"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
