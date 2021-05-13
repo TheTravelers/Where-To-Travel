@@ -1,15 +1,23 @@
 @import '../../App.scss';
 
+body{
+    background-color: $primaryColor;
+}
+
 .default-destinations-container{
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 65vh;
+    height: 100%;
+    width: 100%;
     padding-top: -10px;
+    margin-top: 0px;
 
     button:before{
         align-self: center;
         margin-top: 10px;
+        height: 10%;
         
     }
 
@@ -27,6 +35,9 @@
         // margin-bottom: -20px;
         display: flex;
         flex-direction: column;
+        height: 100%;
+
+        
         ul{
             margin-top: 10px;
         }
@@ -63,6 +74,7 @@
             margin-bottom: 0px;
         }
         
+        
     }
 
     
@@ -73,6 +85,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: $primaryColor;
 
     ul{
         margin-top: 10px;
