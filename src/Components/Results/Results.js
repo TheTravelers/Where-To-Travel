@@ -312,7 +312,7 @@ class Results extends Component {
                   <span className="checkbox-answers">{e.population > 50000 ? 'Urban' : e.population <= 50000 ? 'Rural' : 'Unavailable'} </span>
                   </ul>
                 </li>
-                <button className='save-destinations-button'onClick = { () => this.addToUserList(e) }>Save</button>
+                <button className='save-destinations-button'onClick = { () => this.addToUserList(e) }>Save to My List</button>
               </div>
              
               
