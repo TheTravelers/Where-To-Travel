@@ -3,6 +3,8 @@
 .userlist-container {
     background: linear-gradient( #FDEDDC, $primaryColor,);
     position: relative;
+    height: 100%;
+    min-height: 100vh;
 }
 
 .no-destinations {
@@ -85,19 +87,43 @@
     position: fixed;
     display:flex;
     flex-direction: column;
-    bottom: 5%;
+    bottom: 10%;
     left: 5%;
     z-index: 10;
     width: 90vw;
-    height: 90vh;
+    height: 80vh;
     border-radius: 10%;
     border: 2px solid;
     background: linear-gradient($lightBlue, $middleBlue, $lightBlue);
 
+    .email-outer-border {
+        background: linear-gradient($middleBlue, $darkBlue, $middleBlue);
+        background: linear-gradient(rgb(60, 58, 58), black, rgb(60, 58, 58));
+        position: fixed;
+        top: 0%;
+        left: 0;
+        width: 100vw;
+        height: 100vh; 
+        border: black solid 2px;
+        opacity: 90%;
+    }
+
+    .email-inner-border {
+        background: linear-gradient($lightBlue, $middleBlue, $lightBlue);
+        position: fixed;
+        top: 10%;
+        left: 5%;
+        width: 90vw;
+        height: 80vh; 
+        border-radius: 10%;
+        border: black solid 2px;
+    }
+
 
     .text-box{
+        margin-top: 15px;
         position: relative;
-        height: 300px !important;
+        height: 250px !important;
         width: 100%;
         background-color: white;
     }
@@ -118,7 +144,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 30px;
+            margin-top: 100px;
             width: 90%;
             border-radius: 10%;
 
@@ -256,8 +282,15 @@
 }
 
 @media(min-width: 1024px){
-    .userlist-container, .container {
+    .userlist-container {
         width: 100%;
+        height: 100%;
+    }
+    
+     .container {
+        width: 100%;
+        height: 100%;
+        min-height: 90vh;
     .user-destination-container{
         display: flex;
         flex-direction: row;
@@ -307,20 +340,40 @@
     position: fixed;
     display:flex;
     flex-direction: column;
-    bottom: 5%;
-    left: 20%;
+    bottom: 25%;
+    left: 25%;
     z-index: 10;
-    width: 60vw;
-    height: 90vh;
-    border-radius: 10%;
-    border: 2px solid;
-    background: linear-gradient($lightBlue, $middleBlue, $lightBlue);
+    width: 50vw;
+    height: 50vh;
+    
 
+    .email-outer-border {
+        background: linear-gradient($middleBlue, $darkBlue, $middleBlue);
+        background: linear-gradient(rgb(60, 58, 58), black, rgb(60, 58, 58));
+        position: fixed;
+        top: 0%;
+        left: 0;
+        width: 100vw;
+        height: 100vh; 
+        border: black solid 2px;
+        opacity: 90%;
+    }
+
+    .email-inner-border {
+        background: linear-gradient($lightBlue, $middleBlue, $lightBlue);
+        position: fixed;
+        top: 25%;
+        left: 25%;
+        width: 50vw;
+        height: 50vh; 
+        border-radius: 10%;
+        border: black solid 2px;
+    }
 
     .text-box{
         position: relative;
-        height: 300px !important;
-        width: 100%;
+        height: 100px !important;
+        width: 80%;
         background-color: white;
     }
 
@@ -333,14 +386,14 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        margin: 70px auto;
+        margin: 50px auto;
         border-radius: 10%;
 
         .email-message{
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 30px;
+            margin-top: 0;
             width: 90%;
             border-radius: 10%;
 
@@ -357,7 +410,7 @@
 
         .message{
         margin-top: 30px;
-
+        width: 100%;
         span {
             font-weight: bold;
         }
