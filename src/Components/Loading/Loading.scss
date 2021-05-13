@@ -15,18 +15,23 @@
     height: 90vh;
     width: 100vw;
     object-fit: fill;
+    box-sizing: border-box;
+    overflow: hidden;
+
 }
 svg{
     
     
     display: absolute;
     height: 80vh;
-    width:100vw;
+    width:60vw;
+    box-sizing: border-box;
+    
 }
 
 @media (max-width:720px) {
     svg{
-        transform: scale(1.5);
+        transform: scale(2.5);
         height: 400px;
         width: px;
         object-fit: fill;
