@@ -25,8 +25,7 @@ class EmailForm extends Component {
                 EMAIL FORM
                 <div>
                 <span>Title: </span>
-                {/* <input value={this.state.title} onChange={e => this.handleTitleChange(e.target.value)} /> */}
-                {/* <input value={this.props.dest.userSavedDestinations}/> */}
+                
                 </div>
 
                 <button>CANCEL</button>

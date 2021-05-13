@@ -22,7 +22,7 @@ app.use(session({
     saveUninitialized: true,
     secret: SESSION_SECRET,
     cookie: {
-        maxAge: 1000 * 60 * 60 * 24 * 7 //one week?
+        maxAge: 1000 * 60 * 60 * 24 * 7 //one week
     }
 }))
 
@@ -59,7 +59,6 @@ massive({
 })
 .catch(err => console.log(err))
 
-//if this is before the other app.gets then our get calls would hit this and would have issues. This only runs if none of the other .get matches our call. 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../build/index.html'))
 })

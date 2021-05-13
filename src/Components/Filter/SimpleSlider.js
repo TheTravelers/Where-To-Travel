@@ -20,7 +20,6 @@ export default function SimpleSlider(props) {
     slidesToScroll: 1,
     pauseOnHover:true,
     afterChange: current => {
-      // console.log(current)
       setIndex(current)
       
     }
@@ -36,7 +35,7 @@ export default function SimpleSlider(props) {
     });
   }
 
-  //working on add to list button. -Chad
+  
   let addToList = (val) => {
     const {city_name, population, waterfront, adult_friendly, family_friendly, city_img, state} = props.defaultDestinations[val]
     
@@ -44,38 +43,35 @@ export default function SimpleSlider(props) {
         city_name, population, waterfront, adult_friendly, family_friendly, city_img, state
     })
     .then(res => {
-      // console.log(res)
       addedToast(val)
     })
     .catch(err => console.log(err))
   }
 
-  // console.log(props, 'PROPS')
+  
 
   return (
     <div className='default-destinations-container'>
-      {/* {console.log(index)} */}
-      {/* {console.log(props.defaultDestinations, 'first props.dest')} */}
+      
       
       {/* DO NOT MOVE THIS BUTTON, IT WILL BREAK */}
       <button onClick={() => addToList(index)} >Save {props.defaultDestinations[index] ? props.defaultDestinations[index].city_name : ''} To My List</button>
 
       
       <Slider {...settings}>
-        {/* {console.log(props.defaultDestinations, 'props inside SLID')} */}
+       
         {props.defaultDestinations.map((element, index) => {
-          // console.log(element.default_dest_id)
           return (
             <div key={index}>
               <h3>{element.city_name}</h3>
-              {/* <button onClick={(e) => addToList(e.target)}>+ My List</button> */}
+              
               <img src={element.city_img} alt={element.city_name} />
               
             </div>
           );
         })}
       </Slider>
-      {/* <ToastContainer /> */}
+      
     </div>
   );
 }

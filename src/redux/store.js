@@ -24,4 +24,3 @@ export const store =  createStore(persist, composeWithDevTools(applyMiddleware(p
 
 export const persistor = persistStore(store)
 
-// export default {store, persister}

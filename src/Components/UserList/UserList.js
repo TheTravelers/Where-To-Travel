@@ -30,15 +30,17 @@ class UserList extends Component{
                     "+"
                   )}&image_type=photo&per_page=3`)
                     .then(( res ) => {
-                        userDestinations[i].city_img = res.data.hits[0].largeImageURL
-                        this.props.getSavedDestinations(userDestinations)
+                        if(res.data.hits[0]){
+                            userDestinations[i].city_img = res.data.hits[0].largeImageURL
+                            this.props.getSavedDestinations(userDestinations)
+                        }
+
                     })
             }
             
     }
 
     componentWillMount () {
-        // console.log(this.props.user.user.user, 'this.props.user')
         axios.get(`/userDestList/${this.props.user.user.user.user_id}`)
         .then(res => this.newPhoto(res))
     }
@@ -53,13 +55,6 @@ class UserList extends Component{
         var x = document.getElementById("email-form-comp");
         // Add the "show" class to DIV
         x.className = "show";
-        // console.log(this.props.dest.userSavedDestinations, 'setting to message')
-
-        // const messageN = this.props.dest.userSavedDestinations.map((element, index) => {
-        //     return `${element.city_name} ${element.city_img} ------ ${element.population}`
-            
-        // }).join(' ')
-        // console.log(messageN, 'messageN')
 
         this.setState({messageObj: this.props.dest.userSavedDestinations})
     }
@@ -107,7 +102,6 @@ class UserList extends Component{
     handleMessageChange = (val) => {
         let newVal = val;
         this.setState({message: newVal})
-        // console.log(this.state.message, 'MESSAGE')
     }
 
     showConfirmation = (id) => {
@@ -115,7 +109,6 @@ class UserList extends Component{
         // Add the "show" class to DIV
         x.className = "show";
         this.setState({confirmRemoveID: id})
-        // console.log(this.state.confirmRemoveID)
     }
 
     hideConfirmation =() => {
@@ -124,9 +117,6 @@ class UserList extends Component{
     }
 
     removeFromList = () => {
-        // console.log(val)
-        // let saved_dest_id = val
-        // console.log(saved_dest_id)
         axios.delete(`/userDestList/${this.props.user.user.user.user_id}/${this.state.confirmRemoveID}`)
         .then(res => {
             this.hideConfirmation()
@@ -139,7 +129,6 @@ class UserList extends Component{
 
 
     render(){
-        // console.log(this.props.dest, 'this.props.dest')
         if (this.props.dest.userSavedDestinations.length < 1) {
             return (
               <section className='userlist-container'>
@@ -165,9 +154,7 @@ class UserList extends Component{
                                     <div className='city-name-row'>
                                         <h2>{element.city_name}, {element.state}</h2>                                 
                                         <button className="remove-from-share-list" 
-                                        // onClick={() => this.removeFromList(element.saved_dest_id)}
-                                        onClick={() => this.showConfirmation(element.saved_dest_id)}>-<span className="tooltiptext">Remove from list</span></button> 
-                                        {/* this.removeFromList(element) */}  
+                                        onClick={() => this.showConfirmation(element.saved_dest_id)}>-<span className="tooltiptext">Remove from list</span></button>  
                                     </div>
                                     <div className='image-container'>
                                         {element.city_img ? <img src={element.city_img} alt={element.city_name} /> : <h1>No image to display</h1>}

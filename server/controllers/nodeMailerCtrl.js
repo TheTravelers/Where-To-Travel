@@ -5,7 +5,6 @@ const { EMAIL, PASSWORD } = process.env;
 module.exports = {
     sendEmail: async ( req, res ) => {
         const { name, email, message, messageObj } = req.body;
-        // we can adjust later what info will come from req.body and what we want to assign here in the controller
         const newMessage = messageObj.map((e, i) => {
           return (  
             `<h1>${e.city_name}, ${e.state}</h1>
@@ -34,16 +33,9 @@ module.exports = {
                 from: `'${name}' <${email}>`,
                 to: email,
                 subject: title,
-                // Had to add toString otherwise an error occurred on send of email. Need to figure out how to pass images and all that. If possible. 
                 text: message.toString(),
                 html: `<p>${message}</p>
                 <p>${newMessage}</p>`,
-                // attachments: [
-                //     {
-                //         filename: '',
-                //         path: '',
-                //     }
-                // ]
             },
             (err, res) => {
                 if (err) {
