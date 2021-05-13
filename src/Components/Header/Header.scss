@@ -86,12 +86,10 @@
 
         .header-image{
             width: 100px;
-            // height: 100%;
             height: 6vh;
             border: 2px black solid;
             border-radius: 30%;
             display: flex;
-            // justify-content: center;
             overflow: hidden;
             margin-bottom: 0;
         
@@ -102,7 +100,6 @@
         
             .header-image-inside{
                 width: 100%;
-                // width: 100px;
                 height: 100%;
                 object-fit: cover;
             }
@@ -163,7 +160,6 @@
         
             .header-image-inside{
                 width: 100%;
-                // width: 100px;
                 height: 100%;
                 object-fit: cover;
             }
@@ -194,7 +190,6 @@
     .header-container {
         display: flex;
         height: 10vh;
-        // background: $lightBlue;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
@@ -229,7 +224,6 @@
         
         .header-button {
             width: 100px;
-            // height: 55px;
         }
     }
 

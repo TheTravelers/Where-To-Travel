@@ -30,8 +30,11 @@ class UserList extends Component{
                     "+"
                   )}&image_type=photo&per_page=3`)
                     .then(( res ) => {
-                        userDestinations[i].city_img = res.data.hits[0].largeImageURL
-                        this.props.getSavedDestinations(userDestinations)
+                        if(res.data.hits[0]){
+                            userDestinations[i].city_img = res.data.hits[0].largeImageURL
+                            this.props.getSavedDestinations(userDestinations)
+                        }
+
                     })
             }
             

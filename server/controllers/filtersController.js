@@ -20,7 +20,7 @@ module.exports = {
 
     //information from the front end (actual location must be ab array [longitud, latitude])
     //distance (number in meters )
-    //adultOnly , waterFront , inState , winterSports (boolean)
+    //adultOnly , waterFront , inState
 
     const {
       actualLocation, //  [longitud, latitud] (array)
@@ -30,15 +30,13 @@ module.exports = {
       inState, // boolean
       winterSports, // boolean
     } = req.body;
-    // console.log(req.body
-    // console.log(inState);
+    
     let rate = '3'
 
     if (inState){
       rate = '1'
     }
-    console.log(rate)
-    // we are using the geo coder to have information from our user using his coordinates
+   
     const [getInfoUser] = await geocoder.reverse({
       lat: actualLocation[1],
       lon: actualLocation[0],
@@ -51,7 +49,7 @@ module.exports = {
       stateShort: getInfoUser.administrativeLevels.level1short,
       cityName: getInfoUser.city,
     };
-    // console.log(infoUser)
+    
 
     // in the kinds we need to write the filters this is what this if statements is doing
 
@@ -123,14 +121,12 @@ module.exports = {
         distance: activitiesResults[i].distance,
         population: "",
       };
-      // console.log(eachCityInfo, "this is each city info ");
+      
 
       cities.push(eachCityInfo); // so we need to scape this scope so we are pushing this info to cities
     }
 
     let pop = [];
-
-    // this is the code from erick we can use this for bypass the 10 request for secind of open trip API (this code is not working is just an idea)
 
     for (let i = 0; i < cities.length; i++) {
       //this where we send the population info to the cities array
@@ -153,9 +149,8 @@ module.exports = {
     } else {
       filterCities = cities;
     }
-    // console.log(filterCities)
+    
     const noCitiesFilter = filterCities.filter((e) => {
-      // console.log(e.cityName)
       return e.cityName;
     });
 
@@ -175,7 +170,6 @@ module.exports = {
     };
 
     const finalCityList = removeRepeatingCities(noCitiesFilter);
-    // console.log(finalCityList)
   
     return res.status(200).send(finalCityList);
   },
@@ -184,7 +178,6 @@ module.exports = {
 
     try {
       const defaultCities = await db.get_default_destinations();
-      // console.log(defaultCities, 'default cities')
       return res.status(200).send(defaultCities);
     } catch (err) {
       console.log(err);
@@ -198,4 +191,4 @@ module.exports = {
   },
 };
 
-//cityName(string), population (number), waterFront (kinds string ), adultFriendly(kinds string), distance(number)
+

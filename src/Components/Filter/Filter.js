@@ -27,20 +27,15 @@ class Filter extends Component{
         }
     }
 
-    // componentWillMount(){
-      
-            
-    // }
-    
 
     componentDidMount () {
-        //  gsap.from('.filter-component', {y: -500, opacity: 0, duration: .5})
+        
         
         axios.get("/api/defaultDestinations")
         .then((response) => {
-          // console.log(response, 'RESPONSE')
+          
             this.setState({ defaultDestinations: response.data });
-            // console.log(this.state.defaultDestinations, "destinations");
+            
             
         })
         .catch(err => console.log(err))
@@ -52,19 +47,10 @@ class Filter extends Component{
     }
     
 
-    // hello 
-    // handleUrbanButton = () => {
-    //     //Want cities only if they have a population more than a certain number
-    //     this.setState({populationDivider: '>'})
-    // }
-    // handleRuralButton = () => {
-    //     //Want cities only if they have a population less than a certain number
-    //     this.setState({populationDivider: '<'})
-
-    // }
+    
     handleSearchButton = async () => {
         let zipCodeInfo = zipcodes.lookup(this.state.zipCode)
-        // console.log(zipCodeInfo)
+        
     }
 
   handleAdultFriendlyChange = () => {
@@ -83,14 +69,7 @@ class Filter extends Component{
     }));
   };
   
-//   handleUrbanButton = () => {
-//     //Want cities only if they have a population more than a certain number
-//     this.setState({ populationDivider: ">" });
-//   };
-//   handleRuralButton = () => {
-//     //Want cities only if they have a population less than a certain number
-//     this.setState({ populationDivider: "<" });
-//   };
+
   handleSearchButton =  () => {
     this.setState({citiesToDisplay: undefined},  () => {
 
@@ -105,7 +84,6 @@ class Filter extends Component{
             rangeValueInMeters: this.state.rangeValue * 1609.34,
           },
           async () => {
-            // console.log(this.state.coordinates);
             await axios
               .post(
                 "/api/filters",
@@ -136,40 +114,6 @@ class Filter extends Component{
     })
 
     
-    // } else {
-    //   this.setState(
-    //     {
-    //       coordinates: [
-    //         this.props.coords.longitude,
-    //         this.props.coords.latitude,
-    //       ],
-    //       rangeValueInMeters: this.state.rangeValue * 1609.34,
-    //     },
-    //     async () => {
-    //       console.log(this.state.coordinates);
-    //       await axios
-    //         .post(
-    //           "/api/filters",
-    //           {
-    //             actualLocation: this.state.coordinates,
-    //             distance: this.state.rangeValueInMeters,
-    //             adultOnly: this.state.adultFriendly,
-    //             waterFront: this.state.waterFront,
-    //             inState: this.state.inState,
-    //             winterSports: false,
-    //           },
-    //           {
-    //             headers: {
-    //               "Content-Type": "application/json",
-    //             },
-    //           }
-    //         )
-    //         .then((res) => {
-    //           this.setState({ citiesToDisplay: res.data });
-    //         });
-    //     }
-    //   );
-    // }
   };
 
   needZipCodeToast() {
@@ -236,21 +180,13 @@ class Filter extends Component{
                         
                         
                     </div>
-                    {/* <div>
-                        <h3>Population:</h3>
-                        <button onClick={this.handleUrbanButton}>Urban</button>
-                        <button onClick={this.handleRuralButton}>Rural</button>
-                    </div> */}
+                    
                 
                 <div>
                     <button onClick={this.handleSearchButton} className='filter-search-button'>Search</button>
                     </div>
               </div>
-            {/* result component  */}
-
-                
-                
-                {/* result component  */}
+            
                     {this.state.slideShow ? (
                 <div id="default-destinations-slider">
                     <SimpleSlider userId={this.props.user.user.user.user_id}defaultDestinations={this.state.defaultDestinations}
@@ -282,9 +218,4 @@ const mapStateToProps = reduxState => {
 
 export default connect(mapStateToProps)(Filter);
 
-// export default geolocated({
-//   positionOptions: {
-//     enableHighAccuracy: false,
-//   },
-//   userDecisionTimeout: 5000,
-// })(Filter);
+

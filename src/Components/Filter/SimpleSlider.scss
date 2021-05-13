@@ -11,18 +11,9 @@ body{
     justify-content: center;
     height: auto;
     width: 100%;
-    // padding-top: -10px;
     margin-top: 0px;
 
-    // button:before{
-    //     align-self: center;
-    //     margin-top: 10px;
-    //     size: 50px;
-        
-    // }
-
     button{
-        // margin-top: -10px;
         border-radius: 30%;
         padding-left: 15px;
         padding-right: 15px;
@@ -34,7 +25,6 @@ body{
     }
 
     .slick-slider{
-        // margin-bottom: -20px;
         display: flex;
         flex-direction: column;
         height: 100%;
@@ -63,7 +53,6 @@ body{
         height: auto;
 
         button{
-            // margin-bottom: 20px;
             border-radius: 40%;
             height: 40px;
         }
@@ -94,10 +83,6 @@ body{
     justify-content: center;
     background-color: $primaryColor;
     height: auto;
-
-    // ul{
-    //     margin-top: 10px;
-    // }
 }
 
 @media (min-width:481px) {
@@ -117,7 +102,6 @@ body{
     
     
         button{
-            // margin-top: 10px;
             border-radius: 30%;
             padding-left: 15px;
             padding-right: 15px;
@@ -128,7 +112,6 @@ body{
         }
     
         .slick-slider{
-            // margin-bottom: -20px;
             display: flex;
             flex-direction: column;
             ul{
@@ -142,8 +125,6 @@ body{
     .slick-track{
         width: 100%;
         height: auto;
-        // display: flex;
-        // flex-direction: column;
     
     
         div{
@@ -152,7 +133,6 @@ body{
             height: auto;
     
             button{
-                // margin-bottom: 20px;
                 border-radius: 40%;
                 height: 40px;
                 
@@ -183,8 +163,6 @@ body{
         justify-content: center;
     
         ul{
-            // margin-top: 10px;
-
             padding-bottom: 10px;
         }
     }
@@ -214,33 +192,17 @@ body{
         display: flex;
         align-items: center;
         justify-content: center;
-    
-        // ul{
-        //     margin-top: 10px;
-
-        //     button:before{
-        //         align-self: center;
-        //         margin-top: 10px;
-        //         size: 50px;
-                
-        //     }
-        // }
     }
 
     .slick-track{
         width: 100%;
         height: auto;
-        // display: flex;
-        // flex-direction: column;
-    
-    
         div{
 
             width: 100%;
             height: auto;
     
             button{
-                // margin-bottom: 20px;
                 border-radius: 40%;
                 height: 40px;
                 

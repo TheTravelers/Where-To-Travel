@@ -1,7 +1,6 @@
 @import "../../App.scss";
 
 .profile-container{
-    // background-color: $primaryColor;
     height: 100vh;
 }
 
@@ -12,7 +11,6 @@
     align-items: center;
     background-color: $primaryColor;
     background: linear-gradient( lighten($primaryColor, 1%), darken($primaryColor,5%));
-    // background: linear-gradient(to right, $middleBlue, darken($primaryColor,10%));
 
 }
 
@@ -152,24 +150,3 @@
         }
     }
 }
-
-
-// .profile-picture {
-//     border-radius: 50%;
-//     height: auto;
-//     width: 90%;
-//     margin: 5%;
-//     border: 25x solid $darkBlue;
-    
-// }
-
-// .profile-picture:before{
-//     content: "";
-//     width: 100%;
-//     height: 100%;
-//     position: absolute;
-//     background: inherit;
-//     background-position: center center;
-//     filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.50)) blur(20px);
-//     z-index: -1;
-// }
