@@ -9,7 +9,7 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 100%;
+    height: auto;
     width: 100%;
     padding-top: -10px;
     margin-top: 0px;
@@ -173,6 +173,7 @@ body{
     }
     
     .slick-dots{
+        
         margin-top: 10px;
         display: flex;
         align-items: center;
@@ -192,7 +193,7 @@ body{
         display: flex;
         flex-direction: column;
         justify-content: center;
-        height: 65vh;
+        height: auto;
         button{
             margin-top: 10px;
         }
@@ -211,7 +212,7 @@ body{
 
     .slick-track{
         width: 100%;
-        height: 100%;
+        height: auto;
         // display: flex;
         // flex-direction: column;
     
@@ -219,7 +220,7 @@ body{
         div{
 
             width: 100%;
-            height: 100%;
+            height: auto;
     
             button{
                 // margin-bottom: 20px;
