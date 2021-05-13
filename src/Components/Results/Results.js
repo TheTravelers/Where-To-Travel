@@ -16,7 +16,9 @@ class Results extends Component {
     this.state = {
       results: [],
       cityNames: [],
-      filterResults: [],
+      filterResults: undefined,
+      urban: true,
+      rural: true,
     };
   }
 
@@ -189,6 +191,16 @@ class Results extends Component {
   })
   .catch(err => console.log(err))
   };
+  handleRuralChange = () => {
+    this.setState((prevState) => ({
+      rural: !prevState.rural,
+    }));
+  };
+  handleUrbanChange = () => {
+    this.setState((prevState) => ({
+      urban: !prevState.urban,
+    }));
+  };
 
   addedToCityToast(cityName) {
     // console.log('Success TOAST')
@@ -205,6 +217,18 @@ class Results extends Component {
     // console.log(this.state.results);
     // console.log(this.state.filterResults.length, 'results length');
     let { results, filterResults } = this.state;
+
+    let x = undefined
+
+    if (this.state.rural && this.state.urban){
+      x = filterResults
+    }
+    else if (this.state.rural){
+      x = filterResults.filter( e => e.population<=50000)
+    }
+    else if(this.state.urban){
+      x = filterResults.filter ( e => e.population > 50000)
+    }
 
     if (!this.props.citiesToDisplay) {
     //   if (results.length === 0) {
@@ -239,12 +263,33 @@ class Results extends Component {
     return (<Loading/>)
     } else {
       return (
-        <div>
+        <div className='results'>
           <ToastContainer/>
+          <div className='instant-filter'>
+              <h3>Instant Filter</h3>
+                         <label>
+                           Rural:
+                           <input 
+                              
+                               name="rural"
+                               type="checkbox"
+                               checked={this.state.rural}
+                               onChange={this.handleRuralChange}/>
+                         </label>
+                         <label>
+                           Urban:
+                           <input
+                               name="urban"
+                               type="checkbox"
+                               checked={this.state.urban}
+                               onChange={this.handleUrbanChange}/>
+                         </label>
+                       </div>
         <div className="results-comp">
-          {filterResults.map((e, i) => {
+          {x ? x.map((e, i) => {
             return (
-            <div className="search-destination-single" key={i}>
+              <div className="search-destination-single" key={i}>
+              
               <div className="city-header">
                 <h2>{e.cityName}</h2>
                 <h3>{e.state}</h3>
@@ -256,22 +301,24 @@ class Results extends Component {
                 <li>
                   <ul>Distance from you: Approximately {Math.round(e.distance / 1609.34)} Miles</ul>
                   <ul>
-                    Near Waterfront: 
+                    Near Waterfront:
                     <span className="checkbox-answers">{e.kinds.includes("beach") ? "YES" : "NO"}</span>
                   </ul>
                   <ul>
-                    Adult Friendly: 
+                    Adult Friendly:
                     <span className="checkbox-answers">{e.kinds.includes("adult") ? "YES" : "NO"}</span>
                   </ul>
-                  <ul>Area: 
+                  <ul>Area:
                   <span className="checkbox-answers">{e.population > 50000 ? 'Urban' : e.population <= 50000 ? 'Rural' : 'Unavailable'} </span>
                   </ul>
                 </li>
                 <button className='save-destinations-button'onClick = { () => this.addToUserList(e) }>Save to My List</button>
               </div>
+             
+              
             </div>
             )
-          })}
+          }) : <p className='no-results'>No Results to Display</p> }
       </div>
       </div>
       )

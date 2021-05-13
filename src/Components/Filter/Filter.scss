@@ -29,6 +29,9 @@
 .filter-checkboxes{
     display: flex;
     flex-direction: column-reverse;
+    input{
+        margin-left: 5px;
+    }
 
 }
 .filter-search-button{
@@ -72,6 +75,7 @@
         display: flex;
         align-items: flex-end;
         margin-right: 5%;
+        
     }
 
     .results-comp{

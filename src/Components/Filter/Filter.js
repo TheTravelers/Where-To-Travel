@@ -20,7 +20,6 @@ class Filter extends Component{
             inState: false,
             rangeValue: 100,
             rangeValueInMeters: 300000,
-            // populationDivider: '',
             zipCode: '',
             citiesToDisplay: undefined,
             defaultDestinations: [],
@@ -83,6 +82,7 @@ class Filter extends Component{
       inState: !prevState.inState,
     }));
   };
+  
 //   handleUrbanButton = () => {
 //     //Want cities only if they have a population more than a certain number
 //     this.setState({ populationDivider: ">" });
@@ -208,30 +208,33 @@ class Filter extends Component{
                                 <span>{this.state.rangeValue} miles</span>
                         </div>
                     <div className='filter-checkboxes'>
-                        <label>
-                            Adult Friendly:
-                            <input
-                                name="adultFriendly" 
-                                type="checkbox"
-                                checked={this.state.adultFriendly}
-                                onChange={this.handleAdultFriendlyChange}/>
-                        </label>
-                        <label>
-                            Waterfront: 
-                            <input
-                                name="waterFront"
-                                type="checkbox"
-                                checked={this.state.waterFront}
-                                onChange={this.handleWaterFrontChange}/>
-                        </label>
-                        <label>
-                            In State:
-                            <input
-                                name="inState"
-                                type="checkbox"
-                                checked={this.state.inState}
-                                onChange={this.handleInStateChange}/>
-                        </label>
+                        
+                          <label>
+                              Adult Friendly:
+                              <input
+                                  name="adultFriendly" 
+                                  type="checkbox"
+                                  checked={this.state.adultFriendly}
+                                  onChange={this.handleAdultFriendlyChange}/>
+                          </label>
+                          <label>
+                              Waterfront: 
+                              <input
+                                  name="waterFront"
+                                  type="checkbox"
+                                  checked={this.state.waterFront}
+                                  onChange={this.handleWaterFrontChange}/>
+                          </label>
+                          <label>
+                              In State:
+                              <input
+                                  name="inState"
+                                  type="checkbox"
+                                  checked={this.state.inState}
+                                  onChange={this.handleInStateChange}/>
+                          </label>
+                        
+                        
                     </div>
                     {/* <div>
                         <h3>Population:</h3>
@@ -259,6 +262,8 @@ class Filter extends Component{
                       coordinates={this.state.coordinates}
                       userId={this.props.user.user.user.user_id}
                       citiesToDisplay={this.state.citiesToDisplay}
+                      urban={this.state.urban}
+                      rural={this.state.rural}
                     />
                   </div>
                 )}             
