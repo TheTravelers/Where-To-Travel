@@ -260,9 +260,12 @@ class Results extends Component {
                     <span className="checkbox-answers">{e.kinds.includes("beach") ? "YES" : "NO"}</span>
                   </ul>
                   <ul>
-                    Adult Friendly: {e.kinds.includes("adult") ? "YES" : "NO"}
+                    Adult Friendly: 
+                    <span className="checkbox-answers">{e.kinds.includes("adult") ? "YES" : "NO"}</span>
                   </ul>
-                  <ul>Population: {e.population}</ul>
+                  <ul>Area: 
+                  <span className="checkbox-answers">{e.population > 50000 ? 'Urban' : e.population <= 50000 ? 'Rural' : 'Unknown'} </span>
+                  </ul>
                 </li>
                 <button className='save-destinations-button'onClick = { () => this.addToUserList(e) }>Save</button>
               </div>
