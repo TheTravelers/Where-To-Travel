@@ -12,6 +12,10 @@
     border-radius: 10%;
     background-color: white;
 
+    .hidden{
+        display: hidden;
+    }
+
     .city-header {
         height: 70px;
         display: flex;

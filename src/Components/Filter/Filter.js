@@ -20,7 +20,8 @@ class Filter extends Component{
             inState: false,
             rangeValue: 100,
             rangeValueInMeters: 300000,
-            // populationDivider: '',
+            urban: true,
+            rural: true,
             zipCode: '',
             citiesToDisplay: undefined,
             defaultDestinations: [],
@@ -81,6 +82,16 @@ class Filter extends Component{
   handleInStateChange = () => {
     this.setState((prevState) => ({
       inState: !prevState.inState,
+    }));
+  };
+  handleRuralChange = () => {
+    this.setState((prevState) => ({
+      rural: !prevState.rural,
+    }));
+  };
+  handleUrbanChange = () => {
+    this.setState((prevState) => ({
+      urban: !prevState.urban,
     }));
   };
 //   handleUrbanButton = () => {
@@ -208,30 +219,51 @@ class Filter extends Component{
                                 <span>{this.state.rangeValue} miles</span>
                         </div>
                     <div className='filter-checkboxes'>
-                        <label>
-                            Adult Friendly:
-                            <input
-                                name="adultFriendly" 
-                                type="checkbox"
-                                checked={this.state.adultFriendly}
-                                onChange={this.handleAdultFriendlyChange}/>
-                        </label>
-                        <label>
-                            Waterfront: 
-                            <input
-                                name="waterFront"
-                                type="checkbox"
-                                checked={this.state.waterFront}
-                                onChange={this.handleWaterFrontChange}/>
-                        </label>
-                        <label>
-                            In State:
-                            <input
-                                name="inState"
-                                type="checkbox"
-                                checked={this.state.inState}
-                                onChange={this.handleInStateChange}/>
-                        </label>
+                        <div className='first-checkboxes'>
+                          <label>
+                              Adult Friendly:
+                              <input
+                                  name="adultFriendly" 
+                                  type="checkbox"
+                                  checked={this.state.adultFriendly}
+                                  onChange={this.handleAdultFriendlyChange}/>
+                          </label>
+                          <label>
+                              Waterfront: 
+                              <input
+                                  name="waterFront"
+                                  type="checkbox"
+                                  checked={this.state.waterFront}
+                                  onChange={this.handleWaterFrontChange}/>
+                          </label>
+                          <label>
+                              In State:
+                              <input
+                                  name="inState"
+                                  type="checkbox"
+                                  checked={this.state.inState}
+                                  onChange={this.handleInStateChange}/>
+                          </label>
+                        </div>
+                        <div className='area'>
+                         <h3>Area</h3>
+                         <label>
+                           Rural:
+                           <input
+                               name="rural"
+                               type="checkbox"
+                               checked={this.state.rural}
+                               onChange={this.handleRuralChange}/>
+                         </label>
+                         <label>
+                           Urban:
+                           <input
+                               name="urban"
+                               type="checkbox"
+                               checked={this.state.urban}
+                               onChange={this.handleUrbanChange}/>
+                         </label>
+                       </div>
                     </div>
                     {/* <div>
                         <h3>Population:</h3>
@@ -259,6 +291,8 @@ class Filter extends Component{
                       coordinates={this.state.coordinates}
                       userId={this.props.user.user.user.user_id}
                       citiesToDisplay={this.state.citiesToDisplay}
+                      urban={this.state.urban}
+                      rural={this.state.rural}
                     />
                   </div>
                 )}             

@@ -206,6 +206,18 @@ class Results extends Component {
     // console.log(this.state.filterResults.length, 'results length');
     let { results, filterResults } = this.state;
 
+    let x = undefined
+
+    if (this.props.rural && this.props.urban){
+      x = filterResults
+    }
+    else if (this.props.rural){
+      x = filterResults.filter( e => e.population<=50000)
+    }
+    else if(this.props.urban){
+      x = filterResults.filter ( e => e.population > 50000)
+    }
+
     if (!this.props.citiesToDisplay) {
     //   if (results.length === 0) {
     //     return (
@@ -242,9 +254,10 @@ class Results extends Component {
         <div>
           <ToastContainer/>
         <div className="results-comp">
-          {filterResults.map((e, i) => {
+          {x.map((e, i) => {
             return (
-            <div className="search-destination-single" key={i}>
+              <div className="search-destination-single" key={i}>
+              
               <div className="city-header">
                 <h2>{e.cityName}</h2>
                 <h3>{e.state}</h3>
@@ -256,19 +269,21 @@ class Results extends Component {
                 <li>
                   <ul>Distance from you: Approximately {Math.round(e.distance / 1609.34)} Miles</ul>
                   <ul>
-                    Near Waterfront: 
+                    Near Waterfront:
                     <span className="checkbox-answers">{e.kinds.includes("beach") ? "YES" : "NO"}</span>
                   </ul>
                   <ul>
-                    Adult Friendly: 
+                    Adult Friendly:
                     <span className="checkbox-answers">{e.kinds.includes("adult") ? "YES" : "NO"}</span>
                   </ul>
-                  <ul>Area: 
+                  <ul>Area:
                   <span className="checkbox-answers">{e.population > 50000 ? 'Urban' : e.population <= 50000 ? 'Rural' : 'Unavailable'} </span>
                   </ul>
                 </li>
                 <button className='save-destinations-button'onClick = { () => this.addToUserList(e) }>Save</button>
               </div>
+             
+              
             </div>
             )
           })}
