@@ -30,8 +30,14 @@ module.exports = {
       inState, // boolean
       winterSports, // boolean
     } = req.body;
-    // console.log(req.body)
+    // console.log(req.body
+    // console.log(inState);
+    let rate = '3'
 
+    if (inState){
+      rate = '1'
+    }
+    console.log(rate)
     // we are using the geo coder to have information from our user using his coordinates
     const [getInfoUser] = await geocoder.reverse({
       lat: actualLocation[1],
@@ -45,6 +51,7 @@ module.exports = {
       stateShort: getInfoUser.administrativeLevels.level1short,
       cityName: getInfoUser.city,
     };
+    // console.log(infoUser)
 
     // in the kinds we need to write the filters this is what this if statements is doing
 
@@ -74,7 +81,7 @@ module.exports = {
 
     await axios
       .get(
-        `https://api.opentripmap.com/0.1/en/places/radius?radius=${distance}&lon=${actualLocation[0]}&lat=${actualLocation[1]}&src_geom=osm&src_attr=osm${kinds}&rate=3h&format=geojson&limit=50&apikey=${OPEN_TRIP_KEY}`
+        `https://api.opentripmap.com/0.1/en/places/radius?radius=${distance}&lon=${actualLocation[0]}&lat=${actualLocation[1]}&src_geom=osm&src_attr=osm${kinds}&rate=${rate}&format=geojson&limit=100&apikey=${OPEN_TRIP_KEY}`
       )
       .then(async (response) => {
         response.data.features.forEach((e, i) => {
