@@ -202,6 +202,8 @@ class UserList extends Component{
                     </div>
                 </div>
                     <div id='email-form-comp' className=''>
+                    <div className='email-outer-border'></div>
+                     <div className="email-inner-border">
                         <div className='email-message-container'>
                             
                             <div className='email-message'>
@@ -216,7 +218,8 @@ class UserList extends Component{
                         <div className='email-button-section'>
                             <button className='email-button' onClick={this.hideEmailForm}>CANCEL</button>
                             <button className='email-button' onClick={e => this.shareList(e)}>SEND</button>
-                        </div>      
+                        </div>  
+                        </div>    
                     </div>
                     <div id='remove-confirmation' className=''>
                         <p>Remove this destination from your saved list?</p>
