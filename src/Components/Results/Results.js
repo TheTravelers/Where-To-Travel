@@ -21,6 +21,7 @@ class Results extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    console.log(this.props.citiesToDisplay)
     //   console.log(this.props.citiesToDisplay)
     //   console.log(this.props.coordinates)
     // console.log(this.props.citiesToDisplay);
@@ -29,6 +30,7 @@ class Results extends Component {
       JSON.stringify(prevProps.citiesToDisplay) !==
         JSON.stringify(this.props.citiesToDisplay)
     ) {
+      // this.setState({filterResults:this.props.citiesToDisplay})
       // console.log("first hit");
       if (this.props.citiesToDisplay.length <= 10) {
         // console.log("minus 10");
@@ -183,12 +185,12 @@ class Results extends Component {
   })
   .then(res => {
     // console.log(res)
-    this.addedToast(cityName)
+    this.addedToCityToast(cityName)
   })
   .catch(err => console.log(err))
   };
 
-  addedToast(cityName) {
+  addedToCityToast(cityName) {
     // console.log('Success TOAST')
     toast.success(`${cityName} added to your list`, {
       position: "top-center",
@@ -204,7 +206,7 @@ class Results extends Component {
     // console.log(this.state.filterResults.length, 'results length');
     let { results, filterResults } = this.state;
 
-    if (filterResults.length === 0) {
+    if (!this.props.citiesToDisplay) {
     //   if (results.length === 0) {
     //     return (
     //       <p>Please Wait for your info</p>
@@ -260,7 +262,7 @@ class Results extends Component {
                   <ul>
                     Adult Friendly: {e.kinds.includes("adult") ? "YES" : "NO"}
                   </ul>
-                  <ul>population is comming </ul>
+                  <ul>Population: {e.population}</ul>
                 </li>
                 <button className='save-destinations-button'onClick = { () => this.addToUserList(e) }>Save</button>
               </div>
