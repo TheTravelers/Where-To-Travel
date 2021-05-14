@@ -157,7 +157,7 @@ class Auth extends Component {
         if(mode === "login"){
         return(
             <div className="auth-container">
-                    <h1>Where Should I Travel?</h1>
+                    <h1>Where to Travel?</h1>
                 <div className="login-container">
                     <div className="inputs">
                         <label>Email:</label>
@@ -181,7 +181,7 @@ class Auth extends Component {
         )} else {
             return(
                 <div className="auth-container">
-                    <h1>Where Should I Travel?</h1>
+                    <h1>Where to Travel?</h1>
                     <div className="register-container">
                     <div className="inputs">
                         <label>Name:</label>
